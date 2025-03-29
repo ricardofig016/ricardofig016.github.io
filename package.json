@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://ricardofig016.github.io/homepage",
+  "homepage": "https://ricardofig016.github.io",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

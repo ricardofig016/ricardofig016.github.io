@@ -2,8 +2,7 @@
   font-family: "IBM Plex Mono";
   font-style: normal;
   font-weight: 400;
-  src: url("./assets/fonts/IBM_Plex_Mono/IBMPlexMono-Medium.ttf")
-    format("truetype");
+  src: url("./assets/fonts/IBM_Plex_Mono/IBMPlexMono-Medium.ttf") format("truetype");
 }
 
 :root {
@@ -13,28 +12,29 @@
   font-weight: 400;
 
   color-scheme: light dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
-  --white: #f6f7ff;
-  --black: #242424;
-  --light-blue: #e3f6f5;
-  --dark-blue: #272343;
-  --light-purple: #d0adf0;
-  --dark-purple: #7e15e0;
+  --white: rgb(240, 240, 255);
+  --black: rgb(25, 30, 36);
+  --light-blue: rgb(227, 246, 245);
+  --dark-blue: rgb(39, 35, 67);
+  --light-purple: rgb(203, 144, 237);
+  --dark-purple: rgb(126, 21, 224);
 
+  /* light mode */
   --bg-primary: var(--white);
   --bg-secondary: var(--light-blue);
   --text-primary: var(--black);
   --text-secondary: var(--white);
   --btn-primary: var(--black);
   --btn-secondary: var(--dark-blue);
-  --link-visited: var(--dark-purple);
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --link: var(--dark-purple);
 }
 
+/* dark mode */
 [data-theme="dark"] {
   --bg-primary: var(--black);
   --bg-secondary: var(--dark-blue);
@@ -42,14 +42,14 @@
   --text-secondary: var(--black);
   --btn-primary: var(--white);
   --btn-secondary: var(--light-blue);
-  --link-visited: var(--light-purple);
+  --link: var(--light-purple);
 }
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-  transition: background-color 0.5s ease, color 0.5s ease;
+  transition: all 0.3s ease;
 }
 
 #root {
@@ -64,6 +64,7 @@ body {
   width: 100%;
   background-color: var(--bg-primary);
   color: var(--text-primary);
+  letter-spacing: 1px;
 }
 
 /* Buttons */
@@ -86,8 +87,9 @@ button.btn-secondary {
 
 a {
   text-decoration: none;
+  color: var(--text-primary);
 }
 
 a:visited {
-  color: var(--link-visited);
+  color: var(--text-primary);
 }

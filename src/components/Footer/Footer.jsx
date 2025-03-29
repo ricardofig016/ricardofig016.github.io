@@ -1,18 +1,11 @@
 import styles from "./Footer.module.css";
 
 function Footer() {
-  const startYear = 2024;
-  const currYear = new Date().getFullYear();
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className={styles.footer}>
-      <span>
-        {"© "}
-        {currYear - startYear === 0
-          ? startYear + " "
-          : startYear + "-" + currYear + " "}
-        Ricardo Figueiredo
-      </span>
+      <span>&#169; {currentYear} Ricardo Figueiredo</span>
     </footer>
   );
 }
