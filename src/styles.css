@@ -19,37 +19,33 @@
 
   --white: rgb(240, 240, 255);
   --black: rgb(25, 30, 36);
-  --light-blue: rgb(227, 246, 245);
-  --dark-blue: rgb(39, 35, 67);
-  --light-purple: rgb(203, 144, 237);
-  --dark-purple: rgb(126, 21, 224);
+  --light-blue: rgb(79, 138, 232);
+  --dark-blue: rgb(14, 53, 124);
+}
 
-  /* light mode */
+/* light mode */
+[data-theme="light"] {
   --bg-primary: var(--white);
-  --bg-secondary: var(--light-blue);
   --text-primary: var(--black);
   --text-secondary: var(--white);
   --btn-primary: var(--black);
-  --btn-secondary: var(--dark-blue);
-  --link: var(--dark-purple);
+  --link: var(--dark-blue);
 }
 
 /* dark mode */
 [data-theme="dark"] {
   --bg-primary: var(--black);
-  --bg-secondary: var(--dark-blue);
   --text-primary: var(--white);
   --text-secondary: var(--black);
   --btn-primary: var(--white);
-  --btn-secondary: var(--light-blue);
-  --link: var(--light-purple);
+  --link: var(--light-blue);
 }
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease; /* TODO: add transition */
 }
 
 #root {
@@ -87,9 +83,9 @@ button.btn-secondary {
 
 a {
   text-decoration: none;
-  color: var(--text-primary);
+  color: var(--link);
 }
 
 a:visited {
-  color: var(--text-primary);
+  color: var(--link);
 }
