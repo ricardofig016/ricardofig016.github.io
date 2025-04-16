@@ -1,0 +1,24 @@
+.menubar {
+  padding: 0.5rem 0;
+}
+
+.menubar ul {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menubar a,
+.menubar a:visited {
+  color: var(--text-primary);
+}
+
+.logo {
+  width: 2.5rem;
+  height: 2.5rem;
+  object-fit: contain;
+}
