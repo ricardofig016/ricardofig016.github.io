@@ -1,0 +1,13 @@
+.heroSection {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem;
+  padding: 20px;
+}
+
+.heroSection img {
+  width: 16rem;
+  height: auto;
+  border-radius: 50%;
+}

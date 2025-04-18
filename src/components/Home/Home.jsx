@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-// import styles from "./Home.module.css";
+import styles from "./Home.module.css";
 
 function Home() {
   const carouselElement = (
@@ -58,21 +58,17 @@ function Home() {
   );
 
   return (
-    <div className="homepage">
+    <div>
       {/* Hero Section */}
-      <section className="hero">
-        <div className="hero-content">
-          <img
-            src="/assets/photo.jpg" // Replace with your photo path
-            alt="Profile"
-            className="hero-photo"
-          />
+      <section className={styles.heroSection}>
+        <img src="/images/profile_photo.jpg" alt="Profile" />
+        <div>
           <h1>Ricardo Figueiredo</h1>
           <p>CS Student Building Impactful Projects</p>
         </div>
       </section>
       {/* Featured Projects */}
-      <section className="featured-projects">
+      <section>
         <h2>Featured Projects</h2>
         {carouselElement}
       </section>
