@@ -10,7 +10,8 @@ load_dotenv()
 REPO_CODES = ["kotlin-compiler", "shinsu-duel", "feedback-circle"]
 FEATURED_REPOS = ["kotlin-compiler", "shinsu-duel"]
 
-REPOS_DIR_PATH = "public/data/repos"
+DATA_DIR_PATH = "public/data"
+REPOS_FILE_PATH = os.path.join(DATA_DIR_PATH, "repos.json")
 
 GITHUB_USERNAME = "ricardofig016"
 GITHUB_API_BASE_URL = f"https://api.github.com/repos/{GITHUB_USERNAME}"
@@ -68,10 +69,16 @@ def get_name(readme):
 
 
 if __name__ == "__main__":
-    os.makedirs(REPOS_DIR_PATH, exist_ok=True)
+    os.makedirs(DATA_DIR_PATH, exist_ok=True)
+    data = []
+
+    curr_id = 1
     for repo_code in REPO_CODES:
         print(f"Fetching data for {repo_code}...")
+
         repo_data = {}
+        repo_data["id"] = curr_id
+        curr_id += 1
         repo_data["code"] = repo_code
         general_info = get_general_info(repo_code)
         for key, value in general_info.items():
@@ -81,7 +88,7 @@ if __name__ == "__main__":
         repo_data["name"] = get_name(repo_data["readme"])
         repo_data["featured"] = repo_code in FEATURED_REPOS
 
-        repo_file_name = f"{repo_code}.json"
-        repo_file_path = os.path.join(REPOS_DIR_PATH, repo_file_name)
-        with open(repo_file_path, "w", encoding="utf-8") as file:
-            json.dump(repo_data, file, indent=4, sort_keys=True)
+        data.append(repo_data)
+
+    with open(REPOS_FILE_PATH, "w", encoding="utf-8") as file:
+        json.dump(data, file, indent=4, sort_keys=True)
