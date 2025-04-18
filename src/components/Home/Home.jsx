@@ -2,8 +2,19 @@ import { Link } from "react-router-dom";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import styles from "./Home.module.css";
+import PropTypes from "prop-types";
 
-function Home() {
+function Home({ featuredProjects }) {
+  console.log("Featured Projects:", featuredProjects);
+  const carouselItems = featuredProjects.map((project) => (
+    <div className="carousel-item" key={project.name}>
+      <Link to={`/projects/${project.code}`}>
+        <h3>{project.name}</h3>
+        <p>{project.description}</p>
+      </Link>
+    </div>
+  ));
+
   const carouselElement = (
     <Carousel
       swipeable={true}
@@ -16,7 +27,7 @@ function Home() {
           slidesToSlide: 1,
         },
       }}
-      ssr={true} // means to render carousel on server-side.
+      ssr={true} // render carousel on server-side.
       infinite={true}
       autoPlay={false}
       keyBoardControl={true}
@@ -24,36 +35,7 @@ function Home() {
       dotListClass="custom-dot-list-style"
       itemClass="carousel-item-padding-40-px"
     >
-      <div className="carousel-item">
-        <Link to="/projects/1">
-          <h3>Project One</h3>
-          <p>Short description of Project One.</p>
-        </Link>
-      </div>
-      <div className="carousel-item">
-        <Link to="/projects/2">
-          <h3>Project Two</h3>
-          <p>Short description of Project Two.</p>
-        </Link>
-      </div>
-      <div className="carousel-item">
-        <Link to="/projects/3">
-          <h3>Project Three</h3>
-          <p>Short description of Project Three.</p>
-        </Link>
-      </div>
-      <div className="carousel-item">
-        <Link to="/projects/4">
-          <h3>Project Four</h3>
-          <p>Short description of Project Four.</p>
-        </Link>
-      </div>
-      <div className="carousel-item">
-        <Link to="/projects/5">
-          <h3>Project Five</h3>
-          <p>Short description of Project Five.</p>
-        </Link>
-      </div>
+      {carouselItems}
     </Carousel>
   );
 
@@ -75,5 +57,9 @@ function Home() {
     </div>
   );
 }
+
+Home.propTypes = {
+  featuredProjects: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default Home;

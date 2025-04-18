@@ -8,24 +8,37 @@ import Footer from "./Footer/Footer.jsx";
 // import TestButton from "./TestButton/TestButton.jsx";
 
 function App() {
-  const [width, setWidth] = useState(window.innerWidth);
-  function handleWindowSizeChange() {
-    setWidth(window.innerWidth);
-  }
+  // Ressiveness
+  // const [width, setWidth] = useState(window.innerWidth);
+  // function handleWindowSizeChange() {
+  //   setWidth(window.innerWidth);
+  // }
+  // useEffect(() => {
+  //   window.addEventListener("resize", handleWindowSizeChange);
+  //   return () => {
+  //     window.removeEventListener("resize", handleWindowSizeChange);
+  //   };
+  // }, []);
+  // const deviceType = width <= 768 ? "mobile" : "desktop";
+
+  const [featuredProjects, setFeaturedProjects] = useState([]);
   useEffect(() => {
-    window.addEventListener("resize", handleWindowSizeChange);
-    return () => {
-      window.removeEventListener("resize", handleWindowSizeChange);
-    };
+    fetch("/data/repos.json")
+      .then((response) => response.json())
+      .then((data) => {
+        // Filter to get only featured repositories and map to a list of repo codes or names
+        const featured = data.filter((repo) => repo.featured);
+        setFeaturedProjects(featured);
+      })
+      .catch((error) => console.error("Error fetching repos:", error));
   }, []);
-  const deviceType = width <= 768 ? "mobile" : "desktop";
 
   return (
     <>
       <Navbar />
       <MainContent>
         <Routes>
-          <Route path="/" element={<Home deviceType={deviceType} />} />
+          <Route path="/" element={<Home featuredProjects={featuredProjects} />} />
           <Route path="/projects/*" element={<Projects />} />
           <Route path="/education" element={<div>Education</div>} />
           <Route path="/skills" element={<div>Skills</div>} />
