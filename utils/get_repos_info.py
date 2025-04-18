@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 REPO_CODES = ["kotlin-compiler", "shinsu-duel", "feedback-circle"]
+FEATURED_REPOS = ["kotlin-compiler", "shinsu-duel"]
 
 REPOS_DIR_PATH = "public/data/repos"
 
@@ -78,6 +79,7 @@ if __name__ == "__main__":
         repo_data["languages"] = get_languages(repo_code)
         repo_data["readme"] = get_readme(repo_code)
         repo_data["name"] = get_name(repo_data["readme"])
+        repo_data["featured"] = repo_code in FEATURED_REPOS
 
         repo_file_name = f"{repo_code}.json"
         repo_file_path = os.path.join(REPOS_DIR_PATH, repo_file_name)

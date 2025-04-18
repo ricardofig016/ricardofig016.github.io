@@ -1,6 +1,7 @@
 {
     "code": "feedback-circle",
     "description": "A web-based tool designed to streamline the performance appraisal process within Critical Manufacturing.",
+    "featured": false,
     "forks": 0,
     "issues": 0,
     "languages": {

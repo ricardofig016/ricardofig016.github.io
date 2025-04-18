@@ -1,6 +1,7 @@
 {
     "code": "kotlin-compiler",
     "description": "A haskell compiler for a subset of the Kotlin programming language.",
+    "featured": true,
     "forks": 1,
     "issues": 0,
     "languages": {

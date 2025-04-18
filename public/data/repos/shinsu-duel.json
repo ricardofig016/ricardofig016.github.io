@@ -1,6 +1,7 @@
 {
     "code": "shinsu-duel",
     "description": "A Tower of God CCG where players strategize with deck-building and tactical unit deployment to beat opponents in fierce PvP and PvE battles.",
+    "featured": true,
     "forks": 0,
     "issues": 0,
     "languages": {
