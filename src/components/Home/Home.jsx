@@ -5,7 +5,6 @@ import styles from "./Home.module.css";
 import PropTypes from "prop-types";
 
 function Home({ featuredProjects }) {
-  console.log("Featured Projects:", featuredProjects);
   const carouselItems = featuredProjects.map((project) => (
     <div className="carousel-item" key={project.name}>
       <Link to={`/projects/${project.code}`}>
