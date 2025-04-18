@@ -1,3 +1,30 @@
+.projectCard {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  margin: 0 7rem 0 7rem;
+}
+
+.projectCard img {
+  width: auto;
+  height: 16rem;
+  border-radius: 8px;
+}
+
+.projectInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.projectInfo h3,
+.projectInfo p {
+  color: var(--text-primary);
+  margin: 0;
+  padding: 0;
+}
+
 .heroSection {
   display: flex;
   align-items: center;

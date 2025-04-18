@@ -6,10 +6,15 @@ import PropTypes from "prop-types";
 
 function Home({ featuredProjects }) {
   const carouselItems = featuredProjects.map((project) => (
-    <div className="carousel-item" key={project.name}>
+    <div key={project.name}>
       <Link to={`/projects/${project.code}`}>
-        <h3>{project.name}</h3>
-        <p>{project.description}</p>
+        <div className={styles.projectCard}>
+          <img src="https://www.svgrepo.com/show/508699/landscape-placeholder.svg" alt={project.name} />
+          <div className={styles.projectInfo}>
+            <h3>{project.name}</h3>
+            <p>{project.description}</p>
+          </div>
+        </div>
       </Link>
     </div>
   ));
@@ -22,17 +27,19 @@ function Home({ featuredProjects }) {
       responsive={{
         all: {
           breakpoint: { max: 5000, min: 0 },
-          items: 2,
+          items: 1,
           slidesToSlide: 1,
         },
       }}
       ssr={true} // render carousel on server-side.
       infinite={true}
-      autoPlay={false}
+      autoPlay={true}
+      autoPlaySpeed={5000}
       keyBoardControl={true}
       containerClass="carousel-container"
       dotListClass="custom-dot-list-style"
       itemClass="carousel-item-padding-40-px"
+      className={styles.carousel}
     >
       {carouselItems}
     </Carousel>
