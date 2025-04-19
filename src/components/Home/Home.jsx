@@ -50,9 +50,12 @@ function Home({ featuredProjects }) {
       {/* Hero Section */}
       <section className={styles.heroSection}>
         <img src="/images/profile_photo.jpg" alt="Profile" />
-        <div>
+        <div className={styles.heroText}>
           <h1>Ricardo Figueiredo</h1>
-          <p>CS Student Building Impactful Projects</p>
+          <p>CS Student Building Impactful Applications</p>
+          <a href="/documents/resume.pdf" download="Ricardo_Figueiredo.pdf">
+            Download Resume
+          </a>
         </div>
       </section>
       {/* Featured Projects */}

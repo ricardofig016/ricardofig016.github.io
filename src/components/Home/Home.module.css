@@ -1,3 +1,15 @@
+.heroText {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.heroText h1,
+.heroText p,
+.heroText a {
+  margin: 0;
+}
+
 .projectCard {
   display: flex;
   flex-direction: row;
