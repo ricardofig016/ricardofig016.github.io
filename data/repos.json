@@ -1,7 +1,7 @@
 [
     {
         "code": "kotlin-compiler",
-        "description": "A haskell compiler for a subset of the Kotlin programming language.",
+        "description": "A haskell compiler for a subset of the Kotlin programming language",
         "featured": true,
         "forks": 1,
         "id": 1,
@@ -19,7 +19,7 @@
     },
     {
         "code": "shinsu-duel",
-        "description": "A Tower of God CCG where players strategize with deck-building and tactical unit deployment to beat opponents in fierce PvP and PvE battles.",
+        "description": "A Tower of God CCG where players strategize with deck-building and tactical unit deployment to beat opponents in fierce PvP and PvE battles",
         "featured": true,
         "forks": 0,
         "id": 2,
@@ -36,7 +36,7 @@
     },
     {
         "code": "feedback-circle",
-        "description": "A web-based tool designed to streamline the performance appraisal process within Critical Manufacturing.",
+        "description": "A web-based tool designed to streamline the performance appraisal process within Critical Manufacturing",
         "featured": false,
         "forks": 0,
         "id": 3,
