@@ -1,2 +1,16 @@
-.footer {
+.socialLinks {
+  li {
+    list-style: none;
+    width: max-content;
+    a {
+      color: var(--text-primary);
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    a:hover {
+      color: var(--text-highlight);
+    }
+  }
 }
