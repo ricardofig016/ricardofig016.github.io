@@ -21,16 +21,20 @@ function App() {
   // }, []);
   // const deviceType = width <= 768 ? "mobile" : "desktop";
 
+  const [projects, setProjects] = useState([]);
   const [featuredProjects, setFeaturedProjects] = useState([]);
   useEffect(() => {
-    fetch("/data/repos.json")
-      .then((response) => response.json())
-      .then((data) => {
-        // Filter to get only featured repositories and map to a list of repo codes or names
-        const featured = data.filter((repo) => repo.featured);
-        setFeaturedProjects(featured);
-      })
-      .catch((error) => console.error("Error fetching repos:", error));
+    const fetchRepos = async () => {
+      try {
+        const response = await fetch("/data/repos.json");
+        const data = await response.json();
+        setProjects(data);
+        setFeaturedProjects(data.filter((repo) => repo.featured));
+      } catch (error) {
+        console.error("Error fetching repos:", error);
+      }
+    };
+    fetchRepos();
   }, []);
 
   return (
@@ -38,8 +42,8 @@ function App() {
       <Navbar />
       <MainContent>
         <Routes>
-          <Route path="/" element={<Home featuredProjects={featuredProjects} />} />
-          <Route path="/projects/*" element={<Projects />} />
+          <Route path="/" element={<Home featuredProjectsData={featuredProjects} />} />
+          <Route path="/projects/*" element={<Projects projectsData={projects} />} />
           <Route path="/education" element={<div>Education</div>} />
           <Route path="/skills" element={<div>Skills</div>} />
           <Route path="/experience" element={<div>Experience</div>} />

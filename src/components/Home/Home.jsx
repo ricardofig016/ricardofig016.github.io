@@ -4,8 +4,8 @@ import "react-multi-carousel/lib/styles.css";
 import styles from "./Home.module.css";
 import PropTypes from "prop-types";
 
-function Home({ featuredProjects }) {
-  const carouselItems = featuredProjects.map((project) => (
+function Home({ featuredProjectsData }) {
+  const carouselItems = featuredProjectsData.map((project) => (
     <div key={project.name}>
       <Link to={`/projects/${project.code}`}>
         <div className={styles.projectCard}>
@@ -68,7 +68,7 @@ function Home({ featuredProjects }) {
 }
 
 Home.propTypes = {
-  featuredProjects: PropTypes.arrayOf(PropTypes.object).isRequired,
+  featuredProjectsData: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default Home;

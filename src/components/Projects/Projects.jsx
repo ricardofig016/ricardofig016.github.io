@@ -1,47 +1,18 @@
 import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import PropTypes from "prop-types";
 
-// Example projects data. In a real app, you might fetch this from an API.
-const projectsData = [
-  {
-    id: "1",
-    title: "Personal Project One",
-    type: "Personal",
-    tech: ["React", "CSS"],
-    description: "Brief description of Project One.",
-    demo: "demo1.mp4",
-    whyItMatters: "This project showcases my personal creativity and technical skills.",
-    challenges: "Learned state management and API integration.",
-    github: "https://github.com/yourusername/project-one",
-    live: "https://projectone.example.com",
-    related: ["2", "3"],
-  },
-  {
-    id: "2",
-    title: "University Project Two",
-    type: "University",
-    tech: ["Python", "Django"],
-    description: "Brief description of Project Two.",
-    demo: "demo2.png",
-    whyItMatters: "Demonstrated academic research in web development.",
-    challenges: "Dealt with database optimization and security.",
-    github: "https://github.com/yourusername/project-two",
-    live: "",
-    related: ["1"],
-  },
-  // Add more projects as needed.
-];
-
-function ProjectsList() {
+function ProjectsList({ projectsData }) {
   const [search, setSearch] = useState("");
   const [filterType, setFilterType] = useState("");
 
-  // Filter projects by title/description and type if selected
+  // Filter projects by name/description and type if selected
   const filteredProjects = projectsData.filter((proj) => {
+    const refinedSearch = search.toLowerCase().trim();
     const matchSearch =
-      proj.title.toLowerCase().includes(search.toLowerCase()) ||
-      proj.description.toLowerCase().includes(search.toLowerCase());
+      proj.name.toLowerCase().includes(refinedSearch) ||
+      proj.description.toLowerCase().includes(refinedSearch);
     const matchType = filterType ? proj.type === filterType : true;
     return matchSearch && matchType;
   });
@@ -66,31 +37,34 @@ function ProjectsList() {
       <div className="projects-grid">
         {filteredProjects.map((proj) => (
           <div key={proj.id} className="project-card">
-            <h3>{proj.title}</h3>
+            <h3>{proj.name}</h3>
             <p>Type: {proj.type}</p>
             <div className="tech-tags">
-              {proj.tech.map((tech) => (
+              {/* {proj.tech.map((tech) => (
                 <span key={tech} className="tech-tag">
                   {tech}
                 </span>
-              ))}
+              ))} */}
             </div>
-            <Link to={`/projects/${proj.id}`}>View Details</Link>
+            <Link to={`/projects/${proj.code}`}>View Details</Link>
           </div>
         ))}
       </div>
     </div>
   );
 }
+ProjectsList.propTypes = {
+  projectsData: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
-function ProjectDetail() {
-  const { projectId } = useParams();
-  const project = projectsData.find((proj) => proj.id === projectId);
+function ProjectDetail({ projectsData }) {
+  const { projectCode } = useParams();
+  const project = projectsData.find((proj) => proj.code === projectCode);
   if (!project) return <div>Project not found.</div>;
 
   return (
     <div className="project-detail">
-      <h1>{project.title}</h1>
+      <h1>{project.name}</h1>
       <div className="project-demo">
         {/* Project demo: video, gif, or screenshots */}
         <p>Demo placeholder: {project.demo}</p>
@@ -113,7 +87,7 @@ function ProjectDetail() {
           </a>
         )}
       </section>
-      <section className="related-projects">
+      {/* <section className="related-projects">
         <h2>Related Projects</h2>
         <ul>
           {project.related.map((relatedId) => {
@@ -127,18 +101,24 @@ function ProjectDetail() {
             );
           })}
         </ul>
-      </section>
+      </section> */}
     </div>
   );
 }
+ProjectDetail.propTypes = {
+  projectsData: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
-function Projects() {
+function Projects({ projectsData }) {
   return (
     <Routes>
-      <Route path="/" element={<ProjectsList />} />
-      <Route path=":projectId" element={<ProjectDetail />} />
+      <Route path="/" element={<ProjectsList projectsData={projectsData} />} />
+      <Route path=":projectCode" element={<ProjectDetail projectsData={projectsData} />} />
     </Routes>
   );
 }
+Projects.propTypes = {
+  projectsData: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default Projects;
