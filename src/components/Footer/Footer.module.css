@@ -4,11 +4,13 @@
     list-style: none;
     width: max-content;
     a {
-      color: var(--text-primary);
       display: flex;
       justify-content: flex-start;
       align-items: center;
       gap: 0.5rem;
+      .icon {
+        color: var(--text-primary);
+      }
     }
   }
 }

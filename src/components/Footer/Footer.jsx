@@ -8,7 +8,7 @@ function Footer() {
       <ul className={styles.socialLinks}>
         <li>
           <a href="https://github.com/ricardofig016" target="_blank" rel="noopener noreferrer">
-            <FaGithub />
+            <FaGithub className={styles.icon} />
             GitHub
           </a>
         </li>
@@ -18,19 +18,19 @@ function Footer() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <FaLinkedin />
+            <FaLinkedin className={styles.icon} />
             LinkedIn
           </a>
         </li>
         <li>
           <a href="mailto:ricardocastrofigueiredo@gmail.com">
-            <FaEnvelope />
+            <FaEnvelope className={styles.icon} />
             Email
           </a>
         </li>
         <li>
           <a href="tel:+351967381109">
-            <FaPhone />
+            <FaPhone className={styles.icon} />
             +351 967 381 109
           </a>
         </li>
