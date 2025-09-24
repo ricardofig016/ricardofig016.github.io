@@ -16,6 +16,9 @@
 .menubar a:visited {
   color: var(--text-primary);
 }
+.menubar a:hover {
+  color: var(--text-highlight);
+}
 
 .logo {
   width: 2.5rem;

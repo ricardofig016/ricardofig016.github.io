@@ -3,7 +3,7 @@ import ThemeToggle from "../ThemeToggle/ThemeToggle.jsx";
 import { Menubar } from "primereact/menubar";
 import styles from "./Navbar.module.css";
 
-function Navbar() {
+export default function Navbar() {
   const logo = <img src="/icons/owl.svg" alt="logo" className={styles.logo} />;
   const items = [
     {
@@ -42,5 +42,3 @@ function Navbar() {
     </nav>
   );
 }
-
-export default Navbar;
