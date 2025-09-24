@@ -111,10 +111,10 @@ function ProjectsList({ projectsData }) {
 
               {/* Actions */}
               <div className="project-actions">
-                {proj.url && (
+                {proj.github_url && (
                   <a
                     className={styles.projectGithubLink}
-                    href={proj.url}
+                    href={proj.github_url}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`Open ${proj.name} on GitHub`}

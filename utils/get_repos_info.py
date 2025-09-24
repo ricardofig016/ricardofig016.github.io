@@ -2,6 +2,7 @@ import os
 import requests
 import base64
 import json
+from icecream import ic
 from dotenv import load_dotenv
 
 
@@ -16,8 +17,8 @@ REPOS = {
         "featured": True,
         "context": "University",
     },
-    "java-robocode-robot": {"featured": True, "context": "University"},
     "ricardofig016.github.io": {"featured": True, "context": "Personal"},
+    "java-robocode-robot": {"featured": True, "context": "University"},
 }
 
 DATA_DIR_PATH = "public/data"
@@ -51,7 +52,8 @@ def get_general_info(repo_code):
         "stars": data["stargazers_count"],
         "forks": data["forks_count"],
         "issues": data["open_issues_count"],
-        "url": data["html_url"],
+        "github_url": data["html_url"],
+        "website": data["homepage"],
     }
     return repo_info
 
