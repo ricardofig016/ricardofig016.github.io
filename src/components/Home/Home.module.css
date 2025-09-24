@@ -1,20 +1,43 @@
-.heroText {
+.heroSection {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem;
+  margin: 2rem 0;
 
-.heroText h1,
-.heroText p,
-.heroText a {
-  margin: 0;
+  img {
+    width: 16rem;
+    height: auto;
+    border: 2px solid var(--text-highlight);
+    border-radius: 50%;
+  }
+
+  .heroText {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    h1,
+    p,
+    a {
+      margin: 0;
+    }
+    h1 {
+      color: var(--text-primary);
+    }
+  }
 }
 
 .projectCard {
   display: flex;
   flex-direction: row;
   gap: 2rem;
-  margin: 0 7rem 0 7rem;
+  margin: 0 7rem 2rem 7rem;
+  padding: 1rem;
+  overflow: hidden;
+}
+.projectCard:hover {
+  scale: 0.98;
 }
 
 .projectCard img {
@@ -28,25 +51,16 @@
   flex-direction: column;
   justify-content: flex-start;
   gap: 1rem;
-}
 
-.projectInfo h3,
-.projectInfo p {
-  color: var(--text-primary);
-  margin: 0;
-  padding: 0;
-}
-
-.heroSection {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 2rem;
-  margin: 2rem 0;
-}
-
-.heroSection img {
-  width: 16rem;
-  height: auto;
-  border-radius: 50%;
+  h3,
+  p {
+    margin: 0;
+    padding: 0;
+  }
+  h3 {
+    color: var(--text-highlight);
+  }
+  p {
+    color: var(--text-primary);
+  }
 }

@@ -52,7 +52,10 @@ function Home({ featuredProjectsData }) {
         <img src="/images/profile_photo.jpg" alt="Profile" />
         <div className={styles.heroText}>
           <h1>Ricardo Figueiredo</h1>
-          <p>CS Student Building Impactful Applications</p>
+          <div>
+            <p>CS Student </p>
+            <p>Building Software & Learning Every Day</p>
+          </div>
           <a href="/documents/resume.pdf" download="Ricardo_Figueiredo.pdf">
             Download Resume
           </a>
