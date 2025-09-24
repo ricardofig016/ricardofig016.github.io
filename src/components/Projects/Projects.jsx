@@ -1,54 +1,100 @@
+import styles from "./Projects.module.css";
 import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import PropTypes from "prop-types";
+import Select from "../Select/Select";
 
 function ProjectsList({ projectsData }) {
   const [search, setSearch] = useState("");
-  const [filterType, setFilterType] = useState("");
+  const [filterContext, setFilterContext] = useState("");
 
-  // Filter projects by name/description and type if selected
+  const contextOptions = [
+    { value: "", label: "All Contexts" },
+    { value: "Personal", label: "Personal" },
+    { value: "University", label: "University" },
+    { value: "Internship", label: "Internship" },
+  ];
+
+  const getSortedLanguages = (languages) => {
+    return Object.keys(languages || {}).sort((a, b) => languages[b] - languages[a]);
+  };
+
+  // Filter projects by name/description and context if selected
   const filteredProjects = projectsData.filter((proj) => {
     const refinedSearch = search.toLowerCase().trim();
     const matchSearch =
-      proj.name.toLowerCase().includes(refinedSearch) ||
-      proj.description.toLowerCase().includes(refinedSearch);
-    const matchType = filterType ? proj.type === filterType : true;
-    return matchSearch && matchType;
+      (proj.name || "").toLowerCase().includes(refinedSearch) ||
+      (proj.description || "").toLowerCase().includes(refinedSearch) ||
+      getSortedLanguages(proj.languages).some((lang) => lang.toLowerCase().includes(refinedSearch));
+    const matchContext = filterContext ? proj.context === filterContext : true;
+    return matchSearch && matchContext;
   });
 
   return (
     <div className="projects-list">
       <h1>Projects</h1>
-      <div className="filters">
-        <select value={filterType} onChange={(e) => setFilterType(e.target.value)}>
-          <option value="">All Types</option>
-          <option value="Personal">Personal</option>
-          <option value="University">University</option>
-          <option value="Internship">Internship</option>
-        </select>
+      <div className={styles.filters}>
+        <Select
+          options={contextOptions}
+          value={filterContext}
+          onChange={(v) => setFilterContext(v)}
+          placeholder="All Contexts"
+          id="project-context-select"
+        />
         <input
+          className={styles.searchInput}
           type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search projects..."
         />
       </div>
+
       <div className="projects-grid">
-        {filteredProjects.map((proj) => (
-          <div key={proj.id} className="project-card">
-            <h3>{proj.name}</h3>
-            <p>Type: {proj.type}</p>
-            <div className="tech-tags">
-              {/* {proj.tech.map((tech) => (
-                <span key={tech} className="tech-tag">
-                  {tech}
-                </span>
-              ))} */}
+        {filteredProjects.map((proj) => {
+          const langs = getSortedLanguages(proj.languages);
+          return (
+            <div key={proj.id ?? proj.code} className={styles.projectCard}>
+              {/* Title */}
+              <h3 className={styles.projectTitle}>
+                <Link to={`/projects/${proj.code}`} className={styles.projectLink}>
+                  {proj.name + " "}
+                </Link>
+              </h3>
+
+              {/* Tech Tags */}
+              {langs.length > 0 && (
+                <div className={styles.projectTechTags}>
+                  {langs.map((lang, i, arr) => (
+                    <span key={lang} className="tech-tag">
+                      {lang}
+                      {i < arr.length - 1 ? ", " : ""}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              {/* Actions */}
+              <div className="project-actions">
+                {proj.url && (
+                  <a
+                    className={styles.projectGithubLink}
+                    href={proj.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Open ${proj.name} on GitHub`}
+                  >
+                    GitHub Repo
+                  </a>
+                )}
+              </div>
+
+              {/* Description */}
+              {proj.description && <p className={styles.projectDesc}>{proj.description}</p>}
             </div>
-            <Link to={`/projects/${proj.code}`}>View Details</Link>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
@@ -109,7 +155,7 @@ ProjectDetail.propTypes = {
   projectsData: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-function Projects({ projectsData }) {
+export default function Projects({ projectsData }) {
   return (
     <Routes>
       <Route path="/" element={<ProjectsList projectsData={projectsData} />} />
@@ -120,5 +166,3 @@ function Projects({ projectsData }) {
 Projects.propTypes = {
   projectsData: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
-
-export default Projects;

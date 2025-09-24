@@ -1,6 +1,7 @@
 [
     {
         "code": "kotlin-compiler",
+        "context": "University",
         "description": "A haskell compiler for a subset of the Kotlin programming language",
         "featured": true,
         "forks": 1,
@@ -19,6 +20,7 @@
     },
     {
         "code": "shinsu-duel",
+        "context": "Personal",
         "description": "A Tower of God CCG where players strategize with deck-building and tactical unit deployment to beat opponents in fierce PvP and PvE battles",
         "featured": true,
         "forks": 0,
@@ -36,6 +38,7 @@
     },
     {
         "code": "feedback-circle",
+        "context": "Internship",
         "description": "A web-based tool designed to streamline the performance appraisal process within Critical Manufacturing",
         "featured": false,
         "forks": 0,

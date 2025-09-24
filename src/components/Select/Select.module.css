@@ -1,7 +1,7 @@
 .container {
   position: relative;
   display: inline-block;
-  min-width: 10rem;
+  min-width: 11rem;
   font-family: inherit;
   z-index: 5;
 }
@@ -20,8 +20,11 @@
   cursor: pointer;
   font: inherit;
 }
+.control.onList {
+}
 .control:focus {
   outline: none;
+  /* border-radius: 6px 6px 0 0; */
 }
 
 .value {
@@ -47,7 +50,8 @@
   margin: -2px 0 0 0;
   background: var(--bg-primary);
   border: 2px solid var(--text-highlight);
-  border-radius: 8px;
+  border-radius: 6px;
+  /* border-radius: 0 0 6px 6px; */
   max-height: 240px;
   overflow: auto;
   padding: 0.25rem 0;

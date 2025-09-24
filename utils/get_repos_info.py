@@ -7,8 +7,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-REPO_CODES = ["kotlin-compiler", "shinsu-duel", "feedback-circle"]
-FEATURED_REPOS = ["kotlin-compiler", "shinsu-duel"]
+REPOS = {
+    "kotlin-compiler": {"featured": True, "context": "University"},
+    "shinsu-duel": {"featured": True, "context": "Personal"},
+    "feedback-circle": {"featured": False, "context": "Internship"},
+}
 
 DATA_DIR_PATH = "public/data"
 REPOS_FILE_PATH = os.path.join(DATA_DIR_PATH, "repos.json")
@@ -73,7 +76,7 @@ if __name__ == "__main__":
     data = []
 
     curr_id = 1
-    for repo_code in REPO_CODES:
+    for repo_code in list(REPOS.keys()):
         print(f"Fetching data for {repo_code}...")
 
         repo_data = {}
@@ -86,7 +89,8 @@ if __name__ == "__main__":
         repo_data["languages"] = get_languages(repo_code)
         repo_data["readme"] = get_readme(repo_code)
         repo_data["name"] = get_name(repo_data["readme"])
-        repo_data["featured"] = repo_code in FEATURED_REPOS
+        repo_data["featured"] = REPOS[repo_code]["featured"]
+        repo_data["context"] = REPOS[repo_code]["context"]
 
         data.append(repo_data)
 
