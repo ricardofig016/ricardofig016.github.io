@@ -23,6 +23,7 @@
   --black: rgb(25, 30, 36);
   --light-blue: rgb(79, 138, 232);
   --dark-blue: rgb(14, 53, 124);
+  --orange: #ea7826;
 }
 
 /* light mode */
@@ -30,7 +31,7 @@
   --bg-primary: var(--white);
   --text-primary: var(--black);
   --text-secondary: var(--white);
-  --text-highlight: var(--dark-blue);
+  --text-highlight: var(--orange);
   --btn-primary: var(--black);
   --link: var(--dark-blue);
 }
@@ -40,7 +41,7 @@
   --bg-primary: var(--black);
   --text-primary: var(--white);
   --text-secondary: var(--black);
-  --text-highlight: var(--light-blue);
+  --text-highlight: var(--orange);
   --btn-primary: var(--white);
   --link: var(--light-blue);
 }
@@ -92,4 +93,7 @@ a,
 a:visited {
   text-decoration: none;
   color: var(--link);
+}
+a:hover {
+  color: var(--text-highlight);
 }
