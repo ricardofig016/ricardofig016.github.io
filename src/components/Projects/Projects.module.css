@@ -51,6 +51,23 @@
   p {
     margin: 0;
   }
+
+  h2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  h2:hover {
+    color: var(--text-highlight);
+    cursor: pointer;
+  }
+
+  .caretOpen {
+    transform: rotate(180deg);
+  }
+}
+.projectSection.collapsed .sectionBody {
+  display: none;
 }
 
 .projectHeader {
@@ -61,9 +78,9 @@
   }
 }
 
-.projectReadme {
+/* .projectReadme {
   font-size: 0.6rem;
-}
+} */
 
 .projectLinks {
   display: flex;
