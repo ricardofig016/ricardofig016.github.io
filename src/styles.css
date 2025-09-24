@@ -29,6 +29,7 @@
 /* light mode */
 [data-theme="light"] {
   --bg-primary: var(--white);
+  --bg-secondary: var(--light-blue);
   --text-primary: var(--black);
   --text-secondary: var(--white);
   --text-highlight: var(--orange);
@@ -39,6 +40,7 @@
 /* dark mode */
 [data-theme="dark"] {
   --bg-primary: var(--black);
+  --bg-secondary: var(--dark-blue);
   --text-primary: var(--white);
   --text-secondary: var(--black);
   --text-highlight: var(--orange);
