@@ -7,10 +7,17 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# "": {"featured": , "context": ""},
 REPOS = {
     "kotlin-compiler": {"featured": True, "context": "University"},
     "shinsu-duel": {"featured": True, "context": "Personal"},
     "feedback-circle": {"featured": False, "context": "Internship"},
+    "cart-algorithm-class-imbalance-evaluation": {
+        "featured": True,
+        "context": "University",
+    },
+    "java-robocode-robot": {"featured": True, "context": "University"},
+    "ricardofig016.github.io": {"featured": True, "context": "Personal"},
 }
 
 DATA_DIR_PATH = "public/data"
