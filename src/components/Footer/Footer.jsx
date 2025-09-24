@@ -1,5 +1,5 @@
 import styles from "./Footer.module.css";
-import { FaGithub, FaLinkedin, FaEnvelope, FaPhone } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaEnvelope, FaPhone } from "react-icons/fa6";
 
 function Footer() {
   return (
@@ -35,7 +35,6 @@ function Footer() {
           </a>
         </li>
       </ul>
-      <p>© {new Date().getFullYear()} Ricardo Figueiredo. All rights reserved.</p>
     </footer>
   );
 }
