@@ -21,16 +21,46 @@ function ProjectsList({ projectsData }) {
     return Object.keys(languages || {}).sort((a, b) => languages[b] - languages[a]);
   };
 
-  // Filter projects by name/description and context if selected
-  const filteredProjects = projectsData.filter((proj) => {
+  // Filter projects by name/description/langs/readme and context if selected and sort them
+  const filteredProjects = (() => {
     const refinedSearch = search.toLowerCase().trim();
-    const matchSearch =
-      (proj.name || "").toLowerCase().includes(refinedSearch) ||
-      (proj.description || "").toLowerCase().includes(refinedSearch) ||
-      getSortedLanguages(proj.languages).some((lang) => lang.toLowerCase().includes(refinedSearch));
-    const matchContext = filterContext ? proj.context === filterContext : true;
-    return matchSearch && matchContext;
-  });
+
+    if (!refinedSearch)
+      return projectsData.filter((proj) => (filterContext ? proj.context === filterContext : true));
+
+    // assign rank based on where the search matched (lower = better)
+    const rankProject = (proj) => {
+      const name = (proj.name || "").toLowerCase();
+      if (name.includes(refinedSearch)) return 0;
+
+      const desc = (proj.description || "").toLowerCase();
+      if (desc.includes(refinedSearch)) return 1;
+
+      const langs = getSortedLanguages(proj.languages).map((l) => l.toLowerCase());
+      if (langs.some((l) => l.includes(refinedSearch))) return 2;
+
+      const readme = (proj.readme || "").toLowerCase();
+      if (readme.includes(refinedSearch)) return 3;
+
+      return Number.POSITIVE_INFINITY; // no match
+    };
+
+    return projectsData
+      .map((proj) => ({ proj, rank: rankProject(proj) }))
+      .filter(({ rank }) => rank !== Number.POSITIVE_INFINITY)
+      .filter(({ proj }) => (filterContext ? proj.context === filterContext : true))
+      .sort((a, b) => {
+        // primary: rank
+        if (a.rank !== b.rank) return a.rank - b.rank;
+        // secondary: featured projects first
+        const aFeatured = a.proj.featured ? 0 : 1;
+        const bFeatured = b.proj.featured ? 0 : 1;
+        if (aFeatured !== bFeatured) return aFeatured - bFeatured;
+        // tertiary: alphabetical by name
+        return (a.proj.name || "").localeCompare(b.proj.name || "");
+      })
+      .map(({ proj }) => proj);
+  })();
 
   return (
     <div className="projects-list">
