@@ -4,6 +4,8 @@ import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import Select from "../Select/Select";
+import Showdown from "showdown";
+import { FaGithub, FaGlobe } from "react-icons/fa6";
 
 function ProjectsList({ projectsData }) {
   const [search, setSearch] = useState("");
@@ -52,12 +54,8 @@ function ProjectsList({ projectsData }) {
       .sort((a, b) => {
         // primary: rank
         if (a.rank !== b.rank) return a.rank - b.rank;
-        // secondary: featured projects first
-        const aFeatured = a.proj.featured ? 0 : 1;
-        const bFeatured = b.proj.featured ? 0 : 1;
-        if (aFeatured !== bFeatured) return aFeatured - bFeatured;
-        // tertiary: alphabetical by name
-        return (a.proj.name || "").localeCompare(b.proj.name || "");
+        // default: leave as is (original order)
+        return 0;
       })
       .map(({ proj }) => proj);
   })();
@@ -137,55 +135,96 @@ ProjectsList.propTypes = {
   projectsData: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-function ProjectDetail({ projectsData }) {
+function Project({ projectsData }) {
   const { projectCode } = useParams();
   const project = projectsData.find((proj) => proj.code === projectCode);
-  if (!project) return <div>Project not found.</div>;
+  if (!project) return <div>404: Project {projectCode} not found.</div>;
+
+  const converter = new Showdown.Converter();
+  project.readmeHtml = project.readme ? converter.makeHtml(project.readme) : "";
+
+  const headerSection = (
+    <section className={styles.projectHeader}>
+      <h1>{project.name}</h1>
+      <p>{project.description}</p>
+    </section>
+  );
+
+  const demoSection = project.demo && (
+    <section className={styles.projectSection}>
+      <h2>Demo</h2>
+      <div>{project.demo}</div>
+    </section>
+  );
+
+  const readmeSection = project.readmeHtml && (
+    <section className={styles.projectSection + " " + styles.projectReadmeSection}>
+      <h2>Readme</h2>
+      <div dangerouslySetInnerHTML={{ __html: project.readmeHtml }} className={styles.projectReadme} />
+    </section>
+  );
+
+  const whatILearnedSection = project.whatILearned && (
+    <section className={styles.projectSection}>
+      <h2>What I Learned</h2>
+      <p>{project.whatILearned}</p>
+    </section>
+  );
+
+  const linksSection = (project.github_url || project.website) && (
+    <section className={styles.projectSection}>
+      <h2>Links</h2>
+      <div className={styles.projectLinks}>
+        {project.github_url && (
+          <div className={styles.link}>
+            <FaGithub />
+            <a href={project.github_url} target="_blank" rel="noopener noreferrer">
+              GitHub
+            </a>
+          </div>
+        )}
+        {project.website && (
+          <div className={styles.link}>
+            <FaGlobe />
+            <a href={project.website} target="_blank" rel="noopener noreferrer">
+              Website
+            </a>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+
+  const relatedSection = project.related && project.related.length > 0 && (
+    <section className={styles.projectSection}>
+      <h2>Related Projects</h2>
+      <ul>
+        {project.related.map((code) => {
+          const relatedProject = projectsData.find((p) => p.code === code);
+          return (
+            <li key={code}>
+              <Link to={`/projects/${code}`}>
+                {relatedProject ? relatedProject.title : `Project ${code}`}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  );
 
   return (
-    <div className="project-detail">
-      <h1>{project.name}</h1>
-      <div className="project-demo">
-        {/* Project demo: video, gif, or screenshots */}
-        <p>Demo placeholder: {project.demo}</p>
-      </div>
-      <section className="project-info">
-        <h2>Why It Matters</h2>
-        <p>{project.whyItMatters}</p>
-      </section>
-      <section className="project-challenges">
-        <h2>Technical Challenges &amp; Skills Learned</h2>
-        <p>{project.challenges}</p>
-      </section>
-      <section className="project-links">
-        <a href={project.github} target="_blank" rel="noopener noreferrer">
-          GitHub
-        </a>
-        {project.live && (
-          <a href={project.live} target="_blank" rel="noopener noreferrer">
-            Try It Live
-          </a>
-        )}
-      </section>
-      {/* <section className="related-projects">
-        <h2>Related Projects</h2>
-        <ul>
-          {project.related.map((relatedId) => {
-            const relatedProject = projectsData.find((p) => p.id === relatedId);
-            return (
-              <li key={relatedId}>
-                <Link to={`/projects/${relatedId}`}>
-                  {relatedProject ? relatedProject.title : `Project ${relatedId}`}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </section> */}
+    <div>
+      {headerSection}
+      {demoSection}
+      {readmeSection}
+      {whatILearnedSection}
+      {linksSection}
+      {relatedSection}
     </div>
   );
 }
-ProjectDetail.propTypes = {
+Project.propTypes = {
   projectsData: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
@@ -193,7 +232,7 @@ export default function Projects({ projectsData }) {
   return (
     <Routes>
       <Route path="/" element={<ProjectsList projectsData={projectsData} />} />
-      <Route path=":projectCode" element={<ProjectDetail projectsData={projectsData} />} />
+      <Route path=":projectCode" element={<Project projectsData={projectsData} />} />
     </Routes>
   );
 }
