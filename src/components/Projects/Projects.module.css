@@ -16,6 +16,11 @@
   padding: 1rem;
   border: 2px solid var(--text-highlight);
   border-radius: 6px;
+  cursor: pointer;
+}
+.projectCard:hover {
+  background-color: var(--bg-secondary);
+  transform: translateY(-2px);
 }
 
 .projectTitle {
@@ -24,9 +29,9 @@
 
 .projectTechTags,
 .projectGithubLink {
-  font-size: 0.7rem;
+  font-size: 0.6rem;
 }
 
 .projectDesc {
-  margin: 0;
+  margin: 1rem 0 0 0;
 }

@@ -1,5 +1,5 @@
 import styles from "./Projects.module.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -8,6 +8,7 @@ import Select from "../Select/Select";
 function ProjectsList({ projectsData }) {
   const [search, setSearch] = useState("");
   const [filterContext, setFilterContext] = useState("");
+  const navigate = useNavigate();
 
   const contextOptions = [
     { value: "", label: "All Contexts" },
@@ -55,13 +56,16 @@ function ProjectsList({ projectsData }) {
         {filteredProjects.map((proj) => {
           const langs = getSortedLanguages(proj.languages);
           return (
-            <div key={proj.id ?? proj.code} className={styles.projectCard}>
+            <div
+              key={proj.id ?? proj.code}
+              className={styles.projectCard}
+              tabIndex="0"
+              role="link"
+              onClick={() => navigate(`/projects/${proj.code}`)}
+            >
+              <Link to={`/projects/${proj.code}`}></Link>
               {/* Title */}
-              <h3 className={styles.projectTitle}>
-                <Link to={`/projects/${proj.code}`} className={styles.projectLink}>
-                  {proj.name + " "}
-                </Link>
-              </h3>
+              <h3 className={styles.projectTitle}>{proj.name + " "}</h3>
 
               {/* Tech Tags */}
               {langs.length > 0 && (
