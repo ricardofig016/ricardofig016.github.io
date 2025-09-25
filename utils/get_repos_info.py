@@ -86,24 +86,29 @@ def main():
     for repo_code in list(REPOS.keys()):
         print(f"Fetching data for {repo_code}...")
 
-        repo_data = {}
-        repo_data["id"] = curr_id
-        curr_id += 1
-        repo_data["code"] = repo_code
-        general_info = get_general_info(repo_code)
-        for key, value in general_info.items():
-            repo_data[key] = value
-        repo_data["languages"] = get_languages(repo_code)
-        repo_data["readme"] = get_readme(repo_code)
-        repo_data["name"] = get_name(repo_data["readme"])
-        repo_data["featured"] = REPOS[repo_code]["featured"]
-        repo_data["context"] = REPOS[repo_code]["context"]
-
         repo_folder_path = os.path.join(REPOS_DIR_PATH, repo_code)
         os.makedirs(repo_folder_path, exist_ok=True)
+
+        repo_info = {}
+        repo_info["id"] = curr_id
+        curr_id += 1
+        repo_info["code"] = repo_code
+        general_info = get_general_info(repo_code)
+        for key, value in general_info.items():
+            repo_info[key] = value
+        repo_info["languages"] = get_languages(repo_code)
+        repo_readme = get_readme(repo_code)
+        repo_info["name"] = get_name(repo_readme)
+        repo_info["featured"] = REPOS[repo_code]["featured"]
+        repo_info["context"] = REPOS[repo_code]["context"]
+
         info_json_path = os.path.join(repo_folder_path, "info.json")
         with open(info_json_path, "w", encoding="utf-8") as file:
-            json.dump(repo_data, file, indent=2, sort_keys=True)
+            json.dump(repo_info, file, indent=2, sort_keys=True)
+
+        readme_path = os.path.join(repo_folder_path, "README.md")
+        with open(readme_path, "w", encoding="utf-8") as file:
+            file.write(repo_readme)
 
     index_path = os.path.join(REPOS_DIR_PATH, "index.json")
     with open(index_path, "w", encoding="utf-8") as f:

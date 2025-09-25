@@ -13,7 +13,6 @@
     "JavaScript": 114892
   },
   "name": "Shinsu Duel: A Tower of God CCG",
-  "readme": "# Shinsu Duel: A Tower of God CCG\n\nShinsu Duel is a 1vs1 collectible card game (CCG) inspired by SIU's _Tower of God_. The game offers both Player vs. Player (PvP) and Campaign (PvE) modes. Players strategize by building decks, deploying units, and using abilities to destroy their opponent\u2019s lighthouses while protecting their own.\n\n## Game Logic\n\nBelow is an in-depth explanation on how the `GameState` class handles each game.\n\n### User Actions\n\nThe player may use certain actions, such as deploying a unit, using an ability, or passing the turn. `GameState` redirects these action request to their respective `ActionHandler` (`DeployUnitAction`, `UseAbilityAction`, `PassTurnAction`). `GameState` asks the handler to validate the action request, and then to execute it, performing the necessary changes.\n",
   "stars": 0,
   "website": ""
 }
