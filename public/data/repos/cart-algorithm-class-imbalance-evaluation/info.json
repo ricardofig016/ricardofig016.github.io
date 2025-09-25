@@ -1,0 +1,19 @@
+{
+  "code": "cart-algorithm-class-imbalance-evaluation",
+  "context": "University",
+  "description": "Evaluation of the CART decision tree algorithm on imbalanced binary classification datasets. The project compares the original and a new modified version of CART, applying techniques like cost-sensitive learning and class weighting, and reports improvements in recall and ROC-AUC for minority classes. Developed for the Machine Learning I course.",
+  "featured": true,
+  "forks": 0,
+  "github_url": "https://github.com/ricardofig016/cart-algorithm-class-imbalance-evaluation",
+  "id": 4,
+  "issues": 0,
+  "languages": {
+    "Jupyter Notebook": 1628148,
+    "Python": 36520,
+    "TeX": 8427
+  },
+  "name": "Class Imbalance Evaluantion on CART Algorithm",
+  "readme": "# Class Imbalance Evaluantion on CART Algorithm\n",
+  "stars": 0,
+  "website": ""
+}

@@ -21,19 +21,35 @@ function App() {
   // }, []);
   // const deviceType = width <= 768 ? "mobile" : "desktop";
 
-  const [projects, setProjects] = useState([]);
-  const [featuredProjects, setFeaturedProjects] = useState([]);
-  useEffect(() => {
-    const fetchRepos = async () => {
-      try {
-        const response = await fetch("/data/repos.json");
-        const data = await response.json();
-        setProjects(data);
-        setFeaturedProjects(data.filter((repo) => repo.featured));
-      } catch (error) {
-        console.error("Error fetching repos:", error);
+  const [projects, setProjects] = useState({});
+  const [featuredProjects, setFeaturedProjects] = useState({});
+
+  const fetchRepos = async () => {
+    try {
+      const res = await fetch("/data/repos/index.json");
+      if (!res.ok) throw new Error(`Failed to fetch index.json: ${res.status}`);
+      const repoFolders = await res.json(); // array of folder names
+
+      let reposData = {};
+      for (const folder of repoFolders) {
+        const response = await fetch(`/data/repos/${folder}/info.json`);
+        if (!response.ok) {
+          console.warn(`Skipping ${folder}: ${response.status}`);
+          continue;
+        }
+        const repoInfo = await response.json();
+        reposData[folder] = repoInfo;
       }
-    };
+
+      setProjects(reposData);
+      const featured = Object.fromEntries(Object.entries(reposData).filter(([, repo]) => repo.featured));
+      setFeaturedProjects(featured);
+    } catch (error) {
+      console.error("Error fetching repos:", error);
+    }
+  };
+
+  useEffect(() => {
     fetchRepos();
   }, []);
 

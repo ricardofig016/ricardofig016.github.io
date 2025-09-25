@@ -1,0 +1,17 @@
+{
+  "code": "java-robocode-robot",
+  "context": "University",
+  "description": "Roomba is a Java-based Robocode robot implementing chase, ram, and close-range shooting strategies. Developed as part of ASW 24-25.",
+  "featured": false,
+  "forks": 0,
+  "github_url": "https://github.com/ricardofig016/java-robocode-robot",
+  "id": 6,
+  "issues": 0,
+  "languages": {
+    "Java": 4330
+  },
+  "name": "Roomba",
+  "readme": "# Roomba\n## robocode-robot for ASW 24-25\nHappily tries to wipe every enemy!\n\n## Students\n- Jo\u00e3o Guedes - up202203859\n- Ricardo Figueiredo - up202105430\n\n## Criteria\n### 1. Chase, Ram, Shoot (when very close), Win`*`\n### 2 .Chase, Swerve(, Ram), Shoot (when very close), Win`*`\n`*` makes the roomba cleaning dance\n\nSecond criteria is used when an enemy actively fleas from Roomba and/or shoots Roomba when he is trying to approach it.\n\n\n## Applied Mathematics\n- Shooting Power `3`\n  - `16 damage / 16 tick`\n  - `9 lifesteal / 16 tick`\n    - `1 damage / tick`\n    - `0.56 lifesteal / tick`\n- Shooting Power `1.2`\n    - `4 damage / 12 tick`\n    - `3 lifesteal / 12 tick`\n        - `0.33 damage / tick`\n        - `0.25 lifesteal / tick`\n",
+  "stars": 0,
+  "website": ""
+}

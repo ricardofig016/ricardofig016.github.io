@@ -18,11 +18,10 @@ REPOS = {
         "context": "University",
     },
     "ricardofig016.github.io": {"featured": True, "context": "Personal"},
-    "java-robocode-robot": {"featured": True, "context": "University"},
+    "java-robocode-robot": {"featured": False, "context": "University"},
 }
 
-DATA_DIR_PATH = "public/data"
-REPOS_FILE_PATH = os.path.join(DATA_DIR_PATH, "repos.json")
+REPOS_DIR_PATH = "public/data/repos"
 
 GITHUB_USERNAME = "ricardofig016"
 GITHUB_API_BASE_URL = f"https://api.github.com/repos/{GITHUB_USERNAME}"
@@ -80,9 +79,8 @@ def get_name(readme):
     return "Untitled"
 
 
-if __name__ == "__main__":
-    os.makedirs(DATA_DIR_PATH, exist_ok=True)
-    data = []
+def main():
+    os.makedirs(REPOS_DIR_PATH, exist_ok=True)
 
     curr_id = 1
     for repo_code in list(REPOS.keys()):
@@ -101,7 +99,16 @@ if __name__ == "__main__":
         repo_data["featured"] = REPOS[repo_code]["featured"]
         repo_data["context"] = REPOS[repo_code]["context"]
 
-        data.append(repo_data)
+        repo_folder_path = os.path.join(REPOS_DIR_PATH, repo_code)
+        os.makedirs(repo_folder_path, exist_ok=True)
+        info_json_path = os.path.join(repo_folder_path, "info.json")
+        with open(info_json_path, "w", encoding="utf-8") as file:
+            json.dump(repo_data, file, indent=2, sort_keys=True)
 
-    with open(REPOS_FILE_PATH, "w", encoding="utf-8") as file:
-        json.dump(data, file, indent=4, sort_keys=True)
+    index_path = os.path.join(REPOS_DIR_PATH, "index.json")
+    with open(index_path, "w", encoding="utf-8") as f:
+        json.dump(list(REPOS.keys()), f, indent=2)
+
+
+if __name__ == "__main__":
+    main()

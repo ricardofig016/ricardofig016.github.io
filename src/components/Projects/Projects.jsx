@@ -257,13 +257,15 @@ Project.propTypes = {
 };
 
 export default function Projects({ projectsData }) {
+  const projectEntries = Object.values(projectsData || {});
+
   return (
     <Routes>
-      <Route path="/" element={<ProjectsList projectsData={projectsData} />} />
-      <Route path=":projectCode" element={<Project projectsData={projectsData} />} />
+      <Route path="/" element={<ProjectsList projectsData={projectEntries} />} />
+      <Route path=":projectCode" element={<Project projectsData={projectEntries} />} />
     </Routes>
   );
 }
 Projects.propTypes = {
-  projectsData: PropTypes.arrayOf(PropTypes.object).isRequired,
+  projectsData: PropTypes.objectOf(PropTypes.object).isRequired,
 };

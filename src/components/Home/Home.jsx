@@ -5,7 +5,9 @@ import styles from "./Home.module.css";
 import PropTypes from "prop-types";
 
 function Home({ featuredProjectsData }) {
-  const carouselItems = featuredProjectsData.map((project) => (
+  const featuredProjectEntries = Object.entries(featuredProjectsData || {});
+
+  const carouselItems = featuredProjectEntries.map(([, project]) => (
     <div key={project.name}>
       <Link to={`/projects/${project.code}`}>
         <div className={styles.projectCard}>
@@ -64,14 +66,15 @@ function Home({ featuredProjectsData }) {
       {/* Featured Projects */}
       <section>
         <h2>Featured Projects</h2>
-        {carouselElement}
+        {featuredProjectEntries.length > 0 ? carouselElement : <p>No featured projects yet.</p>}
       </section>
     </div>
   );
 }
 
 Home.propTypes = {
-  featuredProjectsData: PropTypes.arrayOf(PropTypes.object).isRequired,
+  // { [code: string]: { ...projectData } }
+  featuredProjectsData: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default Home;
