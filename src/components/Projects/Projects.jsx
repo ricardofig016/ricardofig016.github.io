@@ -186,18 +186,6 @@ function Project({ projectsData }) {
     </CollapsibleSection>
   );
 
-  const readmeSection = project.readmeHtml && (
-    <CollapsibleSection title="ReadMe" defaultOpen={false}>
-      <div dangerouslySetInnerHTML={{ __html: project.readmeHtml }} className={styles.projectReadme} />
-    </CollapsibleSection>
-  );
-
-  const whatILearnedSection = project.whatILearned && (
-    <CollapsibleSection title="What I Learned">
-      <p>{project.whatILearned}</p>
-    </CollapsibleSection>
-  );
-
   const linksSection = (project.github_url || project.website) && (
     <CollapsibleSection title="Links">
       <div className={styles.projectLinks}>
@@ -218,6 +206,18 @@ function Project({ projectsData }) {
           </div>
         )}
       </div>
+    </CollapsibleSection>
+  );
+
+  const readmeSection = project.readmeHtml && (
+    <CollapsibleSection title="ReadMe" defaultOpen={false}>
+      <div dangerouslySetInnerHTML={{ __html: project.readmeHtml }} className={styles.projectReadme} />
+    </CollapsibleSection>
+  );
+
+  const whatILearnedSection = project.whatILearned && (
+    <CollapsibleSection title="What I Learned">
+      <p>{project.whatILearned}</p>
     </CollapsibleSection>
   );
 
@@ -245,9 +245,9 @@ function Project({ projectsData }) {
     <div>
       {headerSection}
       {demoSection}
+      {linksSection}
       {readmeSection}
       {whatILearnedSection}
-      {linksSection}
       {relatedSection}
     </div>
   );
