@@ -39,7 +39,8 @@
 /* --------------------------------------------- */
 
 .projectHeader {
-  margin: 2rem 0;
+  margin: 0;
+  padding-top: 2rem;
 
   h1 {
     margin: 0;
