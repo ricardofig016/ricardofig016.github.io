@@ -47,17 +47,17 @@
   flex-direction: column;
   gap: 0.5rem;
 
-  h2,
-  p {
+  .sectionParagraph,
+  .sectionTitle {
     margin: 0;
   }
 
-  h2 {
+  .sectionTitle {
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
-  h2:hover {
+  .sectionTitle:hover {
     color: var(--text-highlight);
     cursor: pointer;
   }

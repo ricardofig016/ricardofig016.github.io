@@ -148,7 +148,14 @@ function CollapsibleSection({ title, children, defaultOpen = true, sectionClass 
 
   return (
     <section className={`${styles.projectSection} ${sectionClass} ${open ? "" : styles.collapsed}`}>
-      <h2 onClick={toggle} onKeyDown={onKeyDown} role="button" tabIndex={0} aria-expanded={open}>
+      <h2
+        className={styles.sectionTitle}
+        onClick={toggle}
+        onKeyDown={onKeyDown}
+        role="button"
+        tabIndex={0}
+        aria-expanded={open}
+      >
         <span>{title}</span>
         <FaAngleDown className={open ? styles.caretOpen : ""} aria-hidden="true" />
       </h2>
@@ -173,6 +180,7 @@ function Project({ projectsData }) {
   const converter = new Showdown.Converter();
   project.readmeHtml = project.readme ? converter.makeHtml(project.readme) : "";
 
+  // Header
   const headerSection = (
     <section className={styles.projectHeader}>
       <h1>{project.name}</h1>
@@ -180,12 +188,14 @@ function Project({ projectsData }) {
     </section>
   );
 
+  // Demo
   const demoSection = project.demo && (
     <CollapsibleSection title="Demo">
       <div>{project.demo}</div>
     </CollapsibleSection>
   );
 
+  // Links
   const linksSection = (project.github_url || project.website) && (
     <CollapsibleSection title="Links">
       <div className={styles.projectLinks}>
@@ -209,18 +219,26 @@ function Project({ projectsData }) {
     </CollapsibleSection>
   );
 
+  // ReadMe
   const readmeSection = project.readmeHtml && (
     <CollapsibleSection title="ReadMe" defaultOpen={false}>
+      <p className={styles.sectionParagraph}>
+        Read this on{" "}
+        <a href={project.github_url + "#readme"} target="_blank" rel="noopener noreferrer">
+          GitHub
+        </a>
+        .
+      </p>
       <div dangerouslySetInnerHTML={{ __html: project.readmeHtml }} className={styles.projectReadme} />
     </CollapsibleSection>
   );
 
+  // What I Learned
   const whatILearnedSection = project.whatILearned && (
-    <CollapsibleSection title="What I Learned">
-      <p>{project.whatILearned}</p>
-    </CollapsibleSection>
+    <CollapsibleSection title="What I Learned">{project.whatILearned}</CollapsibleSection>
   );
 
+  // Related Projects
   const relatedSection = project.related && project.related.length > 0 && (
     <section className={styles.projectSection}>
       <h2>
