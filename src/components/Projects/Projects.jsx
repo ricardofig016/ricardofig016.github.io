@@ -4,8 +4,9 @@ import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import Select from "../Select/Select";
+import CollapsibleSection from "../CollapsibleSection/CollapsibleSection";
 import Showdown from "showdown";
-import { FaAngleDown, FaGithub, FaGlobe } from "react-icons/fa6";
+import { FaGithub, FaGlobe } from "react-icons/fa6";
 import Carousel from "react-multi-carousel";
 
 function ProjectsList({ projectsData }) {
@@ -136,43 +137,6 @@ ProjectsList.propTypes = {
   projectsData: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-function CollapsibleSection({ title, children, defaultOpen = true, sectionClass = "" }) {
-  const [open, setOpen] = useState(defaultOpen);
-
-  const toggle = () => setOpen((o) => !o);
-  const onKeyDown = (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      toggle();
-    }
-  };
-
-  return (
-    <section className={`${styles.projectSection} ${sectionClass} ${open ? "" : styles.collapsed}`}>
-      <h2
-        className={styles.sectionTitle}
-        onClick={toggle}
-        onKeyDown={onKeyDown}
-        role="button"
-        tabIndex={0}
-        aria-expanded={open}
-      >
-        <span>{title}</span>
-        <FaAngleDown className={open ? styles.caretOpen : ""} aria-hidden="true" />
-      </h2>
-      <div className={styles.sectionBody} hidden={!open}>
-        {children}
-      </div>
-    </section>
-  );
-}
-CollapsibleSection.propTypes = {
-  title: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
-  defaultOpen: PropTypes.bool,
-  sectionClass: PropTypes.string,
-};
-
 function Project({ projectsData }) {
   const { projectCode } = useParams();
   const project = projectsData.find((proj) => proj.code === projectCode);
@@ -250,13 +214,13 @@ function Project({ projectsData }) {
   // ReadMe
   const readmeSection = project.readmeHtml && (
     <CollapsibleSection title="ReadMe" defaultOpen={false}>
-      <p className={styles.sectionParagraph}>
+      <span className={styles.sectionParagraph}>
         Read this on{" "}
         <a href={project.github_url + "#readme"} target="_blank" rel="noopener noreferrer">
           GitHub
         </a>
         .
-      </p>
+      </span>
       <div dangerouslySetInnerHTML={{ __html: project.readmeHtml }} className={styles.projectReadme} />
     </CollapsibleSection>
   );
@@ -268,10 +232,7 @@ function Project({ projectsData }) {
 
   // Related Projects
   const relatedSection = project.related && project.related.length > 0 && (
-    <section className={styles.projectSection}>
-      <h2>
-        Related Projects <FaAngleDown />
-      </h2>
+    <CollapsibleSection title="Related Projects">
       <ul>
         {project.related.map((code) => {
           const relatedProject = projectsData.find((p) => p.code === code);
@@ -284,7 +245,7 @@ function Project({ projectsData }) {
           );
         })}
       </ul>
-    </section>
+    </CollapsibleSection>
   );
 
   return (
