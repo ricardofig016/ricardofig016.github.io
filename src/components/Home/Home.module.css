@@ -51,6 +51,8 @@
   flex-direction: column;
   justify-content: flex-start;
   gap: 1rem;
+  max-height: 16rem;
+  flex: 1 1 auto;
 
   h3,
   p {
@@ -62,5 +64,6 @@
   }
   p {
     color: var(--text-primary);
+    text-align: justify;
   }
 }
