@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import Select from "../Select/Select";
 import CollapsibleSection from "../CollapsibleSection/CollapsibleSection";
+import ImageModal from "../ImageModal/ImageModal";
 import Showdown from "showdown";
 import { FaGithub, FaGlobe } from "react-icons/fa6";
 import Carousel from "react-multi-carousel";
@@ -154,9 +155,12 @@ function Project({ projectsData }) {
 
   // Images
   const carouselItems = (project.images || []).map((image) => (
-    <div key={image} className={styles.carouselItem}>
-      <img src={`/images/repos/${project.code}/${image}`} alt={project.name} />
-    </div>
+    <ImageModal
+      className={styles.carouselItem}
+      key={image}
+      src={`/images/repos/${project.code}/${image}`}
+      alt={project.name}
+    />
   ));
   const imagesSection = project.images && project.images.length > 0 && (
     <section className={styles.projectImages}>

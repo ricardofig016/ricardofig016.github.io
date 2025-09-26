@@ -67,6 +67,16 @@
         object-position: center;
         display: block;
       }
+      img:hover {
+        cursor: pointer;
+        opacity: 0.8;
+      }
+      img:focus {
+        outline: none;
+      }
+    }
+    .carouselItem:focus {
+      outline: none;
     }
   }
 }
