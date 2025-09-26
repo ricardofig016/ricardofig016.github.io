@@ -1,0 +1,23 @@
+{
+  "code": "ride-sharing-app",
+  "context": "University",
+  "description": "A full-stack web application built as a project for the Software Architecture course from university, using Java Spring Boot and Vaadin Flow. It's a ride-sharing application similar to Uber.",
+  "featured": true,
+  "forks": 0,
+  "github_url": "https://github.com/ricardofig016/ride-sharing-app",
+  "id": 4,
+  "images": [
+    "1-profile.png",
+    "2-create-ride.png",
+    "3-rides.png"
+  ],
+  "issues": 0,
+  "languages": {
+    "CSS": 506,
+    "HTML": 497,
+    "Java": 91964
+  },
+  "name": "Ride Sharing App",
+  "stars": 0,
+  "website": ""
+}
