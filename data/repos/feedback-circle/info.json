@@ -1,0 +1,22 @@
+{
+  "code": "feedback-circle",
+  "context": "Internship",
+  "description": "A web-based tool designed to streamline the performance appraisal process within Critical Manufacturing",
+  "featured": false,
+  "forks": 0,
+  "github_url": "https://github.com/ricardofig016/feedback-circle",
+  "id": 3,
+  "issues": 0,
+  "languages": {
+    "Batchfile": 28,
+    "CSS": 23588,
+    "HTML": 25153,
+    "JavaScript": 133980,
+    "Less": 78481,
+    "Python": 6031,
+    "SCSS": 79489
+  },
+  "name": "Feedback Circle",
+  "stars": 0,
+  "website": ""
+}

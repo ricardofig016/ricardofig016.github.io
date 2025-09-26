@@ -1,0 +1,16 @@
+{
+  "code": "java-robocode-robot",
+  "context": "University",
+  "description": "Roomba is a Java-based Robocode robot implementing chase, ram, and close-range shooting strategies. Developed as part of ASW 24-25.",
+  "featured": false,
+  "forks": 0,
+  "github_url": "https://github.com/ricardofig016/java-robocode-robot",
+  "id": 6,
+  "issues": 0,
+  "languages": {
+    "Java": 4330
+  },
+  "name": "Roomba",
+  "stars": 0,
+  "website": ""
+}

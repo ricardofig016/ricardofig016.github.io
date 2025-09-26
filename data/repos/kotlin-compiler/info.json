@@ -1,0 +1,19 @@
+{
+  "code": "kotlin-compiler",
+  "context": "University",
+  "description": "A haskell compiler for a subset of the Kotlin programming language",
+  "featured": true,
+  "forks": 1,
+  "github_url": "https://github.com/ricardofig016/kotlin-compiler",
+  "id": 1,
+  "issues": 0,
+  "languages": {
+    "Haskell": 273973,
+    "Kotlin": 4324,
+    "Lex": 4390,
+    "Yacc": 5362
+  },
+  "name": "Kotlin Compiler",
+  "stars": 0,
+  "website": ""
+}

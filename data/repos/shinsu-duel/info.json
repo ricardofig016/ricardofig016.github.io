@@ -1,0 +1,18 @@
+{
+  "code": "shinsu-duel",
+  "context": "Personal",
+  "description": "A Tower of God CCG where players strategize with deck-building and tactical unit deployment to beat opponents in fierce PvP and PvE battles",
+  "featured": true,
+  "forks": 0,
+  "github_url": "https://github.com/ricardofig016/shinsu-duel",
+  "id": 2,
+  "issues": 0,
+  "languages": {
+    "CSS": 13856,
+    "HTML": 26621,
+    "JavaScript": 114892
+  },
+  "name": "Shinsu Duel: A Tower of God CCG",
+  "stars": 0,
+  "website": ""
+}
