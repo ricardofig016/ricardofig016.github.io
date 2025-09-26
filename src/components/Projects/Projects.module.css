@@ -38,6 +38,34 @@
 
 /* --------------------------------------------- */
 
+.projectHeader {
+  margin: 2rem 0;
+
+  h1 {
+    margin: 0;
+  }
+}
+
+.projectImages {
+  .carousel {
+    .carouselItem {
+      /* max-height: 50rem; */
+      padding: 0 1rem 0 0;
+      overflow: hidden;
+      width: 100%;
+
+      img {
+        border-radius: 6px;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+        display: block;
+      }
+    }
+  }
+}
+
 .projectSection {
   border: 2px solid var(--text-highlight);
   border-radius: 6px;
@@ -68,14 +96,6 @@
 }
 .projectSection.collapsed .sectionBody {
   display: none;
-}
-
-.projectHeader {
-  margin: 2rem 0;
-
-  h1 {
-    margin: 0;
-  }
 }
 
 /* .projectReadme {

@@ -5,12 +5,13 @@
   "featured": true,
   "forks": 0,
   "github_url": "https://github.com/ricardofig016/ricardofig016.github.io",
-  "id": 5,
+  "id": 6,
+  "images": [],
   "issues": 0,
   "languages": {
-    "CSS": 6417,
+    "CSS": 6530,
     "HTML": 384,
-    "JavaScript": 22866,
+    "JavaScript": 23236,
     "Python": 3585
   },
   "name": "Ricardo Figueiredo - Portfolio",

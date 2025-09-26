@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import Select from "../Select/Select";
 import Showdown from "showdown";
 import { FaAngleDown, FaGithub, FaGlobe } from "react-icons/fa6";
+import Carousel from "react-multi-carousel";
 
 function ProjectsList({ projectsData }) {
   const [search, setSearch] = useState("");
@@ -188,11 +189,38 @@ function Project({ projectsData }) {
     </section>
   );
 
-  // Demo
-  const demoSection = project.demo && (
-    <CollapsibleSection title="Demo">
-      <div>{project.demo}</div>
-    </CollapsibleSection>
+  // Images
+  const carouselItems = (project.images || []).map((image) => (
+    <div key={image} className={styles.carouselItem}>
+      <img src={`/images/repos/${project.code}/${image}`} alt={project.name} />
+    </div>
+  ));
+  const imagesSection = project.images && project.images.length > 0 && (
+    <section className={styles.projectImages}>
+      <Carousel
+        swipeable={true}
+        draggable={false}
+        showDots={true}
+        responsive={{
+          all: {
+            breakpoint: { max: 5000, min: 0 },
+            items: 1.5,
+            slidesToSlide: 1,
+          },
+        }}
+        ssr={true} // render carousel on server-side.
+        infinite={true}
+        // autoPlay={true}
+        autoPlaySpeed={5000}
+        keyBoardControl={true}
+        containerClass="carousel-container"
+        dotListClass="custom-dot-list-style"
+        itemClass="carousel-item-padding-40-px"
+        className={styles.carousel}
+      >
+        {carouselItems}
+      </Carousel>
+    </section>
   );
 
   // Links
@@ -262,7 +290,7 @@ function Project({ projectsData }) {
   return (
     <div>
       {headerSection}
-      {demoSection}
+      {imagesSection}
       {linksSection}
       {readmeSection}
       {whatILearnedSection}

@@ -13,6 +13,7 @@ REPOS = {
     "kotlin-compiler": {"featured": True, "context": "University"},
     "shinsu-duel": {"featured": True, "context": "Personal"},
     "feedback-circle": {"featured": False, "context": "Internship"},
+    "ride-sharing-app": {"featured": True, "context": "University"},
     "cart-algorithm-class-imbalance-evaluation": {
         "featured": True,
         "context": "University",
@@ -22,6 +23,7 @@ REPOS = {
 }
 
 REPOS_DIR_PATH = "public/data/repos"
+IMAGES_DIR_PATH = "public/images/repos"
 
 GITHUB_USERNAME = "ricardofig016"
 GITHUB_API_BASE_URL = f"https://api.github.com/repos/{GITHUB_USERNAME}"
@@ -79,6 +81,18 @@ def get_name(readme):
     return "Untitled"
 
 
+def get_images(repo_code):
+    images_path = os.path.join(IMAGES_DIR_PATH, repo_code)
+    os.makedirs(images_path, exist_ok=True)
+
+    image_file_names = []
+    for filename in os.listdir(images_path):
+        if os.path.isfile(os.path.join(images_path, filename)):
+            image_file_names.append(filename)
+
+    return image_file_names
+
+
 def main():
     os.makedirs(REPOS_DIR_PATH, exist_ok=True)
 
@@ -89,6 +103,13 @@ def main():
         repo_folder_path = os.path.join(REPOS_DIR_PATH, repo_code)
         os.makedirs(repo_folder_path, exist_ok=True)
 
+        # ReadMe
+        repo_readme = get_readme(repo_code)
+        readme_path = os.path.join(repo_folder_path, "README.md")
+        with open(readme_path, "w", encoding="utf-8") as file:
+            file.write(repo_readme)
+
+        # Basic Info
         repo_info = {}
         repo_info["id"] = curr_id
         curr_id += 1
@@ -97,19 +118,15 @@ def main():
         for key, value in general_info.items():
             repo_info[key] = value
         repo_info["languages"] = get_languages(repo_code)
-        repo_readme = get_readme(repo_code)
         repo_info["name"] = get_name(repo_readme)
+        repo_info["images"] = get_images(repo_code)
         repo_info["featured"] = REPOS[repo_code]["featured"]
         repo_info["context"] = REPOS[repo_code]["context"]
-
         info_json_path = os.path.join(repo_folder_path, "info.json")
         with open(info_json_path, "w", encoding="utf-8") as file:
             json.dump(repo_info, file, indent=2, sort_keys=True)
 
-        readme_path = os.path.join(repo_folder_path, "README.md")
-        with open(readme_path, "w", encoding="utf-8") as file:
-            file.write(repo_readme)
-
+    # Index
     index_path = os.path.join(REPOS_DIR_PATH, "index.json")
     with open(index_path, "w", encoding="utf-8") as f:
         json.dump(list(REPOS.keys()), f, indent=2)
