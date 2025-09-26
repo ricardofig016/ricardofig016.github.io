@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# "": {"featured": , "context": ""},
+# "": {"featured": , "image": "", "context": ""},
 REPOS = {
     "kotlin-compiler": {
         "featured": True,
@@ -17,13 +17,8 @@ REPOS = {
     },
     "shinsu-duel": {
         "featured": True,
-        "image": None,
+        "image": "2-big-card.png",
         "context": "Personal",
-    },
-    "feedback-circle": {
-        "featured": False,
-        "image": None,
-        "context": "Internship",
     },
     "ride-sharing-app": {
         "featured": True,
@@ -35,8 +30,13 @@ REPOS = {
         "image": None,
         "context": "University",
     },
+    "feedback-circle": {
+        "featured": False,
+        "image": None,
+        "context": "Internship",
+    },
     "ricardofig016.github.io": {
-        "featured": True,
+        "featured": False,
         "image": None,
         "context": "Personal",
     },

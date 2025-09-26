@@ -6,8 +6,12 @@
   "forks": 0,
   "github_url": "https://github.com/ricardofig016/shinsu-duel",
   "id": 1,
-  "image": null,
-  "images": [],
+  "image": "2-big-card.png",
+  "images": [
+    "1-hover.png",
+    "2-big-card.png",
+    "3-drag.png"
+  ],
   "issues": 0,
   "languages": {
     "CSS": 13856,
