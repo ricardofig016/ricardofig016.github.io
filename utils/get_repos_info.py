@@ -10,16 +10,41 @@ load_dotenv()
 
 # "": {"featured": , "context": ""},
 REPOS = {
-    "kotlin-compiler": {"featured": True, "context": "University"},
-    "shinsu-duel": {"featured": True, "context": "Personal"},
-    "feedback-circle": {"featured": False, "context": "Internship"},
-    "ride-sharing-app": {"featured": True, "context": "University"},
-    "cart-algorithm-class-imbalance-evaluation": {
+    "kotlin-compiler": {
         "featured": True,
+        "image": None,
         "context": "University",
     },
-    "ricardofig016.github.io": {"featured": True, "context": "Personal"},
-    "java-robocode-robot": {"featured": False, "context": "University"},
+    "shinsu-duel": {
+        "featured": True,
+        "image": None,
+        "context": "Personal",
+    },
+    "feedback-circle": {
+        "featured": False,
+        "image": None,
+        "context": "Internship",
+    },
+    "ride-sharing-app": {
+        "featured": True,
+        "image": "2-create-ride.png",
+        "context": "University",
+    },
+    "cart-algorithm-class-imbalance-evaluation": {
+        "featured": True,
+        "image": None,
+        "context": "University",
+    },
+    "ricardofig016.github.io": {
+        "featured": True,
+        "image": None,
+        "context": "Personal",
+    },
+    "java-robocode-robot": {
+        "featured": False,
+        "image": None,
+        "context": "University",
+    },
 }
 
 REPOS_DIR_PATH = "public/data/repos"
@@ -93,10 +118,48 @@ def get_images(repo_code):
     return image_file_names
 
 
+def save_readme(repo_code, file_path):
+    repo_readme = get_readme(repo_code)
+    with open(file_path, "w", encoding="utf-8") as file:
+        file.write(repo_readme)
+    return repo_readme
+
+
+def save_basic_info(repo_code, curr_id, readme, file_path):
+    repo_info = {}
+    repo_info["id"] = curr_id
+    repo_info["code"] = repo_code
+
+    general_info = get_general_info(repo_code)
+    for key, value in general_info.items():
+        repo_info[key] = value
+
+    repo_info["languages"] = get_languages(repo_code)
+    repo_info["name"] = get_name(readme)
+    repo_info["images"] = get_images(repo_code)
+
+    repo_info["featured"] = REPOS[repo_code]["featured"]
+    if (
+        repo_info["featured"]
+        and REPOS[repo_code]["image"]
+        and REPOS[repo_code]["image"] in repo_info["images"]
+    ):
+        repo_info["image"] = REPOS[repo_code]["image"]
+    else:
+        repo_info["image"] = None
+
+    repo_info["context"] = REPOS[repo_code]["context"]
+
+    with open(file_path, "w", encoding="utf-8") as file:
+        json.dump(repo_info, file, indent=2, sort_keys=True)
+
+    return repo_info
+
+
 def main():
     os.makedirs(REPOS_DIR_PATH, exist_ok=True)
 
-    curr_id = 1
+    curr_id = 0
     for repo_code in list(REPOS.keys()):
         print(f"Fetching data for {repo_code}...")
 
@@ -104,27 +167,14 @@ def main():
         os.makedirs(repo_folder_path, exist_ok=True)
 
         # ReadMe
-        repo_readme = get_readme(repo_code)
         readme_path = os.path.join(repo_folder_path, "README.md")
-        with open(readme_path, "w", encoding="utf-8") as file:
-            file.write(repo_readme)
+        readme = save_readme(repo_code, readme_path)
 
         # Basic Info
-        repo_info = {}
-        repo_info["id"] = curr_id
-        curr_id += 1
-        repo_info["code"] = repo_code
-        general_info = get_general_info(repo_code)
-        for key, value in general_info.items():
-            repo_info[key] = value
-        repo_info["languages"] = get_languages(repo_code)
-        repo_info["name"] = get_name(repo_readme)
-        repo_info["images"] = get_images(repo_code)
-        repo_info["featured"] = REPOS[repo_code]["featured"]
-        repo_info["context"] = REPOS[repo_code]["context"]
         info_json_path = os.path.join(repo_folder_path, "info.json")
-        with open(info_json_path, "w", encoding="utf-8") as file:
-            json.dump(repo_info, file, indent=2, sort_keys=True)
+        info = save_basic_info(repo_code, curr_id, readme, info_json_path)
+
+        curr_id += 1
 
     # Index
     index_path = os.path.join(REPOS_DIR_PATH, "index.json")
