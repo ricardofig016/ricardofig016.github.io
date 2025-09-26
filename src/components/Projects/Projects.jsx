@@ -93,7 +93,6 @@ function ProjectsList({ projectsData }) {
               role="link"
               onClick={() => navigate(`/projects/${proj.code}`)}
             >
-              <Link to={`/projects/${proj.code}`}></Link>
               {/* Title */}
               <h3 className={styles.projectTitle}>{proj.name + " "}</h3>
 
@@ -164,7 +163,7 @@ function Project({ projectsData }) {
       <Carousel
         swipeable={true}
         draggable={false}
-        showDots={true}
+        showDots={false}
         responsive={{
           all: {
             breakpoint: { max: 5000, min: 0 },

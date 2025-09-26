@@ -30,40 +30,42 @@
 
 .projectCard {
   display: flex;
-  flex-direction: row;
-  gap: 2rem;
-  margin: 0 7rem 2rem 7rem;
-  padding: 1rem;
-  overflow: hidden;
-}
-.projectCard:hover {
-  scale: 0.98;
-}
-
-.projectCard img {
-  width: auto;
-  height: 16rem;
-  border-radius: 8px;
-}
-
-.projectInfo {
-  display: flex;
   flex-direction: column;
   justify-content: flex-start;
   gap: 1rem;
-  max-height: 16rem;
-  flex: 1 1 auto;
+  height: 100%;
+  margin: 0 1rem 0 0;
+  padding: 1rem;
+  border: 2px solid var(--text-highlight);
+  border-radius: 6px;
+  overflow: hidden;
 
   h3,
-  p {
+  p,
+  img {
     margin: 0;
     padding: 0;
   }
   h3 {
-    color: var(--text-highlight);
+    color: var(--text-primary);
   }
   p {
     color: var(--text-primary);
     text-align: justify;
+  }
+  img {
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+}
+.projectCard:hover {
+  scale: 0.99;
+  background-color: var(--bg-secondary);
+  h3 {
+    color: var(--text-highlight);
   }
 }

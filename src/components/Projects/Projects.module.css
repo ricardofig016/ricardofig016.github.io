@@ -17,23 +17,27 @@
   border: 2px solid var(--text-highlight);
   border-radius: 6px;
   cursor: pointer;
+
+  .projectTitle {
+    margin: 0;
+  }
+
+  .projectTechTags,
+  .projectGithubLink {
+    font-size: 0.6rem;
+  }
+
+  .projectDesc {
+    margin: 1rem 0 0 0;
+  }
 }
 .projectCard:hover {
   background-color: var(--bg-secondary);
   transform: translateY(-2px);
-}
 
-.projectTitle {
-  margin: 0;
-}
-
-.projectTechTags,
-.projectGithubLink {
-  font-size: 0.6rem;
-}
-
-.projectDesc {
-  margin: 1rem 0 0 0;
+  .projectTitle {
+    color: var(--text-highlight);
+  }
 }
 
 /* --------------------------------------------- */

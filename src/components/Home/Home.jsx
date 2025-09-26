@@ -7,35 +7,39 @@ import PropTypes from "prop-types";
 function Home({ featuredProjectsData }) {
   const featuredProjectEntries = Object.entries(featuredProjectsData || {});
 
-  const carouselItems = featuredProjectEntries.map(([, project]) => (
-    <div key={project.name}>
-      <Link to={`/projects/${project.code}`}>
+  const carouselItems = featuredProjectEntries.map(([, project]) => {
+    // Image
+    const repoImagesBasePath = `/images/repos/${project.code}/`;
+    const imageUrl = project.image ? `${repoImagesBasePath}${project.image}` : null;
+    const imgElem = imageUrl && <img src={imageUrl} alt={project.name} />;
+
+    const item = (
+      <Link to={`/projects/${project.code}`} key={project.name}>
         <div className={styles.projectCard}>
-          <img src="https://www.svgrepo.com/show/508699/landscape-placeholder.svg" alt={project.name} />
-          <div className={styles.projectInfo}>
-            <h3>{project.name}</h3>
-            <p>{project.description}</p>
-          </div>
+          <h3>{project.name}</h3>
+          <p>{project.description}</p>
+          {imgElem}
         </div>
       </Link>
-    </div>
-  ));
+    );
+    return item;
+  });
 
   const carouselElement = (
     <Carousel
       swipeable={true}
       draggable={false}
-      showDots={true}
+      showDots={false}
       responsive={{
         all: {
           breakpoint: { max: 5000, min: 0 },
-          items: 1,
+          items: 2,
           slidesToSlide: 1,
         },
       }}
       ssr={true} // render carousel on server-side.
       infinite={true}
-      autoPlay={true}
+      // autoPlay={true}
       autoPlaySpeed={5000}
       keyBoardControl={true}
       containerClass="carousel-container"
