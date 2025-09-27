@@ -2,7 +2,7 @@
   "code": "ricardofig016.github.io",
   "context": "Personal",
   "description": "A lightweight React portfolio built with Vite to showcase my projects, skills and experience.",
-  "featured": true,
+  "featured": false,
   "forks": 0,
   "github_url": "https://github.com/ricardofig016/ricardofig016.github.io",
   "id": 5,
@@ -10,10 +10,10 @@
   "images": [],
   "issues": 0,
   "languages": {
-    "CSS": 6881,
+    "CSS": 7600,
     "HTML": 384,
-    "JavaScript": 24269,
-    "Python": 4138
+    "JavaScript": 25314,
+    "Python": 4928
   },
   "name": "Ricardo Figueiredo - Portfolio",
   "stars": 0,
