@@ -167,7 +167,7 @@ function Project({ projectsData }) {
       <Carousel
         swipeable={true}
         draggable={false}
-        showDots={false}
+        showDots={true}
         responsive={{
           all: {
             breakpoint: { max: 5000, min: 0 },
