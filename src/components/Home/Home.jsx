@@ -29,11 +29,11 @@ function Home({ featuredProjectsData }) {
     <Carousel
       swipeable={true}
       draggable={false}
-      showDots={true}
+      showDots={false}
       responsive={{
         all: {
           breakpoint: { max: 5000, min: 0 },
-          items: 2,
+          items: 1.8,
           slidesToSlide: 1,
         },
       }}
