@@ -1,7 +1,7 @@
 {
   "code": "shinsu-duel",
   "context": "Personal",
-  "description": "A Tower of God CCG where players strategize with deck-building and tactical unit deployment to beat opponents in fierce PvP and PvE battles",
+  "description": "A 1v1 CCG inspired by SIU's Tower of God. It provides a Node.js game server, WebSocket-based real-time play, and a static web client.",
   "featured": true,
   "forks": 0,
   "github_url": "https://github.com/ricardofig016/shinsu-duel",
@@ -18,7 +18,7 @@
     "HTML": 26621,
     "JavaScript": 114892
   },
-  "name": "Shinsu Duel: A Tower of God CCG",
+  "name": "Shinsu Duel",
   "stars": 0,
   "website": ""
 }
