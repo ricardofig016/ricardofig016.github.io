@@ -11,10 +11,10 @@ import { FaGithub, FaGlobe } from "react-icons/fa6";
 import Carousel from "react-multi-carousel";
 
 function ProjectsList({ projectsData }) {
-  const [search, setSearch] = useState("");
-  const [filterContext, setFilterContext] = useState("");
   const navigate = useNavigate();
 
+  // Context filter
+  const [filterContext, setFilterContext] = useState("");
   const contextOptions = [
     { value: "", label: "All Contexts" },
     { value: "Personal", label: "Personal" },
@@ -22,16 +22,33 @@ function ProjectsList({ projectsData }) {
     { value: "Internship", label: "Internship" },
   ];
 
+  // Language filter
+  const [filterLanguage, setFilterLanguage] = useState("");
+  const langs = {}; // { lang: count }
+  projectsData.forEach((proj) => {
+    Object.keys(proj.languages || {}).forEach((lang) => {
+      langs[lang] = (langs[lang] || 0) + 1;
+    });
+  });
+  const languageOptions = [{ value: "", label: "All Languages" }];
+  Object.keys(langs)
+    .map((lang) => ({ value: lang, label: lang }))
+    .sort((a, b) => langs[b.value] - langs[a.value])
+    .forEach((lang) => languageOptions.push(lang));
+
+  // Skill filter
+  // TBA
+
+  // Search
+  const [search, setSearch] = useState("");
+
   const getSortedLanguages = (languages) => {
     return Object.keys(languages || {}).sort((a, b) => languages[b] - languages[a]);
   };
 
-  // Filter projects by name/description/langs/readme and context if selected and sort them
+  // Filter projects by name/description/langs/readme and selected filters and sort them
   const filteredProjects = (() => {
     const refinedSearch = search.toLowerCase().trim();
-
-    if (!refinedSearch)
-      return projectsData.filter((proj) => (filterContext ? proj.context === filterContext : true));
 
     // assign rank based on where the search matched (lower = better)
     const rankProject = (proj) => {
@@ -47,13 +64,14 @@ function ProjectsList({ projectsData }) {
       const readme = (proj.readme || "").toLowerCase();
       if (readme.includes(refinedSearch)) return 3;
 
-      return Number.POSITIVE_INFINITY; // no match
+      return -1; // no match
     };
 
     return projectsData
       .map((proj) => ({ proj, rank: rankProject(proj) }))
-      .filter(({ rank }) => rank !== Number.POSITIVE_INFINITY)
+      .filter(({ rank }) => rank >= 0) // keep only matched
       .filter(({ proj }) => (filterContext ? proj.context === filterContext : true))
+      .filter(({ proj }) => (filterLanguage ? proj.languages && proj.languages[filterLanguage] : true))
       .sort((a, b) => {
         // primary: rank
         if (a.rank !== b.rank) return a.rank - b.rank;
@@ -67,13 +85,28 @@ function ProjectsList({ projectsData }) {
     <div className="projects-list">
       <h1>Projects</h1>
       <div className={styles.filters}>
+        {/* Context */}
         <Select
           options={contextOptions}
           value={filterContext}
           onChange={(v) => setFilterContext(v)}
           placeholder="All Contexts"
-          id="project-context-select"
+          id="projects-context-select"
         />
+
+        {/* Languages */}
+        <Select
+          options={languageOptions}
+          value={filterLanguage}
+          onChange={(v) => setFilterLanguage(v)}
+          placeholder="All Languages"
+          id="projects-language-select"
+        />
+
+        {/* Skills */}
+        {/* TBA */}
+
+        {/* Search */}
         <input
           className={styles.searchInput}
           type="text"
