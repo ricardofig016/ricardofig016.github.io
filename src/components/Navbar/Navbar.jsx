@@ -4,11 +4,35 @@ import { Menubar } from "primereact/menubar";
 import styles from "./Navbar.module.css";
 
 export default function Navbar() {
-  const logo = <img src="/icons/owl.svg" alt="logo" className={styles.logo} />;
+  const scrollToContact = () => {
+    const el = document.getElementById("contact");
+    if (!el) return;
+    // If it's inside a custom scroll container, attempt those first:
+    const possibleScrollParents = [
+      document.querySelector("main"),
+      document.querySelector("[data-scroll-root]"),
+    ].filter(Boolean);
+
+    for (const sc of possibleScrollParents) {
+      if (sc.contains(el)) {
+        sc.scrollTo({ top: el.offsetTop, behavior: "smooth" });
+        history.replaceState(null, "", "#contact");
+        return;
+      }
+    }
+    // Fallback: window scrolling
+    el.scrollIntoView({ behavior: "smooth" });
+    history.replaceState(null, "", "#contact");
+  };
+
   const items = [
     {
       label: "Logo",
-      template: () => <Link to="/">{logo}</Link>,
+      template: () => (
+        <Link to="/">
+          <img src="/icons/owl.svg" alt="logo" className={styles.logo} />
+        </Link>
+      ),
     },
     {
       label: "Projects",
@@ -18,17 +42,22 @@ export default function Navbar() {
       label: "Education",
       template: () => <Link to="/education">Education</Link>,
     },
-    {
-      label: "Skills",
-      template: () => <Link to="/skills">Skills</Link>,
-    },
+    // {
+    //   label: "Skills",
+    //   template: () => <Link to="/skills">Skills</Link>,
+    // },
     {
       label: "Experience",
       template: () => <Link to="/experience">Experience</Link>,
     },
     {
       label: "Contact",
-      template: () => <a href="#contact">Contact</a>,
+      command: scrollToContact,
+      template: (item, options) => (
+        <button type="button" onClick={(e) => options.onClick(e)} className={styles.contactButton}>
+          Contact
+        </button>
+      ),
     },
     {
       label: "ThemeToggle",
