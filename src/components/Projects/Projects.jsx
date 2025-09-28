@@ -187,6 +187,7 @@ function Project({ projectsData }) {
   );
 
   // Images
+  console.log(project.images);
   const carouselItems = (project.images || []).map((image) => (
     <ImageModal
       className={styles.carouselItem}
@@ -204,7 +205,7 @@ function Project({ projectsData }) {
         responsive={{
           all: {
             breakpoint: { max: 5000, min: 0 },
-            items: 1.5,
+            items: 2,
             slidesToSlide: 1,
           },
         }}

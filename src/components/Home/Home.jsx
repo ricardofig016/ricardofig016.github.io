@@ -33,7 +33,7 @@ function Home({ featuredProjectsData }) {
       responsive={{
         all: {
           breakpoint: { max: 5000, min: 0 },
-          items: 1.8,
+          items: 1,
           slidesToSlide: 1,
         },
       }}
@@ -41,6 +41,7 @@ function Home({ featuredProjectsData }) {
       infinite={true}
       // autoPlay={true}
       autoPlaySpeed={5000}
+      centerMode={true}
       keyBoardControl={true}
       containerClass="carousel-container"
       dotListClass="custom-dot-list-style"

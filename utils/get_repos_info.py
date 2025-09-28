@@ -10,11 +10,6 @@ load_dotenv()
 
 # "": {"featured": , "image": "", "context": ""},
 REPOS = {
-    "kotlin-compiler": {
-        "featured": True,
-        "image": None,
-        "context": "University",
-    },
     "shinsu-duel": {
         "featured": True,
         "image": "2-big-card.png",
@@ -25,8 +20,8 @@ REPOS = {
         "image": "2-create-ride.png",
         "context": "University",
     },
-    "cart-algorithm-class-imbalance-evaluation": {
-        "featured": True,
+    "kotlin-compiler": {
+        "featured": False,
         "image": None,
         "context": "University",
     },
@@ -35,15 +30,20 @@ REPOS = {
         "image": None,
         "context": "Internship",
     },
-    "ricardofig016.github.io": {
-        "featured": False,
-        "image": None,
-        "context": "Personal",
+    "cart-algorithm-class-imbalance-evaluation": {
+        "featured": True,
+        "image": "1-average.png",
+        "context": "University",
     },
     "java-robocode-robot": {
         "featured": False,
         "image": None,
         "context": "University",
+    },
+    "ricardofig016.github.io": {
+        "featured": False,
+        "image": None,
+        "context": "Personal",
     },
 }
 
