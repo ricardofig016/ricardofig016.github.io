@@ -8,46 +8,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# "": {"featured": , "image": "", "context": ""},
-REPOS = {
-    "shinsu-duel": {
-        "featured": True,
-        "image": "2-big-card.png",
-        "context": "Personal",
-    },
-    "ride-sharing-app": {
-        "featured": True,
-        "image": "2-create-ride.png",
-        "context": "University",
-    },
-    "kotlin-compiler": {
-        "featured": False,
-        "image": None,
-        "context": "University",
-    },
-    "feedback-circle": {
-        "featured": False,
-        "image": None,
-        "context": "Internship",
-    },
-    "cart-algorithm-class-imbalance-evaluation": {
-        "featured": True,
-        "image": "1-average.png",
-        "context": "University",
-    },
-    "java-robocode-robot": {
-        "featured": False,
-        "image": None,
-        "context": "University",
-    },
-    "ricardofig016.github.io": {
-        "featured": False,
-        "image": None,
-        "context": "Personal",
-    },
-}
 
 REPOS_DIR_PATH = "public/data/repos"
+REPOS_DATA_PATH = os.path.join(REPOS_DIR_PATH, "repos.json")
 IMAGES_DIR_PATH = "public/images/repos"
 
 GITHUB_USERNAME = "ricardofig016"
@@ -125,7 +88,7 @@ def save_readme(repo_code, file_path):
     return repo_readme
 
 
-def save_basic_info(repo_code, curr_id, readme, file_path):
+def save_basic_info(repo_code, curr_id, repos_data, readme, file_path):
     repo_info = {}
     repo_info["id"] = curr_id
     repo_info["code"] = repo_code
@@ -138,17 +101,17 @@ def save_basic_info(repo_code, curr_id, readme, file_path):
     repo_info["name"] = get_name(readme)
     repo_info["images"] = get_images(repo_code)
 
-    repo_info["featured"] = REPOS[repo_code]["featured"]
+    repo_info["featured"] = repos_data[repo_code]["featured"]
     if (
         repo_info["featured"]
-        and REPOS[repo_code]["image"]
-        and REPOS[repo_code]["image"] in repo_info["images"]
+        and repos_data[repo_code]["image"]
+        and repos_data[repo_code]["image"] in repo_info["images"]
     ):
-        repo_info["image"] = REPOS[repo_code]["image"]
+        repo_info["image"] = repos_data[repo_code]["image"]
     else:
         repo_info["image"] = None
 
-    repo_info["context"] = REPOS[repo_code]["context"]
+    repo_info["context"] = repos_data[repo_code]["context"]
 
     with open(file_path, "w", encoding="utf-8") as file:
         json.dump(repo_info, file, indent=2, sort_keys=True)
@@ -158,9 +121,13 @@ def save_basic_info(repo_code, curr_id, readme, file_path):
 
 def main():
     os.makedirs(REPOS_DIR_PATH, exist_ok=True)
+    os.makedirs(IMAGES_DIR_PATH, exist_ok=True)
+
+    with open(REPOS_DATA_PATH, "r", encoding="utf-8") as f:
+        repos_data = json.load(f)
 
     curr_id = 0
-    for repo_code in list(REPOS.keys()):
+    for repo_code in list(repos_data.keys()):
         print(f"Fetching data for {repo_code}...")
 
         repo_folder_path = os.path.join(REPOS_DIR_PATH, repo_code)
@@ -172,14 +139,14 @@ def main():
 
         # Basic Info
         info_json_path = os.path.join(repo_folder_path, "info.json")
-        info = save_basic_info(repo_code, curr_id, readme, info_json_path)
+        info = save_basic_info(repo_code, curr_id, repos_data, readme, info_json_path)
 
         curr_id += 1
 
     # Index
     index_path = os.path.join(REPOS_DIR_PATH, "index.json")
     with open(index_path, "w", encoding="utf-8") as f:
-        json.dump(list(REPOS.keys()), f, indent=2)
+        json.dump(list(repos_data.keys()), f, indent=2)
 
 
 if __name__ == "__main__":
