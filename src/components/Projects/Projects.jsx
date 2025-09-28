@@ -82,7 +82,7 @@ function ProjectsList({ projectsData }) {
   })();
 
   return (
-    <div className="projects-list">
+    <div>
       <h1>Projects</h1>
       <div className={styles.filters}>
         {/* Context */}
@@ -116,7 +116,7 @@ function ProjectsList({ projectsData }) {
         />
       </div>
 
-      <div className="projects-grid">
+      <div>
         {filteredProjects.map((proj) => {
           const langs = getSortedLanguages(proj.languages);
           return (
@@ -134,7 +134,7 @@ function ProjectsList({ projectsData }) {
               {langs.length > 0 && (
                 <div className={styles.projectTechTags}>
                   {langs.map((lang, i, arr) => (
-                    <span key={lang} className="tech-tag">
+                    <span key={lang}>
                       {lang}
                       {i < arr.length - 1 ? ", " : ""}
                     </span>
@@ -143,7 +143,7 @@ function ProjectsList({ projectsData }) {
               )}
 
               {/* Actions */}
-              <div className="project-actions">
+              <div>
                 {proj.github_url && (
                   <a
                     className={styles.projectGithubLink}
