@@ -5,6 +5,7 @@ import Navbar from "./Navbar/Navbar.jsx";
 import MainContent from "./MainContent/MainContent.jsx";
 import Home from "./Home/Home.jsx";
 import Projects from "./Projects/Projects.jsx";
+import Education from "./Education/Education.jsx";
 import Footer from "./Footer/Footer.jsx";
 
 function App() {
@@ -81,7 +82,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home featuredProjectsData={featuredProjects} />} />
           <Route path="/projects/*" element={<Projects projectsData={projects} />} />
-          <Route path="/education" element={<div>Education</div>} />
+          <Route path="/education" element={<Education />} />
           <Route path="/skills" element={<div>Skills</div>} />
           <Route path="/experience" element={<div>Experience</div>} />
           <Route path="*" element={<div>404 - Not Found</div>} />
