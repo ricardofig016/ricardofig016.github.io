@@ -1,0 +1,37 @@
+{
+  "shinsu-duel": {
+    "featured": true,
+    "image": "2-big-card.png",
+    "context": "Personal"
+  },
+  "ride-sharing-app": {
+    "featured": true,
+    "image": "2-create-ride.png",
+    "context": "University"
+  },
+  "kotlin-compiler": {
+    "featured": false,
+    "image": null,
+    "context": "University"
+  },
+  "feedback-circle": {
+    "featured": false,
+    "image": null,
+    "context": "Internship"
+  },
+  "cart-algorithm-class-imbalance-evaluation": {
+    "featured": true,
+    "image": "1-average.png",
+    "context": "University"
+  },
+  "java-robocode-robot": {
+    "featured": false,
+    "image": null,
+    "context": "University"
+  },
+  "ricardofig016.github.io": {
+    "featured": false,
+    "image": null,
+    "context": "Personal"
+  }
+}
