@@ -8,6 +8,8 @@ from bs4 import BeautifulSoup
 BASE_COURSE_PATH = (
     "https://sigarra.up.pt/fcup/en/ucurr_geral.ficha_uc_view?pv_ocorrencia_id="
 )
+OUTPUT_PATH = Path("public/data/fcup/courses.json")
+OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
 
 COURSES = {
     "calculus-i": {
@@ -130,9 +132,6 @@ COURSES = {
 
 
 def main():
-    OUTPUT_PATH = Path("public/data/fcup/courses.json")
-    OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-
     def normalize_whitespace(text: str) -> str:
         return re.sub(r"\s+", " ", text).strip()
 
