@@ -1,9 +1,7 @@
-import argparse
 import json
-import time
 from pathlib import Path
-import sys
 import requests
+import re
 from bs4 import BeautifulSoup
 
 
@@ -132,152 +130,56 @@ COURSES = {
 
 
 def main():
-
-    parser = argparse.ArgumentParser(
-        description="Scrape FCUP course info (name & Program section)."
-    )
-    parser.add_argument(
-        "--output",
-        default="public/data/fcup/courses.json",
-        help="Path to output JSON file (will be created or updated).",
-    )
-    parser.add_argument(
-        "--limit",
-        type=int,
-        default=None,
-        help="Limit number of courses to scrape (useful for testing).",
-    )
-    parser.add_argument(
-        "--delay",
-        type=float,
-        default=0.0,
-        help="Delay in seconds between requests to be polite (default 0).",
-    )
-    parser.add_argument(
-        "--timeout",
-        type=float,
-        default=20.0,
-        help="HTTP request timeout in seconds (default 20).",
-    )
-    parser.add_argument(
-        "--retries",
-        type=int,
-        default=2,
-        help="Number of retries for failed requests (default 2).",
-    )
-    parser.add_argument(
-        "--verbose", "-v", action="store_true", help="Verbose logging output."
-    )
-    parser.add_argument(
-        "--dry-run",
-        action="store_true",
-        help="Scrape and print summary without writing output file.",
-    )
-    args = parser.parse_args()
-
-    output_path = Path(args.output)
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-
-    # Load existing JSON if present and non-empty
-    existing = {}
-    if output_path.exists() and output_path.stat().st_size > 0:
-        try:
-            existing = json.loads(output_path.read_text(encoding="utf-8"))
-            if not isinstance(existing, dict):
-                print("Existing JSON is not an object; starting fresh.")
-                existing = {}
-        except Exception as e:  # pragma: no cover
-            print(f"Warning: could not parse existing JSON ({e}); starting fresh.")
-
-    session = requests.Session()
-    session.headers.update(
-        {
-            "User-Agent": "Mozilla/5.0 (compatible; CourseScraper/1.0; +https://github.com/ricardofig016)"
-        }
-    )
-
-    def fetch(url: str):
-        last_exc = None
-        for attempt in range(1, args.retries + 2):  # retries + initial
-            try:
-                resp = session.get(url, timeout=args.timeout)
-                if resp.status_code >= 400:
-                    raise RuntimeError(f"HTTP {resp.status_code}")
-                return resp.text
-            except Exception as exc:  # pragma: no cover
-                last_exc = exc
-                if args.verbose:
-                    print(f"Attempt {attempt} failed for {url}: {exc}")
-                if attempt < args.retries + 1:
-                    time.sleep(min(2**attempt, 5))
-        raise last_exc  # type: ignore
+    OUTPUT_PATH = Path("public/data/fcup/courses.json")
+    OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
 
     def normalize_whitespace(text: str) -> str:
-        import re
-
         return re.sub(r"\s+", " ", text).strip()
 
-    def parse_course(html: str):
+    def extract_program(html: str) -> str:
         soup = BeautifulSoup(html, "html.parser")
-        program_h3 = soup.find(
-            lambda tag: tag.name == "h3"
-            and normalize_whitespace(tag.get_text()).lower() == "program"
+        programH3 = soup.find(
+            lambda t: t.name == "h3"
+            and normalize_whitespace(t.get_text()).lower() == "program"
         )
-        program_blocks = []
-        if program_h3:
-            for sibling in program_h3.next_siblings:
-                # If it's a Tag
-                name = getattr(sibling, "name", None)
-                if name is not None:
-                    # Stop when another heading is reached
-                    if name in {"h1", "h2", "h3", "h4", "h5", "h6"}:
-                        break
-                    if name in {"script", "style", "noscript"}:
-                        continue
-                    text = normalize_whitespace(sibling.get_text(" "))
-                    if text:
-                        program_blocks.append(text)
-                else:
-                    # NavigableString: include if non-empty after stripping
-                    text = normalize_whitespace(str(sibling))
-                    if text:
-                        program_blocks.append(text)
+        if not programH3:
+            return ""
+        blocks = []
+        for sib in programH3.next_siblings:
+            name = getattr(sib, "name", None)
+            if name is not None:
+                if name in {"h1", "h2", "h3", "h4", "h5", "h6"}:
+                    break
+                if name in {"script", "style", "noscript"}:
+                    continue
+                text = normalize_whitespace(sib.get_text(" "))
+            else:
+                text = normalize_whitespace(str(sib))
+            if text:
+                blocks.append(text)
+        return "\n".join(blocks)
 
-        program_content = "\n".join(program_blocks)
-        return {"content": program_content}
+    session = requests.Session()
+    session.headers.update({"User-Agent": "CourseScraper/Minimal"})
 
-    # Iterate courses
-    items = list(COURSES.items())
-    if args.limit is not None:
-        items = items[: args.limit]
-
-    updated_courses = 0
-    for slug, meta in items:
+    result = {}
+    for slug, meta in COURSES.items():
         url = meta["url"]
-        name = meta["name"]
-        if args.verbose:
-            print(f"Scraping {slug}: {url}")
         try:
-            html = fetch(url)
-            parsed = parse_course(html)
-            # Merge
-            existing.setdefault(slug, {}).update({"url": url, "name": name, **parsed})
-            updated_courses += 1
-            if args.delay:
-                time.sleep(args.delay)
-        except Exception as e:  # pragma: no cover
-            print(f"Error scraping {slug}: {e}", file=sys.stderr)
+            resp = session.get(url, timeout=15)
+            if resp.status_code >= 400:
+                program = ""
+            else:
+                program = extract_program(resp.text)
+        except Exception:
+            program = ""
+        result[slug] = {"name": meta["name"], "url": url, "content": program}
 
-    if args.dry_run:
-        print(json.dumps(existing, ensure_ascii=False, indent=2))
-        print(f"(dry-run) Updated {updated_courses} course(s). Output not written.")
-        return
-
-    output_path.write_text(
-        json.dumps(existing, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+    OUTPUT_PATH.write_text(
+        json.dumps(result, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
     )
-    print(f"Wrote data for {updated_courses} course(s) to {output_path}")
+    print(f"Wrote {len(result)} courses to {OUTPUT_PATH}")
 
 
 if __name__ == "__main__":
