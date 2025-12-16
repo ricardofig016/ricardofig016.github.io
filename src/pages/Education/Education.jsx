@@ -1,6 +1,7 @@
 // import { useEffect, useState } from "react";
 import { useState, useEffect } from "react";
 import styles from "./Education.module.css";
+import CollapsibleSection from "../../components/CollapsibleSection/CollapsibleSection";
 
 // Simple Education component inspired by ProjectsList structure.
 // Fetches courses data directly (no props) from public/data/fcup/courses.json
@@ -30,21 +31,38 @@ export default function Education() {
 
     return (
       <div>
-        {Object.entries(courses).map(([id, course]) => (
-          <div key={id} className={styles.courseCard}>
-            <h3 className={styles.courseName}>{course.name}</h3>
-            <a
-              className={styles.courseLink}
-              href={course.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Open ${course.name} original page`}
-            >
-              View Course
-            </a>
-            <p>{course.content}</p>
-          </div>
-        ))}
+        {Object.entries(courses).map(([id, course]) => {
+          const topics = Array.isArray(course.topics) ? course.topics : [];
+          return (
+            <div key={id} className={styles.courseCard}>
+              <CollapsibleSection
+                title={<span className={styles.courseTitle}>{course.name}</span>}
+                defaultOpen={false}
+              >
+                <a
+                  className={styles.courseLink}
+                  href={course.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Open ${course.name} original page`}
+                >
+                  View Course
+                </a>
+                <div className={styles.courseTopics}>
+                  {topics.length > 0 ? (
+                    <ul>
+                      {topics.map((topic) => (
+                        <li key={topic}>{topic}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p>No structured topics available yet.</p>
+                  )}
+                </div>
+              </CollapsibleSection>
+            </div>
+          );
+        })}
       </div>
     );
   };
@@ -53,8 +71,6 @@ export default function Education() {
     <div>
       <h1>Education</h1>
       <h2>Bachelor&apos;s in Computer Science - FCUP</h2>
-
-      {/* Filters */}
 
       {/* Course List */}
       <div>{courseList()}</div>

@@ -12,12 +12,6 @@
 }
 
 .courseCard {
-  margin: 1rem 0;
-  padding: 1rem;
-  border: 2px solid var(--text-highlight);
-  border-radius: 6px;
-  cursor: pointer;
-
   .courseName {
     margin: 0;
   }
@@ -30,6 +24,10 @@
   .projectDesc {
     margin: 1rem 0 0 0;
   }
+}
+
+.courseTitle {
+  font-size: 1.2rem;
 }
 .courseCard:hover {
   background-color: var(--bg-secondary);
