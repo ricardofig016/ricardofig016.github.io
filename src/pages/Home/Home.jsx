@@ -3,6 +3,8 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import styles from "./Home.module.css";
 import PropTypes from "prop-types";
+import { contactLinks } from "../../constants/contactLinks";
+import { FaDownload } from "react-icons/fa6";
 
 function Home({ featuredProjectsData }) {
   const featuredProjectEntries = Object.entries(featuredProjectsData || {});
@@ -63,9 +65,25 @@ function Home({ featuredProjectsData }) {
             <p>CS Student </p>
             <p>Building Software & Learning Every Day</p>
           </div>
-          <a href="/documents/resume.pdf" download="Ricardo_Figueiredo.pdf">
-            Download Resume
-          </a>
+          <div className={styles.heroActions}>
+            <a className={styles.resumeButton} href="/documents/resume.pdf" download="Ricardo_Figueiredo.pdf">
+              <FaDownload aria-hidden="true" />
+              <span>Download Resume</span>
+            </a>
+            <ul className={styles.heroContacts}>
+              {contactLinks.map(({ id, href, icon: Icon, label, text, external }) => {
+                const externalProps = external ? { target: "_blank", rel: "noopener noreferrer" } : {};
+                return (
+                  <li key={id}>
+                    <a href={href} {...externalProps}>
+                      <Icon aria-hidden="true" />
+                      <span>{text || label}</span>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </div>
       </section>
       {/* Featured Projects */}

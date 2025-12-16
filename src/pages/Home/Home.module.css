@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: flex-start;
   gap: 2rem;
+  flex-wrap: wrap;
   margin: 2rem 0;
 
   img {
@@ -24,6 +25,69 @@
     }
     h1 {
       color: var(--text-primary);
+    }
+
+    .heroActions {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .resumeButton {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      padding: 0.75rem 1.5rem;
+      border-radius: 999px;
+      font-weight: 600;
+      text-decoration: none;
+      border: 2px solid var(--text-highlight);
+      color: var(--text-primary);
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    .resumeButton:hover {
+      background-color: var(--text-highlight);
+      color: var(--bg-primary);
+    }
+
+    .resumeButton svg {
+      margin-right: 0.5rem;
+      font-size: 1rem;
+      display: inline-block;
+    }
+
+    .heroContacts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+
+      li {
+        margin: 0;
+      }
+
+      a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 0.85rem;
+        border-radius: 999px;
+        border: 2px solid var(--text-highlight);
+        text-decoration: none;
+        color: var(--text-primary);
+        transition: background-color 0.2s ease, color 0.2s ease;
+      }
+      a:hover {
+        background-color: var(--text-highlight);
+        color: var(--bg-primary);
+      }
+
+      svg {
+        font-size: 1rem;
+      }
     }
   }
 }
