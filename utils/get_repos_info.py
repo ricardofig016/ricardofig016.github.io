@@ -18,15 +18,45 @@ GITHUB_API_BASE_URL = f"https://api.github.com/repos/{GITHUB_USERNAME}"
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 
 
-def get_request(url):
-    headers = {
+def build_headers():
+    if not GITHUB_TOKEN:
+        raise RuntimeError(
+            "GITHUB_TOKEN is not set. Create a personal access token with 'repo' scope and set it in the .env file."
+        )
+
+    return {
         "Accept": "application/vnd.github.v3+json",
-        "Authorization": f"token {GITHUB_TOKEN}",
         "User-Agent": GITHUB_USERNAME,
+        "Authorization": f"token {GITHUB_TOKEN}",
     }
+
+
+def validate_token_access():
+    headers = build_headers()
+    response = requests.get("https://api.github.com/user", headers=headers, timeout=30)
+    if response.status_code == 401:
+        raise RuntimeError(
+            "GitHub rejected the provided token (401 Bad credentials). Regenerate the PAT, ensure it has the 'repo' scope, and update .env."
+        )
+    if response.status_code != 200:
+        raise RuntimeError(
+            f"Failed to validate the GitHub token: {response.status_code} - {response.text}"
+        )
+
+
+def get_request(url):
+    headers = build_headers()
     response = requests.get(url, headers=headers)
     if response.status_code != 200:
         print(f"Failed to fetch data: {response.status_code} - {response.text}")
+        if response.status_code == 404:
+            print(
+                "GitHub returned 404. Double-check the repo name and ensure your token has access to private repositories."
+            )
+        if response.status_code == 401:
+            print(
+                "GitHub returned 401 Bad credentials. Regenerate the PAT, ensure it has the 'repo' scope, and update .env/.venv."
+            )
         return None
     return response.json()
 
@@ -83,6 +113,10 @@ def get_images(repo_code):
 
 def save_readme(repo_code, file_path):
     repo_readme = get_readme(repo_code)
+    if repo_readme is None:
+        raise RuntimeError(
+            f"Unable to download README for {repo_code}. Verify the repo exists and that your token includes private repo access."
+        )
     with open(file_path, "w", encoding="utf-8") as file:
         file.write(repo_readme)
     return repo_readme
@@ -94,10 +128,18 @@ def save_basic_info(repo_code, curr_id, repos_data, readme, file_path):
     repo_info["code"] = repo_code
 
     general_info = get_general_info(repo_code)
+    if general_info is None:
+        raise RuntimeError(
+            f"Unable to fetch general metadata for {repo_code}. Previous API call failed; see the log output for details."
+        )
     for key, value in general_info.items():
         repo_info[key] = value
 
     repo_info["languages"] = get_languages(repo_code)
+    if repo_info["languages"] is None:
+        raise RuntimeError(
+            f"Unable to fetch languages for {repo_code}. Previous API call failed; see the log output for details."
+        )
     repo_info["name"] = get_name(readme)
     repo_info["images"] = get_images(repo_code)
 
@@ -122,6 +164,8 @@ def save_basic_info(repo_code, curr_id, repos_data, readme, file_path):
 def main():
     os.makedirs(REPOS_DIR_PATH, exist_ok=True)
     os.makedirs(IMAGES_DIR_PATH, exist_ok=True)
+
+    validate_token_access()
 
     with open(REPOS_DATA_PATH, "r", encoding="utf-8") as f:
         repos_data = json.load(f)
