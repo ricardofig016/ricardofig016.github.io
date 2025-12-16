@@ -39,16 +39,12 @@ export default function Navbar() {
       template: () => <Link to="/projects">Projects</Link>,
     },
     {
-      label: "Education",
-      template: () => <Link to="/education">Education</Link>,
-    },
-    // {
-    //   label: "Skills",
-    //   template: () => <Link to="/skills">Skills</Link>,
-    // },
-    {
       label: "Experience",
       template: () => <Link to="/experience">Experience</Link>,
+    },
+    {
+      label: "Education",
+      template: () => <Link to="/education">Education</Link>,
     },
     {
       label: "Contact",

@@ -82,9 +82,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home featuredProjectsData={featuredProjects} />} />
           <Route path="/projects/*" element={<Projects projectsData={projects} />} />
-          <Route path="/education" element={<Education />} />
-          <Route path="/skills" element={<div>Skills</div>} />
           <Route path="/experience" element={<div>Experience</div>} />
+          <Route path="/education" element={<Education />} />
           <Route path="*" element={<div>404 - Not Found</div>} />
         </Routes>
       </MainContent>
