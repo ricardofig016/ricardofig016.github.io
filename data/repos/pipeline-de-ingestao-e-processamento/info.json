@@ -1,0 +1,28 @@
+{
+  "code": "pipeline-de-ingestao-e-processamento",
+  "context": "Internship",
+  "description": "HORUS is an end-to-end OSINT cyber-news ingestion and processing pipeline developed for Skill & Reach, combining RSS and headless scraping, LLM-based enrichment, embedding-based deduplication, and an Elasticsearch API with a React control center.",
+  "featured": true,
+  "forks": 0,
+  "github_url": "https://github.com/ricardofig016/pipeline-de-ingestao-e-processamento",
+  "id": 0,
+  "image": "1-dashboard.png",
+  "images": [
+    "1-dashboard.png",
+    "2-articles.png",
+    "3-article-details.png",
+    "4-sources.png",
+    "5-email.png"
+  ],
+  "issues": 0,
+  "languages": {
+    "CSS": 14298,
+    "Dockerfile": 755,
+    "HTML": 343,
+    "Python": 306184,
+    "TypeScript": 245135
+  },
+  "name": "HORUS - OSINT cyber-news ingestion and processing pipeline",
+  "stars": 0,
+  "website": ""
+}
