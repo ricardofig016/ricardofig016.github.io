@@ -1,4 +1,9 @@
 {
+  "pipeline-de-ingestao-e-processamento": {
+    "featured": true,
+    "image": "1-dashboard.png",
+    "context": "Internship"
+  },
   "shinsu-duel": {
     "featured": true,
     "image": "2-big-card.png",
