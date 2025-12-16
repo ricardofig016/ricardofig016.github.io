@@ -4,7 +4,7 @@ import "react-multi-carousel/lib/styles.css";
 import styles from "./Home.module.css";
 import PropTypes from "prop-types";
 import { contactLinks } from "../../constants/contactLinks";
-import { FaDownload } from "react-icons/fa6";
+import { FaDownload, FaLocationDot } from "react-icons/fa6";
 
 function Home({ featuredProjectsData }) {
   const featuredProjectEntries = Object.entries(featuredProjectsData || {});
@@ -65,6 +65,18 @@ function Home({ featuredProjectsData }) {
             <p>Fullstack Developer</p>
             <p>Building Software & Learning Every Day</p>
           </div>
+          <p className={styles.location}>
+            <a
+              href="https://www.google.com/maps?q=Oliveira+de+Azemeis+Portugal"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open Google Maps for Oliveira de Azeméis, Portugal"
+              className="outink"
+            >
+              <FaLocationDot aria-hidden="true" />
+              <span>Oliveira de Azeméis, Portugal</span>
+            </a>
+          </p>
           <div className={styles.heroActions}>
             <a className={styles.resumeButton} href="/documents/resume.pdf" download="Ricardo_Figueiredo.pdf">
               <FaDownload aria-hidden="true" />

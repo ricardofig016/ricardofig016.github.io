@@ -33,6 +33,17 @@
       gap: 1rem;
     }
 
+    .location {
+      color: var(--text-primary);
+
+      a {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        font-size: 0.8rem;
+      }
+    }
+
     .resumeButton {
       display: inline-flex;
       align-items: center;

@@ -102,6 +102,11 @@ a:hover {
   color: var(--text-highlight);
 }
 
+a.outink:hover {
+  color: var(--link);
+  text-decoration: underline;
+}
+
 /* Minimalist, theme-aware scrollbar */
 /* Firefox */
 * {

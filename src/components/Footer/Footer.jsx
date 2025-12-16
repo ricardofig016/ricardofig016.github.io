@@ -10,7 +10,7 @@ function Footer() {
           const externalProps = external ? { target: "_blank", rel: "noopener noreferrer" } : {};
           return (
             <li key={id}>
-              <a href={href} {...externalProps}>
+              <a href={href} {...externalProps} className="outink">
                 <Icon className={styles.icon} />
                 {text || label}
               </a>
