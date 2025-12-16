@@ -62,7 +62,7 @@ function Home({ featuredProjectsData }) {
         <div className={styles.heroText}>
           <h1>Ricardo Figueiredo</h1>
           <div>
-            <p>CS Student </p>
+            <p>Backend Developer</p>
             <p>Building Software & Learning Every Day</p>
           </div>
           <div className={styles.heroActions}>
