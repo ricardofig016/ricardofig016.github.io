@@ -9,6 +9,7 @@
 - [ ] change search bar default to something more clear like "Search tools, frameworks, projects..."
 - [ ] maybe add development time to each project (think about how to implement this interestingly)
 - [ ] projects NEED to have technology (langs/tools/frameworks) tags both in their dedicated page and in their card
+- [x] feat: make dark mode the default
 - [x] add filtering in projects: languages
 - [x] Contact link in navbar isnt working
 - [x] when user clicks a <Link>, they will be transported to the new page scrolled, instead of on the top of the page (this fixed itself (??) )
