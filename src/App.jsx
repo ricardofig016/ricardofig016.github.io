@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./Navbar/Navbar.jsx";
+import Navbar from "./components/Navbar/Navbar.jsx";
 import MainContent from "./MainContent/MainContent.jsx";
-import Home from "./Home/Home.jsx";
-import Projects from "./Projects/Projects.jsx";
-import Education from "./Education/Education.jsx";
-import Footer from "./Footer/Footer.jsx";
+import Home from "./pages/Home/Home.jsx";
+import Projects from "./pages/Projects/Projects.jsx";
+import Education from "./pages/Education/Education.jsx";
+import Footer from "./components/Footer/Footer.jsx";
 
 function App() {
   // Ressiveness
