@@ -2,67 +2,49 @@
 
 # Copilot Instructions — homepage
 
-Purpose: give an AI coding agent the minimum, actionable repo knowledge to be productive quickly.
+Goal: give an AI agent just enough repo context to ship useful changes quickly.
 
-**Big Picture**
+## Big Picture
 
-- Framework: React single-page app built with Vite. Entry: `src/main.jsx` and top-level `src/components/App.jsx`.
-- UI: small component-per-folder structure under `src/components/` (examples: `Home`, `Projects`, `MainContent`, `Navbar`).
-- Data model: the site is driven by static JSON + markdown in `public/data/repos/` — each repo has an `info.json` (metadata) and `README.md` (content). The index list lives at `public/data/repos/index.json` and is fetched by the frontend.
-- Offline data tooling: `utils/get_repos_info.py` collects GitHub repo metadata and writes the `info.json` + `README.md` files used by the site.
+- SPA built with Vite + React Router (`src/main.jsx` → `src/App.jsx`).
+- Layout frame lives in `App.jsx`: `Navbar` + `MainContent` wrapper + `Footer` around routed pages.
+- Portfolio data is static content under `public/data/` and `public/images/`; the runtime only fetches from those files (no backend).
+- Python helper `utils/get_repos_info.py` syncs GitHub metadata/README into `public/data/repos/*` based on `public/data/repos/repos.json` (stores `context`, `featured`, hero `image`).
 
-**Where to look first (quick onboarding)**
+## Where to Start
 
-- App entry: `src/main.jsx` -> `src/components/App.jsx`.
-- Projects and data flow: `src/components/Projects/Projects.jsx` and `src/components/MainContent/MainContent.jsx` (these fetch `/data/repos/index.json` and per-repo files).
-- Repo data structure and generator: `public/data/repos/` and `utils/get_repos_info.py`.
-- Build and deploy: `package.json` scripts and `vite.config.js`.
+- Routing + data fetch: read `src/App.jsx` (fetches `/data/repos/index.json`, then per-repo `info.json` + `README.md`, derives `featuredProjects`).
+- Project views: `src/pages/Projects/Projects.jsx` handles list + detail routes (`/projects/:code`), filters, showdown markdown conversion, image carousel + modal.
+- Home landing: `src/pages/Home/Home.jsx` consumes `featuredProjectsData` to render hero + carousel.
+- Styling pattern: CSS modules colocated with each component/page (`Component/Component.module.css`). Global resets live in `src/styles.css`.
 
-**Developer workflows & commands**
+## Data & Content Pipeline
 
-- Install deps: `npm install` (or `npm ci` for CI).
-- Dev server: `npm run dev` (runs `vite`).
-- Build: `npm run build` -> outputs `dist`.
-- Preview production build: `npm run preview` (vite preview).
-- Deploy to GitHub Pages: `npm run deploy` (builds then `gh-pages -d dist`). `package.json` contains `homepage` set to the GitHub Pages URL.
+- `public/data/repos/index.json` is an ordered array of repo folder names; `App.jsx` iterates that list when preloading metadata.
+- Every repo folder contains `info.json` (GitHub stats, languages, context, readme path, etc.) and `README.md`. Images surface from `public/images/repos/<code>/`.
+- To add/update repos, edit `public/data/repos/repos.json` (toggle `featured`, default image, `context`). Run `python utils/get_repos_info.py` with `GITHUB_TOKEN` env var to regenerate `info.json`, `README.md`, and refresh `index.json`.
+- Frontend assumes `info.json` includes `code`, `name`, `languages`, `description`, `github_url`, `images`, optional `whatILearned`, `related`, `website`, and `featured` flags.
 
-If `npm run dev` fails, check that dependencies are installed (`node_modules`), re-run `npm install`, and ensure a compatible Node version is used. Dev server logs will show failing `fetch` requests to `/data/*` if required JSON files are missing.
+## UI Patterns & Dependencies
 
-**Project-specific conventions**
+- React Router v7: `BrowserRouter` with nested `Routes` (top-level in `App.jsx`, nested inside `Projects.jsx`). Remember to provide fallback routes when adding new sections.
+- `react-multi-carousel` drives both Home and Project image carousels; adjust responsive config in-place rather than reusing global settings.
+- Markdown rendering uses `showdown` (`project.readmeHtml = converter.makeHtml(project.readme)`); sanitize before injecting if you introduce new sources.
+- Custom controls (`Select`, `CollapsibleSection`, `ImageModal`, `ThemeToggle`) live under `src/components/`; follow the existing prop/aria patterns when reusing.
 
-- CSS modules: styles use `.module.css` files colocated with components (`Component/Component.module.css`).
-- Component folders: one folder per component, file named like `Component.jsx` and optional `Component.module.css`.
-- Static-data pattern: For repository entries the frontend expects two files per repo: `info.json` and `README.md`. Example fetch pattern (used in code):
+## Developer Workflows
 
-```js
-// pseudo from src code
-const meta = await fetch(`/data/repos/${name}/info.json`).then((r) => r.json());
-const readme = await fetch(`/data/repos/${name}/README.md`).then((r) => r.text());
-meta.readme = readme;
-```
+- Install dependencies: `npm install` (repo is private: true, so no publish).
+- Local dev: `npm run dev` (Vite); ensure `/public/data/**` exists or fetch calls will 404.
+- Build/preview: `npm run build` → `dist/`, `npm run preview` to smoke-test the prod bundle.
+- Deploy to GitHub Pages: `npm run deploy` (runs `vite build` then `gh-pages -d dist`, URL comes from `package.json:homepage`).
+- Lint (optional): `npm run lint` uses flat ESLint config in `eslint.config.js`.
 
-- Markdown rendering: `showdown` (npm dep) is used to render README.md content in the UI.
+## Debugging & Gotchas
 
-**Adding or updating repo data**
+- If project cards render empty, verify `projectsData` content and ensure `repos.json` + `index.json` stay in sync; stale folders cause fetch failures logged in the console.
+- Image modal paths are static (`/images/repos/${code}/filename`); broken thumbnails usually mean missing files or mismatch between `repos.json.image` and actual filenames.
+- GitHub Pages needs absolute paths compatible with `BrowserRouter`; keep asset paths rooted at `/` (Vite `base` is `/`). For custom domains you may need HashRouter, but current deploy expects BrowserRouter.
+- Filters/search in `ProjectsList` rely on `languages` object counts; maintain the `{ language: bytes }` shape exported by GitHub’s API when editing data manually.
 
-- Preferred method: run `utils/get_repos_info.py` (it collects GitHub info and writes `info.json` + `README.md`). If editing by hand, add a folder under `public/data/repos/<repo-name>/` with `info.json` and `README.md`, and list the repo directory name in `public/data/repos/index.json`.
-
-**Integration points & external deps**
-
-- Deployment: `gh-pages` (devDependency) + `npm run deploy`. `package.json` has `homepage` configured.
-- UI libs: `@mui/material`, `primereact`, `react-multi-carousel`, `react-router-dom`, `@theme-toggles/react` — follow existing usage patterns in components.
-- Build tool: Vite (`vite` and `@vitejs/plugin-react`). `vite.config.js` sets `base: "/"`.
-
-**Debugging tips (project-specific)**
-
-- If projects or readme content doesn't show: check `public/data/repos/index.json` and that each repo folder contains `info.json` and `README.md`.
-- If markdown rendering looks wrong: check `showdown` usage in `Projects` or `MainContent` components.
-- For visual/style issues: components use CSS modules; check `Component.module.css` colocated files.
-
-**Files to reference when making changes**
-
-- `src/main.jsx`, `src/components/App.jsx`, `src/components/Projects/Projects.jsx`, `src/components/MainContent/MainContent.jsx`, `src/components/Home/Home.jsx`
-- `public/data/repos/` and `utils/get_repos_info.py`
-- `package.json`, `vite.config.js`
-
-If anything here is unclear or you want more detail (examples of data shapes, exact component props, or a checklist for adding a new repo), tell me which area to expand and I will update this file.
+Questions or missing info? Let me know which section needs examples or deeper detail and I’ll expand it.
