@@ -34,7 +34,7 @@ export default function CollapsibleSection({ title, children, defaultOpen = true
   );
 }
 CollapsibleSection.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.node.isRequired,
   children: PropTypes.node.isRequired,
   defaultOpen: PropTypes.bool,
 };
