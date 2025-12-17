@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar/Navbar.jsx";
 import MainContent from "./MainContent/MainContent.jsx";
 import Home from "./pages/Home/Home.jsx";
 import Projects from "./pages/Projects/Projects.jsx";
+import Experience from "./pages/Experience/Experience.jsx";
 import Education from "./pages/Education/Education.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 
@@ -82,7 +83,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home featuredProjectsData={featuredProjects} />} />
           <Route path="/projects/*" element={<Projects projectsData={projects} />} />
-          <Route path="/experience" element={<div>Experience</div>} />
+          <Route path="/experience" element={<Experience />} />
           <Route path="/education" element={<Education />} />
           <Route path="*" element={<div>404 - Not Found</div>} />
         </Routes>
