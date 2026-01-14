@@ -12,7 +12,7 @@
   "ongoing": false,
   "location": { "city": "Porto", "country": "Portugal", "type": "Hybrid" },
   "description": "Developed HORUS, an end-to-end OSINT cyber-news ingestion and processing pipeline for Skill & Reach. Built ingestion (RSS + headless scraping), LLM-based enrichment (classification, tagging, automatic summaries), vector embedding-based deduplication and related-article detection, and an Elasticsearch-backed API with a React control center for exploration and scheduled reports. Delivered containerized tooling with per-source configuration, logging and authentication.",
-  "projects": ["pipeline-de-ingestao-e-processamento"],
+  "projects": ["horus-skill-and-reach"],
   "technologies": ["docker", "elasticsearch", "react", "python", "typescript", "llms"],
   "files": [],
   "images": [],

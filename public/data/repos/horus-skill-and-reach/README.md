@@ -2,7 +2,7 @@
 
 HORUS is an end-to-end OSINT cyber-news ingestion and processing pipeline developed for Skill & Reach. It includes ingestion (RSS + headless scraping), LLM-based enrichment (classification, tagging, automatic summaries), vector embedding-based deduplication and related-article detection, and an Elasticsearch-backed API with a React control center for exploration and scheduled email reports. The system is containerized and supports per-source configuration, structured logging, and authentication.
 
-- [Pipeline de Ingestão e Processamento](#pipeline-de-ingestão-e-processamento)
+- [HORUS - OSINT cyber-news ingestion and processing pipeline](#horus---osint-cyber-news-ingestion-and-processing-pipeline)
   - [Setup](#setup)
     - [Prerequisites](#prerequisites)
     - [Run the stack](#run-the-stack)
