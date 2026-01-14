@@ -1,16 +1,29 @@
 {
-  "code": "skill-reach-horus",
+  "code": "skill-and-reach",
   "role": "Software Developer",
   "level": "Internship",
   "type": "Full-time",
+  "arrangement": "Hybrid",
   "company": "Skill & Reach",
-  "company_logo": "skill-reach-logo.png",
+  "company_logo": "logo.png",
   "company_website": "https://skillandreach.com/",
-  "company_linkedin": "https://www.linkedin.com/company/skillandreach/posts/?feedView=all",
+  "company_linkedin": "https://www.linkedin.com/company/skillandreach/",
+  "supervisors": [
+    {
+      "name": "Manuel Neto",
+      "role": "Information Security Engineer",
+      "linkedin": "https://www.linkedin.com/in/manelneto/"
+    },
+    {
+      "name": "Pedro Norton Barbosa",
+      "role": "CEO",
+      "linkedin": "https://www.linkedin.com/in/pedronorton/"
+    }
+  ],
   "start_date": "10-2025",
   "end_date": "12-2025",
   "ongoing": false,
-  "location": { "city": "Porto", "country": "Portugal", "type": "Hybrid" },
+  "location": { "city": "Porto", "country": "Portugal" },
   "description": "Developed HORUS, an end-to-end OSINT cyber-news ingestion and processing pipeline for Skill & Reach. Built ingestion (RSS + headless scraping), LLM-based enrichment (classification, tagging, automatic summaries), vector embedding-based deduplication and related-article detection, and an Elasticsearch-backed API with a React control center for exploration and scheduled reports. Delivered containerized tooling with per-source configuration, logging and authentication.",
   "projects": ["horus-skill-and-reach"],
   "technologies": ["docker", "elasticsearch", "react", "python", "typescript", "llms"],

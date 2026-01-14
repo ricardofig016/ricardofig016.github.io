@@ -1,0 +1,38 @@
+{
+  "code": "critical-manufacturing",
+  "role": "Software Developer",
+  "level": "Internship",
+  "type": "Full-time",
+  "arrangement": "Hybrid",
+  "company": "Critical Manufacturing",
+  "company_logo": "logo.png",
+  "company_website": "https://www.criticalmanufacturing.com/",
+  "company_linkedin": "https://www.linkedin.com/company/critical-manufacturing/",
+  "supervisors": [
+    {
+      "name": "Sónia Araújo",
+      "role": "Project Manager",
+      "linkedin": "https://www.linkedin.com/in/s%C3%B3nia-ara%C3%BAjo-28b103a/"
+    },
+    {
+      "name": "Duarte Pereira",
+      "role": "Software Engineer",
+      "linkedin": "https://www.linkedin.com/in/duarte-pereira-924210140/"
+    },
+    {
+      "name": "Vasco Cruz",
+      "role": "Software Engineer",
+      "linkedin": "https://www.linkedin.com/in/vasco-j-r-cruz/"
+    }
+  ],
+  "start_date": "07-2024",
+  "end_date": "09-2024",
+  "ongoing": false,
+  "location": { "city": "Porto", "country": "Portugal" },
+  "description": "Designed and deployed a full-stack performance appraisal platform to automate internal employee evaluations. Developed a modular frontend using component-based vanilla JavaScript and HTML/CSS. Engineered a REST backend with Node.js and Express.js, implementing custom Middleware for JWT-based authentication and Role-Based Access Control (RBAC). Designed a MySQL relational schema to manage feedback workflows between employees and appraisers.",
+  "projects": ["feedback-circle"],
+  "technologies": ["javascript", "html", "css", "nodejs", "expressjs", "mysql", "restapi", "jwt", "rbac"],
+  "files": [],
+  "images": [],
+  "featured": false
+}
