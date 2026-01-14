@@ -1,50 +1,43 @@
-<!-- Copilot / AI agent instructions for contributors and coding agents -->
-
 # Copilot Instructions — homepage
 
-Goal: give an AI agent just enough repo context to ship useful changes quickly.
+Goal: Provide AI agents with essential codebase context to ship changes quickly and reliably.
 
 ## Big Picture
 
-- SPA built with Vite + React Router (`src/main.jsx` → `src/App.jsx`).
-- Layout frame lives in `App.jsx`: `Navbar` + `MainContent` wrapper + `Footer` around routed pages.
-- Portfolio data is static content under `public/data/` and `public/images/`; the runtime only fetches from those files (no backend).
-- Python helper `utils/get_repos_info.py` syncs GitHub metadata/README into `public/data/repos/*` based on `public/data/repos/repos.json` (stores `context`, `featured`, hero `image`).
+- **Architecture**: Single Page Application (SPA) built with **Vite + React Router v7**.
+- **Layout**: `App.jsx` defines the shell (`Navbar`, `MainContent`, `Footer`).
+- **Data Flow**: Purely static. Data is fetched at runtime from `public/data/`.
+  - `App.jsx` preloads metadata for all repos from `public/data/repos/`.
+  - `Education.jsx` fetches course data from `public/data/fcup/courses.json`.
+- **Styling**: CSS Modules (`Component.module.css`) for local scoping; `src/styles.css` for globals.
 
-## Where to Start
+## Critical Workflows
 
-- Routing + data fetch: read `src/App.jsx` (fetches `/data/repos/index.json`, then per-repo `info.json` + `README.md`, derives `featuredProjects`).
-- Project views: `src/pages/Projects/Projects.jsx` handles list + detail routes (`/projects/:code`), filters, showdown markdown conversion, image carousel + modal.
-- Home landing: `src/pages/Home/Home.jsx` consumes `featuredProjectsData` to render hero + carousel.
-- Styling pattern: CSS modules colocated with each component/page (`Component/Component.module.css`). Global resets live in `src/styles.css`.
+- **Local Dev**: `npm run dev` (Frontend) | `python utils/get_repos_info.py` (Data Sync).
+- **Data Sync**: To update projects, edit `public/data/repos/repos.json` then run `get_repos_info.py`. This script populates `info.json` and `README.md` for each repo.
+- **Build/Deploy**: `npm run build` (runs `create-404.js` post-build for GH Pages support) | `npm run deploy`.
+- **Environment**: Requires `GITHUB_TOKEN` in `.env` for the Python sync script.
 
-## Data & Content Pipeline
+## Core Patterns & Conventions
 
-- `public/data/repos/index.json` is an ordered array of repo folder names; `App.jsx` iterates that list when preloading metadata.
-- Every repo folder contains `info.json` (GitHub stats, languages, context, readme path, etc.) and `README.md`. Images surface from `public/images/repos/<code>/`.
-- To add/update repos, edit `public/data/repos/repos.json` (toggle `featured`, default image, `context`). Run `python utils/get_repos_info.py` with `GITHUB_TOKEN` env var to regenerate `info.json`, `README.md`, and refresh `index.json`.
-- Frontend assumes `info.json` includes `code`, `name`, `languages`, `description`, `github_url`, `images`, optional `whatILearned`, `related`, `website`, and `featured` flags.
+- **Routing**: Nested routes in `Projects.jsx` (`/projects` for list, `/projects/:code` for detail).
+- **Project Data**:
+  - `info.json`: Contains GitHub stats, languages (as byte counts), and featured flags.
+  - `README.md`: Fetched from GitHub and rendered using `showdown`.
+- **Images**: Located in `public/images/repos/{code}/`. Reference them with absolute paths like `/images/repos/...`.
+- **Components**: Follow the pattern `src/components/ComponentName/ComponentName.{jsx,module.css}`.
+- **Icons**: Uses `react-icons` (Fa6).
 
-## UI Patterns & Dependencies
+## Developer Gotchas
 
-- React Router v7: `BrowserRouter` with nested `Routes` (top-level in `App.jsx`, nested inside `Projects.jsx`). Remember to provide fallback routes when adding new sections.
-- `react-multi-carousel` drives both Home and Project image carousels; adjust responsive config in-place rather than reusing global settings.
-- Markdown rendering uses `showdown` (`project.readmeHtml = converter.makeHtml(project.readme)`); sanitize before injecting if you introduce new sources.
-- Custom controls (`Select`, `CollapsibleSection`, `ImageModal`, `ThemeToggle`) live under `src/components/`; follow the existing prop/aria patterns when reusing.
+- **Data Sync**: `repos.json` entries must match GitHub repository names precisely.
+- **Carousel**: `react-multi-carousel` is used for image galleries; ensure responsive config matches the local layout.
+- **Markdown**: Sanitize or trust `showdown` output carefully in `dangerouslySetInnerHTML`.
+- **Absolute Paths**: Always use absolute paths (starting with `/`) for public assets in code.
 
-## Developer Workflows
+## Key Files for Reference
 
-- Install dependencies: `npm install` (repo is private: true, so no publish).
-- Local dev: `npm run dev` (Vite); ensure `/public/data/**` exists or fetch calls will 404.
-- Build/preview: `npm run build` → `dist/`, `npm run preview` to smoke-test the prod bundle.
-- Deploy to GitHub Pages: `npm run deploy` (runs `vite build` then `gh-pages -d dist`, URL comes from `package.json:homepage`).
-- Lint (optional): `npm run lint` uses flat ESLint config in `eslint.config.js`.
-
-## Debugging & Gotchas
-
-- If project cards render empty, verify `projectsData` content and ensure `repos.json` + `index.json` stay in sync; stale folders cause fetch failures logged in the console.
-- Image modal paths are static (`/images/repos/${code}/filename`); broken thumbnails usually mean missing files or mismatch between `repos.json.image` and actual filenames.
-- GitHub Pages needs absolute paths compatible with `BrowserRouter`; keep asset paths rooted at `/` (Vite `base` is `/`). For custom domains you may need HashRouter, but current deploy expects BrowserRouter.
-- Filters/search in `ProjectsList` rely on `languages` object counts; maintain the `{ language: bytes }` shape exported by GitHub’s API when editing data manually.
-
-Questions or missing info? Let me know which section needs examples or deeper detail and I’ll expand it.
+- `src/App.jsx`: Global routing and data preloading logic.
+- `src/pages/Projects/Projects.jsx`: Complex filtering, search logic, and markdown rendering.
+- `utils/get_repos_info.py`: The "Source of Truth" generator for project data.
+- `public/data/repos/repos.json`: Manually managed configuration for which projects to display.
