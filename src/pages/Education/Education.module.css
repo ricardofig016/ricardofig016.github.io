@@ -11,6 +11,24 @@
   border-radius: 6px;
 }
 
+.educationHeader {
+  h2 {
+    margin-bottom: 0;
+    span {
+      color: var(--text-highlight);
+    }
+  }
+  p {
+    margin-top: 0;
+  }
+  .summary {
+    margin: 1.5rem 0 2rem 0;
+    span {
+      color: var(--text-highlight);
+    }
+  }
+}
+
 .courseCard {
   .courseName {
     margin: 0;
@@ -29,6 +47,7 @@
 .courseTitle {
   font-size: 1.2rem;
 }
+
 .courseCard:hover {
   background-color: var(--bg-secondary);
   transform: translateY(-2px);

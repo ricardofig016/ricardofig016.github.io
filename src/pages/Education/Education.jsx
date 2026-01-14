@@ -35,17 +35,8 @@ export default function Education() {
           const topics = Array.isArray(course.topics) ? course.topics : [];
           return (
             <div key={id} className={styles.courseCard}>
-              <CollapsibleSection
-                title={<span className={styles.courseTitle}>{course.name}</span>}
-                defaultOpen={false}
-              >
-                <a
-                  className={styles.courseLink}
-                  href={course.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Open ${course.name} original page`}
-                >
+              <CollapsibleSection title={<span className={styles.courseTitle}>{course.name}</span>} defaultOpen={false}>
+                <a className={styles.courseLink} href={course.url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${course.name} original page`}>
                   View Course
                 </a>
                 <div className={styles.courseTopics}>
@@ -70,7 +61,17 @@ export default function Education() {
   return (
     <div>
       <h1>Education</h1>
-      <h2>Bachelor&apos;s in Computer Science - FCUP</h2>
+
+      {/* Header */}
+      <div className={styles.educationHeader}>
+        <h2>
+          Bachelor&apos;s in <span>Computer Science</span>
+        </h2>
+        <p>Faculty of Sciences - University of Porto</p>
+        <p className={styles.summary}>
+          I studied mathematical foundations including calculus, discrete structures, and computational logic. I learned core concepts like <span>data structures</span>, complexity theory, and <span>algorithms</span>. I explored systems such as computer architecture, operating systems, compilers, and networks. I developed programming skills in imperative and functional paradigms, worked with databases and web technologies, and studied specialized topics like <span>artificial intelligence</span>, machine learning, security, and <span>software architecture</span>.
+        </p>
+      </div>
 
       {/* Course List */}
       <div>{courseList()}</div>
