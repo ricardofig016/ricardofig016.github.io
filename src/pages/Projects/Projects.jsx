@@ -86,47 +86,23 @@ function ProjectsList({ projectsData }) {
       <h1>Projects</h1>
       <div className={styles.filters}>
         {/* Context */}
-        <Select
-          options={contextOptions}
-          value={filterContext}
-          onChange={(v) => setFilterContext(v)}
-          placeholder="All Contexts"
-          id="projects-context-select"
-        />
+        <Select options={contextOptions} value={filterContext} onChange={(v) => setFilterContext(v)} placeholder="All Contexts" id="projects-context-select" />
 
         {/* Languages */}
-        <Select
-          options={languageOptions}
-          value={filterLanguage}
-          onChange={(v) => setFilterLanguage(v)}
-          placeholder="All Languages"
-          id="projects-language-select"
-        />
+        <Select options={languageOptions} value={filterLanguage} onChange={(v) => setFilterLanguage(v)} placeholder="All Languages" id="projects-language-select" />
 
         {/* Skills */}
         {/* TBA */}
 
         {/* Search */}
-        <input
-          className={styles.searchInput}
-          type="text"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search projects..."
-        />
+        <input className={styles.searchInput} type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search tools, frameworks, projects..." />
       </div>
 
       <div>
         {filteredProjects.map((proj) => {
           const langs = getSortedLanguages(proj.languages);
           return (
-            <div
-              key={proj.id ?? proj.code}
-              className={styles.projectCard}
-              tabIndex="0"
-              role="link"
-              onClick={() => navigate(`/projects/${proj.code}`)}
-            >
+            <div key={proj.id ?? proj.code} className={styles.projectCard} tabIndex="0" role="link" onClick={() => navigate(`/projects/${proj.code}`)}>
               {/* Title */}
               <h3 className={styles.projectTitle}>{proj.name + " "}</h3>
 
@@ -145,13 +121,7 @@ function ProjectsList({ projectsData }) {
               {/* Actions */}
               <div>
                 {proj.github_url && (
-                  <a
-                    className={styles.projectGithubLink}
-                    href={proj.github_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Open ${proj.name} on GitHub`}
-                  >
+                  <a className={styles.projectGithubLink} href={proj.github_url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${proj.name} on GitHub`}>
                     GitHub Repo
                   </a>
                 )}
@@ -188,14 +158,7 @@ function Project({ projectsData }) {
 
   // Images
   console.log(project.images);
-  const carouselItems = (project.images || []).map((image) => (
-    <ImageModal
-      className={styles.carouselItem}
-      key={image}
-      src={`/images/repos/${project.code}/${image}`}
-      alt={project.name}
-    />
-  ));
+  const carouselItems = (project.images || []).map((image) => <ImageModal className={styles.carouselItem} key={image} src={`/images/repos/${project.code}/${image}`} alt={project.name} />);
   const imagesSection = project.images && project.images.length > 0 && (
     <section className={styles.projectImages}>
       <Carousel
@@ -263,9 +226,7 @@ function Project({ projectsData }) {
   );
 
   // What I Learned
-  const whatILearnedSection = project.whatILearned && (
-    <CollapsibleSection title="What I Learned">{project.whatILearned}</CollapsibleSection>
-  );
+  const whatILearnedSection = project.whatILearned && <CollapsibleSection title="What I Learned">{project.whatILearned}</CollapsibleSection>;
 
   // Related Projects
   const relatedSection = project.related && project.related.length > 0 && (
@@ -275,9 +236,7 @@ function Project({ projectsData }) {
           const relatedProject = projectsData.find((p) => p.code === code);
           return (
             <li key={code}>
-              <Link to={`/projects/${code}`}>
-                {relatedProject ? relatedProject.title : `Project ${code}`}
-              </Link>
+              <Link to={`/projects/${code}`}>{relatedProject ? relatedProject.title : `Project ${code}`}</Link>
             </li>
           );
         })}
