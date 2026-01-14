@@ -6,8 +6,14 @@
   "forks": 0,
   "github_url": "https://github.com/ricardofig016/horus-skill-and-reach",
   "id": 0,
-  "image": null,
-  "images": [],
+  "image": "1-dashboard.png",
+  "images": [
+    "1-dashboard.png",
+    "2-articles.png",
+    "3-article-details.png",
+    "4-sources.png",
+    "5-email.png"
+  ],
   "issues": 0,
   "languages": {
     "CSS": 14298,
