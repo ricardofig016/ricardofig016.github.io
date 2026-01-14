@@ -1,39 +1,372 @@
-.filters {
-  display: flex;
-  gap: 1rem;
-}
-
-.searchInput {
-  all: unset;
-  flex: 1;
-  padding: 0.5rem;
+.experienceCard {
+  margin: 1rem 0;
+  padding: 1.5rem;
   border: 2px solid var(--text-highlight);
   border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.courseCard {
-  .courseName {
-    margin: 0;
-  }
-
-  .projectTechTags,
-  .courseLink {
-    font-size: 0.7rem;
-  }
-
-  .projectDesc {
-    margin: 1rem 0 0 0;
-  }
-}
-
-.courseTitle {
-  font-size: 1.2rem;
-}
-.courseCard:hover {
+.experienceCard:hover {
   background-color: var(--bg-secondary);
   transform: translateY(-2px);
 
-  .courseName {
+  .expCompany,
+  .expRole {
     color: var(--text-highlight);
   }
+}
+
+.expHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.expCardContent {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.expCardLogo {
+  width: 3rem;
+  height: 3rem;
+  object-fit: contain;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+
+.expCardText {
+  flex-grow: 1;
+}
+
+.expCompany {
+  margin: 0;
+}
+
+.expDates {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.expSubHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.25rem;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.expRole {
+  font-weight: 600;
+}
+
+.expLocation {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  opacity: 0.8;
+}
+
+.expDetails {
+  margin-top: 0.6rem;
+  font-size: 0.8rem;
+  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.expTechTags {
+  margin-top: 0.5rem;
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+
+.expHighlightsPreview {
+  margin-top: 1rem;
+  padding-left: 1.2rem;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.expHighlightsPreview li {
+  margin-bottom: 0.4rem;
+}
+
+.icon {
+  font-size: 0.9em;
+}
+
+/* Detail View */
+
+.expHeaderLarge {
+  margin-bottom: 2rem;
+}
+
+.expHeaderLarge h1 {
+  margin-bottom: 0.25rem;
+}
+
+.expTitleContainer {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 1.5rem 0 0.5rem 0;
+}
+
+.expTitleText {
+  display: flex;
+  flex-direction: column;
+}
+
+.companyTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+
+  h1 {
+    margin: 0 0 0.3rem 0;
+  }
+}
+
+.companyIcons {
+  display: flex;
+  gap: 0.8rem;
+  font-size: 1.2rem;
+}
+
+.companyIcons a,
+.companyIcons a:visited {
+  display: flex;
+  align-items: center;
+  color: var(--text-primary);
+  /* opacity: 0.9; */
+}
+
+.companyIcons a:hover {
+  color: var(--text-highlight);
+  opacity: 1;
+}
+
+.expHeaderLarge h2 {
+  margin: 0;
+  color: var(--text-highlight);
+  font-weight: 500;
+}
+
+.expLogo {
+  width: 4rem;
+  height: 4rem;
+  object-fit: contain;
+  /* border: 2px solid var(--text-highlight); */
+  border-radius: 5px;
+}
+
+.expMetadata {
+  display: flex;
+  gap: 1.5rem;
+  opacity: 0.8;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.expMetadata span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.expTypeInfo {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.techListHeader {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.2rem;
+}
+
+.supervisorsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.supervisorCard,
+.supervisorCard:visited {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border: 2px solid var(--text-highlight);
+  border-radius: 6px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+}
+
+.supervisorCard:hover {
+  background-color: var(--bg-secondary);
+  transform: translateY(-2px);
+  color: var(--text-primary);
+}
+.supervisorCard:hover strong {
+  color: var(--text-highlight);
+}
+
+.supInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.supIcon {
+  font-size: 1.5rem;
+  color: var(--text-highlight);
+}
+
+.supInfo strong {
+  display: block;
+  font-size: 1rem;
+}
+
+.supInfo p {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.relatedProjectsSection {
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.relatedProjectsSection::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background-color: var(--text-primary);
+  margin: 0 auto;
+  opacity: 0.8;
+  border-radius: 50%;
+}
+
+.relatedProjectTitle {
+  margin: 0 0 1rem 0;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+}
+
+.relatedProjectsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.relatedProjectCard:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
+.relatedProjectCard,
+.relatedProjectCard:visited {
+  display: flex;
+  flex-direction: column;
+  padding: 1.2rem;
+  border: 2px solid var(--text-highlight);
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+  background-color: transparent;
+}
+
+.relatedProjectCard:hover {
+  background-color: var(--bg-secondary);
+  transform: translateY(-3px);
+}
+
+.relatedProjectCard h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  color: var(--text-highlight);
+}
+
+.relatedProjectCard p {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.8;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.relatedProjectTech {
+  margin-top: auto;
+  padding-top: 0.8rem;
+  font-size: 0.75rem;
+  opacity: 0.7;
+  font-style: italic;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.highlightsList {
+  padding-left: 1.5rem;
+}
+
+.highlightsList li {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.projectsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.techList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.techItem {
+  padding: 0.25rem 0.75rem;
+  background-color: var(--bg-secondary);
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+}
+
+.projectNavLink,
+.projectNavLink:visited {
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--text-highlight);
+  border-radius: 20px;
+  text-decoration: none;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+
+.projectNavLink:hover {
+  background-color: var(--text-highlight);
+  color: var(--text-secondary);
 }

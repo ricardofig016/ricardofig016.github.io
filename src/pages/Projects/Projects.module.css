@@ -13,7 +13,7 @@
 
 .projectCard {
   margin: 1rem 0;
-  padding: 1rem;
+  padding: 1.5rem;
   border: 2px solid var(--text-highlight);
   border-radius: 6px;
   cursor: pointer;
