@@ -32,12 +32,12 @@ export default function Navbar() {
       ),
     },
     {
-      label: "Experience",
-      template: () => <Link to="/experience">Experience</Link>,
-    },
-    {
       label: "Projects",
       template: () => <Link to="/projects">Projects</Link>,
+    },
+    {
+      label: "Experience",
+      template: () => <Link to="/experience">Experience</Link>,
     },
     {
       label: "Education",
