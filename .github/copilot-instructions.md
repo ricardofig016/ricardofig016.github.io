@@ -7,7 +7,7 @@ Goal: Provide AI agents with essential codebase context to ship changes quickly 
 - **Architecture**: Single Page Application (SPA) built with **Vite + React Router v7**.
 - **Layout**: `App.jsx` defines the shell (`Navbar`, `MainContent`, `Footer`).
 - **Data Flow**: Static site architecture. Data is fetched at runtime from `public/data/` using `fetch`.
-  - `App.jsx` preloads metadata for all repos from `public/data/repos/` and experiences from `public/data/experience/`.
+  - `App.jsx` preloads metadata for all projects from `public/data/projects/` and experiences from `public/data/experience/`.
   - Content is organized into folders with a standard structure: `index.json` (listing folders), `[folder]/info.json` (metadata), and `[folder]/README.md` (detailed content).
 - **Styling**: CSS Modules (`Component.module.css`) for local scoping; `src/styles.css` for globals.
 - **UI Libraries**: Uses **Material UI (MUI)** for some components, **PrimeReact** for interactive elements like `Carousel`, and **react-icons** (Font Awesome 6 - `Fa6`) for icons.
@@ -16,8 +16,8 @@ Goal: Provide AI agents with essential codebase context to ship changes quickly 
 
 - **Frontend Development**: `npm run dev` (Vite dev server).
 - **Project Data Sync**:
-  1. Add/edit entries in [public/data/repos/repos.json](public/data/repos/repos.json).
-  2. Run `python utils/get_repos_info.py` (requires `GITHUB_TOKEN` in `.env`). This populates `public/data/repos/` and `public/images/repos/`.
+  1. Add/edit entries in [public/data/projects/projects.json](public/data/projects/projects.json).
+  2. Run `python utils/get_projects_info.py` (requires `GITHUB_TOKEN` in `.env`). This populates `public/data/projects/` and `public/images/projects/`.
 - **Education Data Sync**:
   1. Run `python utils/scrape_sigarra.py` to fetch raw HTML content.
   2. Run `python utils/summarize_courses.py` (requires `OPENAI_API_KEY`) to generate structured topics.
@@ -44,5 +44,5 @@ Goal: Provide AI agents with essential codebase context to ship changes quickly 
 - [src/App.jsx](src/App.jsx): Global routing and centralized data fetching logic.
 - [src/pages/Projects/Projects.jsx](src/pages/Projects/Projects.jsx): Search, filtering, and markdown rendering architecture.
 - [src/pages/Experience/Experience.jsx](src/pages/Experience/Experience.jsx): Career history rendering with related project links.
-- [utils/get_repos_info.py](utils/get_repos_info.py): Primary automation script for repository data aggregation.
+- [utils/get_projects_info.py](utils/get_projects_info.py): Primary automation script for repository data aggregation.
 - [scripts/create-404.js](scripts/create-404.js): Post-build script facilitating SPA routing on GitHub Pages.

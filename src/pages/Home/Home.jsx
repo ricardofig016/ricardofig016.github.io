@@ -14,8 +14,8 @@ function Home({ featuredProjectsData, experiencesData }) {
 
   const carouselItems = featuredProjectEntries.map(([, project]) => {
     // Image
-    const repoImagesBasePath = `/images/repos/${project.code}/`;
-    const imageUrl = project.image ? `${repoImagesBasePath}${project.image}` : null;
+    const projectImagesBasePath = `/images/projects/${project.code}/`;
+    const imageUrl = project.image ? `${projectImagesBasePath}${project.image}` : null;
     const imgElem = imageUrl && <img src={imageUrl} alt={project.name} />;
 
     const item = (

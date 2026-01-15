@@ -38,18 +38,18 @@ function App() {
   const [experiences, setExperiences] = useState({});
 
   useEffect(() => {
-    const fetchRepoData = async (folder) => {
+    const fetchProjectData = async (folder) => {
       const FILE_NAMES = {
         info: "info.json",
         readme: "README.md",
       };
 
-      let repoData = {};
+      let projectData = {};
 
       // Basic info
       try {
-        const response = await fetch(`/data/repos/${folder}/${FILE_NAMES.info}`);
-        repoData = await response.json();
+        const response = await fetch(`/data/projects/${folder}/${FILE_NAMES.info}`);
+        projectData = await response.json();
       } catch (error) {
         console.error(`Error fetching info.json for ${folder}: ${error}`);
         return null;
@@ -57,12 +57,12 @@ function App() {
 
       // Readme
       try {
-        const readmeRes = await fetch(`/data/repos/${folder}/${FILE_NAMES.readme}`);
-        repoData.readme = await readmeRes.text();
+        const readmeRes = await fetch(`/data/projects/${folder}/${FILE_NAMES.readme}`);
+        projectData.readme = await readmeRes.text();
       } catch (error) {
-        repoData.readme = null;
+        projectData.readme = null;
       }
-      return repoData;
+      return projectData;
     };
 
     const fetchExperienceData = async (folder) => {
@@ -75,22 +75,22 @@ function App() {
       }
     };
 
-    const fetchRepos = async () => {
+    const fetchProjects = async () => {
       try {
-        const res = await fetch("/data/repos/index.json");
+        const res = await fetch("/data/projects/index.json");
         if (!res.ok) throw new Error(`Failed to fetch index.json: ${res.status}`);
-        const repoFolders = await res.json(); // array of folder names
+        const projectFolders = await res.json(); // array of folder names
 
-        let reposData = {};
-        for (const folder of repoFolders) {
-          reposData[folder] = await fetchRepoData(folder);
+        let projectsData = {};
+        for (const folder of projectFolders) {
+          projectsData[folder] = await fetchProjectData(folder);
         }
 
-        setProjects(reposData);
-        const featured = Object.fromEntries(Object.entries(reposData).filter(([, repo]) => repo.featured));
+        setProjects(projectsData);
+        const featured = Object.fromEntries(Object.entries(projectsData).filter(([, project]) => project.featured));
         setFeaturedProjects(featured);
       } catch (error) {
-        console.error("Error fetching repos:", error);
+        console.error("Error fetching projects:", error);
       }
     };
 
@@ -110,7 +110,7 @@ function App() {
       }
     };
 
-    fetchRepos();
+    fetchProjects();
     fetchExperiences();
   }, []);
 

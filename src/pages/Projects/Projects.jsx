@@ -152,7 +152,7 @@ function Project({ projectsData }) {
   );
 
   // Images
-  const carouselItems = (project.images || []).map((image) => <ImageModal className={styles.carouselItem} key={image} src={`/images/repos/${project.code}/${image}`} alt={project.name} />);
+  const carouselItems = (project.images || []).map((image) => <ImageModal className={styles.carouselItem} key={image} src={`/images/projects/${project.code}/${image}`} alt={project.name} />);
   const imagesSection = project.images && project.images.length > 0 && (
     <section className={styles.projectImages}>
       <Carousel
