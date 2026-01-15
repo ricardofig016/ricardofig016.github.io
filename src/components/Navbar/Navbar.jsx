@@ -8,10 +8,7 @@ export default function Navbar() {
     const el = document.getElementById("contact");
     if (!el) return;
     // If it's inside a custom scroll container, attempt those first:
-    const possibleScrollParents = [
-      document.querySelector("main"),
-      document.querySelector("[data-scroll-root]"),
-    ].filter(Boolean);
+    const possibleScrollParents = [document.querySelector("main"), document.querySelector("[data-scroll-root]")].filter(Boolean);
 
     for (const sc of possibleScrollParents) {
       if (sc.contains(el)) {
@@ -35,12 +32,12 @@ export default function Navbar() {
       ),
     },
     {
-      label: "Projects",
-      template: () => <Link to="/projects">Projects</Link>,
-    },
-    {
       label: "Experience",
       template: () => <Link to="/experience">Experience</Link>,
+    },
+    {
+      label: "Projects",
+      template: () => <Link to="/projects">Projects</Link>,
     },
     {
       label: "Education",
