@@ -198,7 +198,8 @@ function ExperienceDetail({ experiencesData, projectsData }) {
       )}
 
       {exp.supervisors && exp.supervisors.length > 0 && (
-        <CollapsibleSection title="Supervisors">
+        <section className={styles.supervisorsSection}>
+          <h2 className={styles.supervisorsTitle}>Supervisors</h2>
           <div className={styles.supervisorsGrid}>
             {exp.supervisors.map((sup, i) => (
               <a key={i} href={sup.linkedin} target="_blank" rel="noopener noreferrer" className={styles.supervisorCard}>
@@ -212,7 +213,7 @@ function ExperienceDetail({ experiencesData, projectsData }) {
               </a>
             ))}
           </div>
-        </CollapsibleSection>
+        </section>
       )}
     </div>
   );

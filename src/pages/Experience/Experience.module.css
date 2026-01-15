@@ -213,6 +213,19 @@
   margin-top: 0.6rem;
 }
 
+.supervisorsSection {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border: 2px solid var(--text-highlight);
+  border-radius: 6px;
+}
+
+.supervisorsTitle {
+  margin: 0 0 1.5rem 0;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+}
+
 .supervisorsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
