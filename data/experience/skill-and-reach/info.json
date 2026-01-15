@@ -1,0 +1,34 @@
+{
+  "code": "skill-and-reach",
+  "role": "Software Developer",
+  "level": "Internship",
+  "type": "Full-time",
+  "arrangement": "Hybrid",
+  "company": "Skill & Reach",
+  "company_logo": "logo.png",
+  "company_website": "https://skillandreach.com/",
+  "company_linkedin": "https://www.linkedin.com/company/skillandreach/",
+  "supervisors": [
+    {
+      "name": "Manuel Neto",
+      "role": "Information Security Engineer",
+      "linkedin": "https://www.linkedin.com/in/manelneto/"
+    },
+    {
+      "name": "Pedro Norton Barbosa",
+      "role": "Founder & CEO",
+      "linkedin": "https://www.linkedin.com/in/pedronorton/"
+    }
+  ],
+  "start_date": "10-2025",
+  "end_date": "12-2025",
+  "ongoing": false,
+  "location": { "city": "Porto", "country": "Portugal" },
+  "description": "",
+  "highlights": ["Built an end-to-end **OSINT** news ingestion pipeline aggregating **RSS feeds** and scraped web sources using **Python**, processing 1000+ news articles daily.", "Applied **LLM**-based enrichment for article classification and summarization, with heuristic fallbacks.", "Implemented semantic deduplication and related-article linking using vector embeddings and **Elasticsearch**.", "Developed a **FastAPI** backend and **React** control center for article management and automated email reports."],
+  "projects": ["horus-skill-and-reach"],
+  "technologies": ["docker", "elasticsearch", "react", "python", "typescript", "llms"],
+  "files": [],
+  "images": [],
+  "featured": false
+}
