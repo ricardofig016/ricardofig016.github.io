@@ -7,6 +7,21 @@
   transition: all 0.2s ease;
 }
 
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.searchInput {
+  all: unset;
+  flex: 1;
+  padding: 0.5rem;
+  border: 2px solid var(--text-highlight);
+  border-radius: 6px;
+  color: var(--text-primary);
+}
+
 .experienceCard:hover {
   background-color: var(--bg-secondary);
   transform: translateY(-2px);

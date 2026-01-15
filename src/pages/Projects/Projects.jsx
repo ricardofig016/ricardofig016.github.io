@@ -24,6 +24,8 @@ function ProjectsList({ projectsData }) {
   ];
 
   // Language filter
+  // TODO: Refactor 'languages' to 'techs' to align with Experience.
+  // This will also involve updating the sorting logic to match the multi-level sort used in Experience.
   const [filterLanguage, setFilterLanguage] = useState("");
   const langs = {}; // { lang: count }
   projectsData.forEach((proj) => {

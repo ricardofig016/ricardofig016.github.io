@@ -1,8 +1,10 @@
 import styles from "./Experience.module.css";
 import { Routes, Route, useNavigate, useParams, Link } from "react-router-dom";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import CollapsibleSection from "../../components/CollapsibleSection/CollapsibleSection";
 import TechPills from "../../components/TechPills/TechPills";
+import Select from "../../components/Select/Select";
 import { FaLinkedin, FaGlobe, FaLocationDot, FaCalendarDays, FaUserTie } from "react-icons/fa6";
 import { formatDate } from "../../utils/dateUtils";
 
@@ -23,12 +25,59 @@ const renderHighlight = (text) => {
 
 function ExperienceList({ experiencesData }) {
   const navigate = useNavigate();
+  const [search, setSearch] = useState("");
+  const [filterTech, setFilterTech] = useState("");
+
+  const techStats = {}; // { tech: { count: number, minOrder: number } }
+  experiencesData.forEach((exp) => {
+    (exp.technologies || []).forEach((tech, index) => {
+      if (!techStats[tech]) {
+        techStats[tech] = { count: 0, minOrder: index };
+      }
+      techStats[tech].count += 1;
+      if (index < techStats[tech].minOrder) {
+        techStats[tech].minOrder = index;
+      }
+    });
+  });
+
+  const techOptions = [
+    { value: "", label: "All Technologies" },
+    ...Object.keys(techStats)
+      .sort((a, b) => {
+        // 1. Sort by frequency (descending)
+        if (techStats[b].count !== techStats[a].count) {
+          return techStats[b].count - techStats[a].count;
+        }
+        // 2. Sort by lowest appearance order (ascending)
+        if (techStats[a].minOrder !== techStats[b].minOrder) {
+          return techStats[a].minOrder - techStats[b].minOrder;
+        }
+        // 3. Alphabetical tie-breaker
+        return a.localeCompare(b);
+      })
+      .map((tech) => ({ value: tech, label: tech })),
+  ];
+
+  const filteredExperiences = experiencesData.filter((exp) => {
+    const matchesSearch = exp.company.toLowerCase().includes(search.toLowerCase()) || exp.role.toLowerCase().includes(search.toLowerCase()) || (exp.technologies || []).some((t) => t.toLowerCase().includes(search.toLowerCase())) || (exp.highlights || []).some((h) => h.toLowerCase().includes(search.toLowerCase()));
+
+    const matchesTech = filterTech ? (exp.technologies || []).includes(filterTech) : true;
+
+    return matchesSearch && matchesTech;
+  });
 
   return (
     <div>
       <h1>Experience</h1>
+
+      <div className={styles.filters}>
+        <Select options={techOptions} value={filterTech} onChange={(v) => setFilterTech(v)} placeholder="All Technologies" id="experience-tech-select" />
+        <input className={styles.searchInput} type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search companies, roles, techs..." />
+      </div>
+
       <div>
-        {experiencesData.map((exp) => (
+        {filteredExperiences.map((exp) => (
           <div key={exp.code} className={styles.experienceCard} tabIndex="0" role="link" onClick={() => navigate(`/experience/${exp.code}`)}>
             <div className={styles.expCardContent}>
               {exp.company_logo && <img src={`/data/experience/${exp.code}/${exp.company_logo}`} alt={`${exp.company} logo`} className={styles.expCardLogo} />}
@@ -49,9 +98,9 @@ function ExperienceList({ experiencesData }) {
             </div>
             <div className={styles.expDetails}>
               <span>{exp.level}</span>
-              <span> • </span>
+              <span> | </span>
               <span>{exp.type}</span>
-              <span> • </span>
+              <span> | </span>
               <span>{exp.arrangement}</span>
             </div>
             <TechPills technologies={exp.technologies} size="small" className={styles.expTechTags} />
@@ -129,9 +178,7 @@ function ExperienceDetail({ experiencesData, projectsData }) {
               return (
                 <Link key={projCode} to={`/projects/${projCode}`} className={styles.relatedProjectCard}>
                   <h3>{project ? project.name : projCode}</h3>
-                  {project && project.languages && (
-                    <TechPills technologies={Object.keys(project.languages)} size="small" className={styles.relatedProjectTech} />
-                  )}
+                  {project && project.languages && <TechPills technologies={Object.keys(project.languages)} size="small" className={styles.relatedProjectTech} />}
                   {project && project.description && <p>{project.description}</p>}
                 </Link>
               );

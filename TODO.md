@@ -1,10 +1,11 @@
 # To Do
 
 - [ ] feat: have a technologies (langs/tools/frameworks) section in Home with icons, see https://jzitnik.dev/en/, but make sure the viewer can look for what they want. or maybe make it a cool simple table, see https://andrijaweb.vercel.app/
-- [ ] feat: include experience in Home
+- [ ] refactor: align Projects technologies with Experience (migrate 'languages' to 'techs' and sync multi-level sorting)
 - [ ] feat: add a change language feature between Portuguese and English in the Navbar
 - [ ] feat: add development time to each project (think about how to implement this interestingly)
 - [ ] feat: projects NEED to have technology (langs/tools/frameworks) tags both in their dedicated page and in their card
+- [x] feat: include experience in Home
 - [x] fix: the shit image modal in ProjectDetails
 - [x] feat: change search bar default to something more clear like "Search tools, frameworks, projects..."
 - [x] feat: add LOCATION to the hero section of Home, sth like "Oliveira de Azeméis, Portugal" with a google maps anchor
