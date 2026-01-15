@@ -4,7 +4,7 @@
 - [ ] refactor: align Projects technologies with Experience (migrate 'languages' to 'techs' and sync multi-level sorting)
 - [ ] feat: add a change language feature between Portuguese and English in the Navbar
 - [ ] feat: add development time to each project (think about how to implement this interestingly)
-- [ ] feat: projects NEED to have technology (langs/tools/frameworks) tags both in their dedicated page and in their card
+- [x] feat: projects NEED to have technology (langs/tools/frameworks) tags both in their dedicated page and in their card
 - [x] feat: include experience in Home
 - [x] fix: the shit image modal in ProjectDetails
 - [x] feat: change search bar default to something more clear like "Search tools, frameworks, projects..."
