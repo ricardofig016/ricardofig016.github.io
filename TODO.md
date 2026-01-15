@@ -5,6 +5,7 @@
 - [ ] feat: add a change language feature between Portuguese and English in the Navbar
 - [ ] feat: add development time to each project (think about how to implement this interestingly)
 - [ ] feat: projects NEED to have technology (langs/tools/frameworks) tags both in their dedicated page and in their card
+- [x] fix: the shit image modal in ProjectDetails
 - [x] feat: change search bar default to something more clear like "Search tools, frameworks, projects..."
 - [x] feat: add LOCATION to the hero section of Home, sth like "Oliveira de Azeméis, Portugal" with a google maps anchor
 - [x] feat: have the links of Contact also appear in the hero section of Home, for easy access
