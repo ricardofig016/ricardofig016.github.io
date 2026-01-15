@@ -13,12 +13,11 @@
     "3-place.png"
   ],
   "issues": 0,
-  "languages": {
-    "CSS": 13856,
-    "HTML": 26621,
-    "JavaScript": 114892
-  },
   "name": "Shinsu Duel",
   "stars": 0,
+  "technologies": [
+    "placeholder",
+    "placeholder"
+  ],
   "website": ""
 }

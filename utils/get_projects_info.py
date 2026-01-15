@@ -67,11 +67,6 @@ def get_general_info(project_code):
     return project_info
 
 
-def get_languages(project_code):
-    url = f"{GITHUB_API_BASE_URL}/{project_code}/languages"
-    return get_request(url)
-
-
 def get_readme(project_code):
     url = f"{GITHUB_API_BASE_URL}/{project_code}/readme"
     data = get_request(url)
@@ -121,9 +116,6 @@ def save_basic_info(project_code, curr_id, projects_data, readme, file_path):
     for key, value in general_info.items():
         project_info[key] = value
 
-    project_info["languages"] = get_languages(project_code)
-    if project_info["languages"] is None:
-        raise RuntimeError(f"Unable to fetch languages for {project_code}. Previous API call failed; see the log output for details.")
     project_info["name"] = get_name(readme)
     project_info["images"] = get_images(project_code)
 
@@ -134,6 +126,7 @@ def save_basic_info(project_code, curr_id, projects_data, readme, file_path):
         project_info["image"] = None
 
     project_info["context"] = projects_data[project_code]["context"]
+    project_info["technologies"] = projects_data[project_code]["technologies"]
 
     with open(file_path, "w", encoding="utf-8") as file:
         json.dump(project_info, file, indent=2, sort_keys=True)

@@ -9,10 +9,11 @@
   "image": null,
   "images": [],
   "issues": 0,
-  "languages": {
-    "Java": 4330
-  },
   "name": "Roomba",
   "stars": 0,
+  "technologies": [
+    "placeholder",
+    "placeholder"
+  ],
   "website": ""
 }

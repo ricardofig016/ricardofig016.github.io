@@ -2,41 +2,49 @@
   "horus-skill-and-reach": {
     "featured": true,
     "image": "1-dashboard.png",
-    "context": "Internship"
+    "context": "Internship",
+    "technologies": ["placeholder", "placeholder"]
   },
   "shinsu-duel": {
     "featured": true,
     "image": "2-big-card.png",
-    "context": "Personal"
+    "context": "Personal",
+    "technologies": ["placeholder", "placeholder"]
   },
   "ride-sharing-app": {
     "featured": true,
     "image": "2-create-ride.png",
-    "context": "University"
+    "context": "University",
+    "technologies": ["placeholder", "placeholder"]
   },
   "kotlin-compiler": {
     "featured": false,
     "image": null,
-    "context": "University"
+    "context": "University",
+    "technologies": ["placeholder", "placeholder"]
   },
   "feedback-circle": {
     "featured": false,
     "image": null,
-    "context": "Internship"
+    "context": "Internship",
+    "technologies": ["placeholder", "placeholder"]
   },
   "cart-algorithm-class-imbalance-evaluation": {
     "featured": true,
     "image": "1-average.png",
-    "context": "University"
+    "context": "University",
+    "technologies": ["placeholder", "placeholder"]
   },
   "java-robocode-robot": {
     "featured": false,
     "image": null,
-    "context": "University"
+    "context": "University",
+    "technologies": ["placeholder", "placeholder"]
   },
   "ricardofig016.github.io": {
     "featured": false,
     "image": null,
-    "context": "Personal"
+    "context": "Personal",
+    "technologies": ["placeholder", "placeholder"]
   }
 }

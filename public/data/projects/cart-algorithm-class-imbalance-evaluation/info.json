@@ -12,12 +12,11 @@
     "2-count.png"
   ],
   "issues": 0,
-  "languages": {
-    "Jupyter Notebook": 1628148,
-    "Python": 36520,
-    "TeX": 8427
-  },
   "name": "Class Imbalance Evaluantion on CART Algorithm",
   "stars": 0,
+  "technologies": [
+    "placeholder",
+    "placeholder"
+  ],
   "website": ""
 }

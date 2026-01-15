@@ -9,13 +9,11 @@
   "image": null,
   "images": [],
   "issues": 0,
-  "languages": {
-    "Haskell": 273973,
-    "Kotlin": 4324,
-    "Lex": 4390,
-    "Yacc": 5362
-  },
   "name": "Kotlin Compiler",
   "stars": 0,
+  "technologies": [
+    "placeholder",
+    "placeholder"
+  ],
   "website": ""
 }

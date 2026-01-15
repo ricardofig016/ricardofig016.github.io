@@ -52,7 +52,7 @@
    - **Purpose**: Visualize technical/soft skills.
    - **Structure**:
      - **Categories**:
-       - **Languages**: Python, JavaScript, etc.
+       - **Technologies**: Python, JavaScript, etc.
        - **Frameworks**: React, Node.js.
        - **Tools**: Git, Docker.
        - **Concepts**: Agile, OOP.

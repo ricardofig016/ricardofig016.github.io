@@ -22,7 +22,7 @@ function Home({ featuredProjectsData, experiencesData }) {
       <Link to={`/projects/${project.code}`} key={project.name}>
         <div className={styles.projectCard}>
           <h3>{project.name}</h3>
-          <TechPills technologies={project.languages ? Object.keys(project.languages) : []} size="small" />
+          <TechPills technologies={project.technologies || []} size="small" />
           <p>{project.description}</p>
           {imgElem}
         </div>

@@ -23,33 +23,43 @@ function ProjectsList({ projectsData }) {
     { value: "Internship", label: "Internship" },
   ];
 
-  // Language filter
-  // TODO: Refactor 'languages' to 'techs' to align with Experience.
-  // This will also involve updating the sorting logic to match the multi-level sort used in Experience.
-  const [filterLanguage, setFilterLanguage] = useState("");
-  const langs = {}; // { lang: count }
+  // Technology filter
+  const [filterTech, setFilterTech] = useState("");
+  const techStats = {}; // { tech: { count: number, minOrder: number } }
   projectsData.forEach((proj) => {
-    Object.keys(proj.languages || {}).forEach((lang) => {
-      langs[lang] = (langs[lang] || 0) + 1;
+    (proj.technologies || []).forEach((tech, index) => {
+      if (!techStats[tech]) {
+        techStats[tech] = { count: 0, minOrder: index };
+      }
+      techStats[tech].count += 1;
+      if (index < techStats[tech].minOrder) {
+        techStats[tech].minOrder = index;
+      }
     });
   });
-  const languageOptions = [{ value: "", label: "All Languages" }];
-  Object.keys(langs)
-    .map((lang) => ({ value: lang, label: lang }))
-    .sort((a, b) => langs[b.value] - langs[a.value])
-    .forEach((lang) => languageOptions.push(lang));
 
-  // Skill filter
-  // TBA
+  const techOptions = [
+    { value: "", label: "All Technologies" },
+    ...Object.keys(techStats)
+      .sort((a, b) => {
+        // 1. Sort by frequency (descending)
+        if (techStats[b].count !== techStats[a].count) {
+          return techStats[b].count - techStats[a].count;
+        }
+        // 2. Sort by lowest appearance order (ascending)
+        if (techStats[a].minOrder !== techStats[b].minOrder) {
+          return techStats[a].minOrder - techStats[b].minOrder;
+        }
+        // 3. Alphabetical tie-breaker
+        return a.localeCompare(b);
+      })
+      .map((tech) => ({ value: tech, label: tech })),
+  ];
 
   // Search
   const [search, setSearch] = useState("");
 
-  const getSortedLanguages = (languages) => {
-    return Object.keys(languages || {}).sort((a, b) => languages[b] - languages[a]);
-  };
-
-  // Filter projects by name/description/langs/readme and selected filters and sort them
+  // Filter projects by name/description/techs/readme and selected filters and sort them
   const filteredProjects = (() => {
     const refinedSearch = search.toLowerCase().trim();
 
@@ -61,8 +71,8 @@ function ProjectsList({ projectsData }) {
       const desc = (proj.description || "").toLowerCase();
       if (desc.includes(refinedSearch)) return 1;
 
-      const langs = getSortedLanguages(proj.languages).map((l) => l.toLowerCase());
-      if (langs.some((l) => l.includes(refinedSearch))) return 2;
+      const techs = (proj.technologies || []).map((t) => t.toLowerCase());
+      if (techs.some((t) => t.includes(refinedSearch))) return 2;
 
       const readme = (proj.readme || "").toLowerCase();
       if (readme.includes(refinedSearch)) return 3;
@@ -74,7 +84,7 @@ function ProjectsList({ projectsData }) {
       .map((proj) => ({ proj, rank: rankProject(proj) }))
       .filter(({ rank }) => rank >= 0) // keep only matched
       .filter(({ proj }) => (filterContext ? proj.context === filterContext : true))
-      .filter(({ proj }) => (filterLanguage ? proj.languages && proj.languages[filterLanguage] : true))
+      .filter(({ proj }) => (filterTech ? (proj.technologies || []).includes(filterTech) : true))
       .sort((a, b) => {
         // primary: rank
         if (a.rank !== b.rank) return a.rank - b.rank;
@@ -91,11 +101,8 @@ function ProjectsList({ projectsData }) {
         {/* Context */}
         <Select options={contextOptions} value={filterContext} onChange={(v) => setFilterContext(v)} placeholder="All Contexts" id="projects-context-select" />
 
-        {/* Languages */}
-        <Select options={languageOptions} value={filterLanguage} onChange={(v) => setFilterLanguage(v)} placeholder="All Languages" id="projects-language-select" />
-
-        {/* Skills */}
-        {/* TBA */}
+        {/* Technologies */}
+        <Select options={techOptions} value={filterTech} onChange={(v) => setFilterTech(v)} placeholder="All Technologies" id="projects-tech-select" />
 
         {/* Search */}
         <input className={styles.searchInput} type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search tools, frameworks, projects..." />
@@ -103,14 +110,13 @@ function ProjectsList({ projectsData }) {
 
       <div>
         {filteredProjects.map((proj) => {
-          const langs = getSortedLanguages(proj.languages);
           return (
             <div key={proj.id ?? proj.code} className={styles.projectCard} tabIndex="0" role="link" onClick={() => navigate(`/projects/${proj.code}`)}>
               {/* Title */}
               <h3 className={styles.projectTitle}>{proj.name + " "}</h3>
 
               {/* Tech Tags */}
-              <TechPills technologies={langs} size="small" className={styles.projectTechTags} />
+              <TechPills technologies={proj.technologies || []} size="small" className={styles.projectTechTags} />
 
               {/* Actions */}
               <div>
@@ -146,7 +152,7 @@ function Project({ projectsData }) {
   const headerSection = (
     <section className={styles.projectHeader}>
       <h1>{project.name}</h1>
-      <TechPills technologies={project.languages ? Object.keys(project.languages) : []} className={styles.projectHeaderTech} />
+      <TechPills technologies={project.technologies || []} className={styles.projectHeaderTech} />
       <p>{project.description}</p>
     </section>
   );

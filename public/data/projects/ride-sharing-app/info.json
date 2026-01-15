@@ -13,12 +13,11 @@
     "3-rides.png"
   ],
   "issues": 0,
-  "languages": {
-    "CSS": 506,
-    "HTML": 497,
-    "Java": 91964
-  },
   "name": "Ride Sharing App",
   "stars": 0,
+  "technologies": [
+    "placeholder",
+    "placeholder"
+  ],
   "website": ""
 }
