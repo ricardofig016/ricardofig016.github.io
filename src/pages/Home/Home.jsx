@@ -6,8 +6,19 @@ import PropTypes from "prop-types";
 import { contactLinks } from "../../constants/contactLinks";
 import { FaDownload, FaLocationDot } from "react-icons/fa6";
 
-function Home({ featuredProjectsData }) {
+const formatDate = (dateStr) => {
+  if (!dateStr) return "";
+  const match = dateStr.match(/^(\d{2})-(\d{4})$/);
+  if (!match) return dateStr;
+  const [, month, year] = match;
+  const monthInt = parseInt(month, 10);
+  const date = new Date(year, monthInt - 1);
+  return date.toLocaleString("en-US", { month: "short", year: "numeric" });
+};
+
+function Home({ featuredProjectsData, experiencesData }) {
   const featuredProjectEntries = Object.entries(featuredProjectsData || {});
+  const experiences = Object.values(experiencesData || {});
 
   const carouselItems = featuredProjectEntries.map(([, project]) => {
     // Image
@@ -66,13 +77,7 @@ function Home({ featuredProjectsData }) {
             <p>Building Software & Learning Every Day</p>
           </div>
           <p className={styles.location}>
-            <a
-              href="https://www.google.com/maps?q=Oliveira+de+Azemeis+Portugal"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Open Google Maps for Oliveira de Azeméis, Portugal"
-              className="outink"
-            >
+            <a href="https://www.google.com/maps?q=Oliveira+de+Azemeis+Portugal" target="_blank" rel="noopener noreferrer" aria-label="Open Google Maps for Oliveira de Azeméis, Portugal" className="outink">
               <FaLocationDot aria-hidden="true" />
               <span>Oliveira de Azeméis, Portugal</span>
             </a>
@@ -110,6 +115,7 @@ function Home({ featuredProjectsData }) {
 Home.propTypes = {
   // { [code: string]: { ...projectData } }
   featuredProjectsData: PropTypes.objectOf(PropTypes.object).isRequired,
+  experiencesData: PropTypes.objectOf(PropTypes.object),
 };
 
 export default Home;
