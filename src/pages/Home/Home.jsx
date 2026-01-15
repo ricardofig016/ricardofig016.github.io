@@ -76,7 +76,7 @@ function Home({ featuredProjectsData, experiencesData }) {
             </a>
           </p>
           <div className={styles.heroActions}>
-            <a className={styles.resumeButton} href="/documents/resume.pdf" download="Ricardo_Figueiredo.pdf">
+            <a className={styles.resumeButton} href="/documents/resume.pdf" download="Ricardo-Figueiredo-Full-Stack-Developer.pdf">
               <FaDownload aria-hidden="true" />
               <span>Download Resume</span>
             </a>
