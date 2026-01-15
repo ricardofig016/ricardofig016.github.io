@@ -22,6 +22,7 @@ function Home({ featuredProjectsData, experiencesData }) {
       <Link to={`/projects/${project.code}`} key={project.name}>
         <div className={styles.projectCard}>
           <h3>{project.name}</h3>
+          <TechPills technologies={project.languages ? Object.keys(project.languages) : []} size="small" />
           <p>{project.description}</p>
           {imgElem}
         </div>
@@ -111,7 +112,7 @@ function Home({ featuredProjectsData, experiencesData }) {
                 <div className={styles.expDot} />
                 <div className={styles.expContent}>
                   <h3 className={styles.expTitle}>
-                    {exp.role} <span className={styles.expCompany}>@ {exp.company}</span>
+                    {exp.role} @ <span className={styles.expCompany}>{exp.company}</span>
                   </h3>
                   <span className={styles.expDate}>
                     {formatDate(exp.start_date)} — {exp.ongoing ? "Present" : formatDate(exp.end_date)}

@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import Select from "../../components/Select/Select";
 import CollapsibleSection from "../../components/CollapsibleSection/CollapsibleSection";
 import ImageModal from "../../components/ImageModal/ImageModal";
+import TechPills from "../../components/TechPills/TechPills";
 import Showdown from "showdown";
 import { FaGithub, FaGlobe } from "react-icons/fa6";
 import Carousel from "react-multi-carousel";
@@ -107,16 +108,7 @@ function ProjectsList({ projectsData }) {
               <h3 className={styles.projectTitle}>{proj.name + " "}</h3>
 
               {/* Tech Tags */}
-              {langs.length > 0 && (
-                <div className={styles.projectTechTags}>
-                  {langs.map((lang, i, arr) => (
-                    <span key={lang}>
-                      {lang}
-                      {i < arr.length - 1 ? ", " : ""}
-                    </span>
-                  ))}
-                </div>
-              )}
+              <TechPills technologies={langs} size="small" className={styles.projectTechTags} />
 
               {/* Actions */}
               <div>
@@ -152,6 +144,7 @@ function Project({ projectsData }) {
   const headerSection = (
     <section className={styles.projectHeader}>
       <h1>{project.name}</h1>
+      <TechPills technologies={project.languages ? Object.keys(project.languages) : []} className={styles.projectHeaderTech} />
       <p>{project.description}</p>
     </section>
   );

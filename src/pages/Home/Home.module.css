@@ -127,6 +127,8 @@
   p {
     color: var(--text-primary);
     text-align: justify;
+    font-size: 0.85rem;
+    opacity: 0.9;
   }
   img {
     width: auto;

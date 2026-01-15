@@ -22,7 +22,10 @@
     margin: 0;
   }
 
-  .projectTechTags,
+  .projectTechTags {
+    margin: 0.5rem 0;
+  }
+
   .projectGithubLink {
     font-size: 0.7rem;
   }
@@ -49,6 +52,10 @@
   h1 {
     margin: 0;
   }
+}
+
+.projectHeaderTech {
+  margin: 1rem 0;
 }
 
 .projectImages {

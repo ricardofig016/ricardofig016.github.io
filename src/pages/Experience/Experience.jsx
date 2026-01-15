@@ -129,8 +129,10 @@ function ExperienceDetail({ experiencesData, projectsData }) {
               return (
                 <Link key={projCode} to={`/projects/${projCode}`} className={styles.relatedProjectCard}>
                   <h3>{project ? project.name : projCode}</h3>
+                  {project && project.languages && (
+                    <TechPills technologies={Object.keys(project.languages)} size="small" className={styles.relatedProjectTech} />
+                  )}
                   {project && project.description && <p>{project.description}</p>}
-                  {project && project.languages && <div className={styles.relatedProjectTech}>{Object.keys(project.languages).join(", ")}</div>}
                 </Link>
               );
             })}
