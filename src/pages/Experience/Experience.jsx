@@ -19,6 +19,21 @@ const formatDate = (dateStr) => {
   return date.toLocaleString("en-US", { month: "short", year: "numeric" });
 };
 
+const renderHighlight = (text) => {
+  if (!text) return null;
+  const parts = text.split(/(\*\*.*?\*\*)/);
+  return parts.map((part, i) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return (
+        <span key={i} className={styles.highlightText}>
+          {part.slice(2, -2)}
+        </span>
+      );
+    }
+    return part;
+  });
+};
+
 function ExperienceList({ experiencesData }) {
   const navigate = useNavigate();
 
@@ -65,7 +80,7 @@ function ExperienceList({ experiencesData }) {
             {exp.highlights && exp.highlights.length > 0 && (
               <ul className={styles.expHighlightsPreview}>
                 {exp.highlights.map((highlight, i) => (
-                  <li key={i}>{highlight}</li>
+                  <li key={i}>{renderHighlight(highlight)}</li>
                 ))}
               </ul>
             )}
@@ -157,7 +172,7 @@ function ExperienceDetail({ experiencesData, projectsData }) {
         <CollapsibleSection title="Highlights" defaultOpen={true}>
           <ul className={styles.highlightsList}>
             {exp.highlights.map((highlight, i) => (
-              <li key={i}>{highlight}</li>
+              <li key={i}>{renderHighlight(highlight)}</li>
             ))}
           </ul>
         </CollapsibleSection>

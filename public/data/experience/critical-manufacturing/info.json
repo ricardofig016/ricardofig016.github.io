@@ -30,7 +30,7 @@
   "ongoing": false,
   "location": { "city": "Porto", "country": "Portugal" },
   "description": "",
-  "highlights": ["Designed and deployed a full-stack performance appraisal platform to automate internal employee evaluations.", "Developed a modular frontend using component-based vanilla JavaScript and HTML/CSS.", "Engineered a REST backend with Node.js and Express.js, implementing custom Middleware for JWT-based authentication and Role-Based Access Control (RBAC).", "Designed a MySQL relational schema to manage feedback workflows between employees and appraisers."],
+  "highlights": ["Designed and deployed a **full-stack** performance appraisal platform to automate internal employee evaluations.", "Developed a modular frontend using component-based **vanilla JavaScript** and **HTML/CSS**.", "Engineered a **REST** backend with **Node.js** and **Express.js**, implementing custom Middleware for **JWT**-based authentication and Role-Based Access Control (**RBAC**).", "Designed a **MySQL** relational schema to manage feedback workflows between employees and appraisers."],
   "projects": ["feedback-circle"],
   "technologies": ["javascript", "html", "css", "nodejs", "expressjs", "mysql", "restapi", "jwt", "rbac"],
   "files": [],

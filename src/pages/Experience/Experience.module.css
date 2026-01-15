@@ -66,6 +66,7 @@
 
 .expRole {
   font-weight: 600;
+  color: var(--text-highlight);
 }
 
 .expLocation {
@@ -102,6 +103,11 @@
 
 .icon {
   font-size: 0.9em;
+}
+
+.highlightText {
+  color: var(--text-highlight);
+  font-weight: 500;
 }
 
 /* Detail View */
