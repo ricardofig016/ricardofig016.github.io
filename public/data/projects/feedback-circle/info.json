@@ -12,8 +12,15 @@
   "name": "Feedback Circle",
   "stars": 0,
   "technologies": [
-    "placeholder",
-    "placeholder"
+    "javascript",
+    "nodejs",
+    "expressjs",
+    "mysql",
+    "restapi",
+    "jwt",
+    "rbac",
+    "html",
+    "css"
   ],
   "website": ""
 }

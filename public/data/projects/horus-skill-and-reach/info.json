@@ -18,8 +18,12 @@
   "name": "HORUS - OSINT cyber-news ingestion and processing pipeline",
   "stars": 0,
   "technologies": [
-    "placeholder",
-    "placeholder"
+    "react",
+    "python",
+    "docker",
+    "typescript",
+    "elasticsearch",
+    "llms"
   ],
   "website": null
 }

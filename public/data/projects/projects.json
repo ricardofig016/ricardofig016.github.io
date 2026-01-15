@@ -3,13 +3,13 @@
     "featured": true,
     "image": "1-dashboard.png",
     "context": "Internship",
-    "technologies": ["placeholder", "placeholder"]
+    "technologies": ["react", "python", "docker", "typescript", "elasticsearch", "llms"]
   },
   "shinsu-duel": {
     "featured": true,
     "image": "2-big-card.png",
     "context": "Personal",
-    "technologies": ["placeholder", "placeholder"]
+    "technologies": ["javascript", "nodejs", "expressjs", "socketio", "html", "css"]
   },
   "ride-sharing-app": {
     "featured": true,
@@ -27,7 +27,7 @@
     "featured": false,
     "image": null,
     "context": "Internship",
-    "technologies": ["placeholder", "placeholder"]
+    "technologies": ["javascript", "nodejs", "expressjs", "mysql", "restapi", "jwt", "rbac", "html", "css"]
   },
   "cart-algorithm-class-imbalance-evaluation": {
     "featured": true,
