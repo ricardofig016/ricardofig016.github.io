@@ -1,6 +1,6 @@
 """Normalize FCUP course descriptions using an OpenAI LLM.
 
-The script reads public/data/fcup/courses.json, sends each course description
+The script reads public/data/education/fcup/courses.json, sends each course description
 through an LLM, and stores the structured list of topics under a new
 "topics" field per course. Set OPENAI_API_KEY in your environment before
 running this script.
@@ -19,7 +19,7 @@ from openai import OpenAI
 
 # Path setup
 ROOT_DIR = Path(__file__).resolve().parents[1]
-COURSES_PATH = ROOT_DIR / "public" / "data" / "fcup" / "courses.json"
+COURSES_PATH = ROOT_DIR / "public" / "data" / "education" / "fcup" / "courses.json"
 
 # Courses that should be ignored by the normalization pass
 EXCLUDED_CODES = {}

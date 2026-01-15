@@ -5,10 +5,8 @@ import re
 from bs4 import BeautifulSoup
 
 
-BASE_COURSE_PATH = (
-    "https://sigarra.up.pt/fcup/en/ucurr_geral.ficha_uc_view?pv_ocorrencia_id="
-)
-OUTPUT_PATH = Path("public/data/fcup/courses.json")
+BASE_COURSE_PATH = "https://sigarra.up.pt/fcup/en/ucurr_geral.ficha_uc_view?pv_ocorrencia_id="
+OUTPUT_PATH = Path("public/data/education/fcup/courses.json")
 OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
 
 COURSES = {
@@ -137,10 +135,7 @@ def main():
 
     def extract_program(html: str) -> str:
         soup = BeautifulSoup(html, "html.parser")
-        programH3 = soup.find(
-            lambda t: t.name == "h3"
-            and normalize_whitespace(t.get_text()).lower() == "program"
-        )
+        programH3 = soup.find(lambda t: t.name == "h3" and normalize_whitespace(t.get_text()).lower() == "program")
         if not programH3:
             return ""
         blocks = []

@@ -4,13 +4,13 @@ import styles from "./Education.module.css";
 import CollapsibleSection from "../../components/CollapsibleSection/CollapsibleSection";
 
 // Simple Education component inspired by ProjectsList structure.
-// Fetches courses data directly (no props) from public/data/fcup/courses.json
+// Fetches courses data directly (no props) from public/data/education/fcup/courses.json
 // and provides a minimal search over course name and program content.
 export default function Education() {
   const [courses, setCourses] = useState({});
 
   const fetchFcupData = async () => {
-    const FCUP_COURSES_FILE_PATH = "/data/fcup/courses.json";
+    const FCUP_COURSES_FILE_PATH = "/data/education/fcup/courses.json";
     try {
       const response = await fetch(FCUP_COURSES_FILE_PATH);
       setCourses(await response.json());
