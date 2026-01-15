@@ -3,21 +3,7 @@ import { Routes, Route, useNavigate, useParams, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import CollapsibleSection from "../../components/CollapsibleSection/CollapsibleSection";
 import { FaLinkedin, FaGlobe, FaLocationDot, FaCalendarDays, FaUserTie } from "react-icons/fa6";
-
-const formatDate = (dateStr) => {
-  if (!dateStr) return "";
-  const match = dateStr.match(/^(\d{2})-(\d{4})$/);
-  if (!match) {
-    throw new Error(`Invalid date format: "${dateStr}". Expected MM-YYYY (e.g., 01-2024)`);
-  }
-  const [, month, year] = match;
-  const monthInt = parseInt(month, 10);
-  if (monthInt < 1 || monthInt > 12) {
-    throw new Error(`Invalid month: "${month}". Must be between 01 and 12`);
-  }
-  const date = new Date(year, monthInt - 1);
-  return date.toLocaleString("en-US", { month: "short", year: "numeric" });
-};
+import { formatDate } from "../../utils/dateUtils";
 
 const renderHighlight = (text) => {
   if (!text) return null;

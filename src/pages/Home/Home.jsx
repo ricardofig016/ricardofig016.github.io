@@ -5,16 +5,7 @@ import styles from "./Home.module.css";
 import PropTypes from "prop-types";
 import { contactLinks } from "../../constants/contactLinks";
 import { FaDownload, FaLocationDot } from "react-icons/fa6";
-
-const formatDate = (dateStr) => {
-  if (!dateStr) return "";
-  const match = dateStr.match(/^(\d{2})-(\d{4})$/);
-  if (!match) return dateStr;
-  const [, month, year] = match;
-  const monthInt = parseInt(month, 10);
-  const date = new Date(year, monthInt - 1);
-  return date.toLocaleString("en-US", { month: "short", year: "numeric" });
-};
+import { formatDate } from "../../utils/dateUtils";
 
 function Home({ featuredProjectsData, experiencesData }) {
   const featuredProjectEntries = Object.entries(featuredProjectsData || {});
