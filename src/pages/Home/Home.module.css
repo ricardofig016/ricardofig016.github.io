@@ -144,3 +144,74 @@
     color: var(--text-highlight);
   }
 }
+
+.experienceSection {
+  margin: 3rem 0;
+}
+
+.experienceList {
+  display: flex;
+  flex-direction: column;
+  border-left: 2px solid var(--text-highlight);
+  margin-left: 0.5rem;
+  padding-left: 1.5rem;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.experienceItem {
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.experienceItem:hover .expContent {
+  transform: translateX(10px);
+}
+
+.expDot {
+  position: absolute;
+  left: -2.05rem; /* Center on the 2px border */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1rem;
+  height: 1rem;
+  background-color: var(--bg-primary);
+  border: 2px solid var(--text-highlight);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.experienceItem:hover .expDot {
+  background-color: var(--text-highlight);
+}
+
+.expContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  transition: transform 0.2s ease;
+}
+
+.expTitle {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.expCompany {
+  color: var(--text-highlight);
+  font-weight: 500;
+}
+
+.expDate {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  opacity: 0.8;
+}
+
+.homeExpTech {
+  margin-top: 0.2rem;
+}

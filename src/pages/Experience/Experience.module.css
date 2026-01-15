@@ -86,8 +86,6 @@
 
 .expTechTags {
   margin-top: 0.5rem;
-  font-size: 0.7rem;
-  opacity: 0.8;
 }
 
 .expHighlightsPreview {
@@ -197,10 +195,7 @@
 }
 
 .techListHeader {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 1.2rem;
+  margin-top: 0.6rem;
 }
 
 .supervisorsGrid {
@@ -346,20 +341,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-}
-
-.techList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.techItem {
-  padding: 0.25rem 0.75rem;
-  background-color: var(--bg-secondary);
-  border-radius: 4px;
-  font-size: 0.85rem;
-  color: var(--text-primary);
 }
 
 .projectNavLink,

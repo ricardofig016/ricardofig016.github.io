@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import { contactLinks } from "../../constants/contactLinks";
 import { FaDownload, FaLocationDot } from "react-icons/fa6";
 import { formatDate } from "../../utils/dateUtils";
+import TechPills from "../../components/TechPills/TechPills";
 
 function Home({ featuredProjectsData, experiencesData }) {
   const featuredProjectEntries = Object.entries(featuredProjectsData || {});
@@ -94,6 +95,34 @@ function Home({ featuredProjectsData, experiencesData }) {
           </div>
         </div>
       </section>
+
+      {/* Experience Section */}
+      <section className={styles.experienceSection}>
+        <h2>Experience</h2>
+        <div className={styles.experienceList}>
+          {experiences
+            .sort((a, b) => {
+              const dateA = new Date(a.start_date.split("-").reverse().join("-"));
+              const dateB = new Date(b.start_date.split("-").reverse().join("-"));
+              return dateB - dateA;
+            })
+            .map((exp) => (
+              <Link key={exp.code} to={`/experience/${exp.code}`} className={styles.experienceItem}>
+                <div className={styles.expDot} />
+                <div className={styles.expContent}>
+                  <h3 className={styles.expTitle}>
+                    {exp.role} <span className={styles.expCompany}>@ {exp.company}</span>
+                  </h3>
+                  <span className={styles.expDate}>
+                    {formatDate(exp.start_date)} — {exp.ongoing ? "Present" : formatDate(exp.end_date)}
+                  </span>
+                  <TechPills technologies={exp.technologies} size="small" className={styles.homeExpTech} />
+                </div>
+              </Link>
+            ))}
+        </div>
+      </section>
+
       {/* Featured Projects */}
       <section>
         <h2>Featured Projects</h2>

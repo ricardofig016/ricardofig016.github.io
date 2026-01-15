@@ -1,0 +1,18 @@
+.techList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.techItem {
+  padding: 0.25rem 0.75rem;
+  background-color: var(--bg-secondary);
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+}
+
+.small .techItem {
+  padding: 0.15rem 0.5rem;
+  font-size: 0.7rem;
+}

@@ -2,6 +2,7 @@ import styles from "./Experience.module.css";
 import { Routes, Route, useNavigate, useParams, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import CollapsibleSection from "../../components/CollapsibleSection/CollapsibleSection";
+import TechPills from "../../components/TechPills/TechPills";
 import { FaLinkedin, FaGlobe, FaLocationDot, FaCalendarDays, FaUserTie } from "react-icons/fa6";
 import { formatDate } from "../../utils/dateUtils";
 
@@ -53,16 +54,7 @@ function ExperienceList({ experiencesData }) {
               <span> • </span>
               <span>{exp.arrangement}</span>
             </div>
-            {exp.technologies && exp.technologies.length > 0 && (
-              <div className={styles.expTechTags}>
-                {exp.technologies.map((tech, i, arr) => (
-                  <span key={tech}>
-                    {tech}
-                    {i < arr.length - 1 ? ", " : ""}
-                  </span>
-                ))}
-              </div>
-            )}
+            <TechPills technologies={exp.technologies} size="small" className={styles.expTechTags} />
             {exp.highlights && exp.highlights.length > 0 && (
               <ul className={styles.expHighlightsPreview}>
                 {exp.highlights.map((highlight, i) => (
@@ -125,15 +117,7 @@ function ExperienceDetail({ experiencesData, projectsData }) {
         <div className={styles.expTypeInfo}>
           <span>{exp.level}</span> | <span>{exp.type}</span> | <span>{exp.arrangement}</span>
         </div>
-        {exp.technologies && exp.technologies.length > 0 && (
-          <div className={styles.techListHeader}>
-            {exp.technologies.map((tech) => (
-              <span key={tech} className={styles.techItem}>
-                {tech}
-              </span>
-            ))}
-          </div>
-        )}
+        <TechPills technologies={exp.technologies} className={styles.techListHeader} />
       </section>
 
       {exp.projects && exp.projects.length > 0 && (
