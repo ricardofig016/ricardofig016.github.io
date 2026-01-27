@@ -7,6 +7,7 @@ import TechPills from "../../components/TechPills/TechPills";
 import Select from "../../components/Select/Select";
 import { FaLinkedin, FaGlobe, FaLocationDot, FaCalendarDays, FaUserTie } from "react-icons/fa6";
 import { formatDate } from "../../utils/dateUtils";
+import { getExperienceTechnologies } from "../../utils/techMerger";
 
 const renderHighlight = (text) => {
   if (!text) return null;
@@ -23,14 +24,15 @@ const renderHighlight = (text) => {
   });
 };
 
-function ExperienceList({ experiencesData }) {
+function ExperienceList({ experiencesData, projectsData }) {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [filterTech, setFilterTech] = useState("");
 
   const techStats = {}; // { tech: { count: number, minOrder: number } }
   experiencesData.forEach((exp) => {
-    (exp.technologies || []).forEach((tech, index) => {
+    const technologies = getExperienceTechnologies(exp, projectsData);
+    (technologies || []).forEach((tech, index) => {
       if (!techStats[tech]) {
         techStats[tech] = { count: 0, minOrder: index };
       }
@@ -60,9 +62,10 @@ function ExperienceList({ experiencesData }) {
   ];
 
   const filteredExperiences = experiencesData.filter((exp) => {
-    const matchesSearch = exp.company.toLowerCase().includes(search.toLowerCase()) || exp.role.toLowerCase().includes(search.toLowerCase()) || (exp.technologies || []).some((t) => t.toLowerCase().includes(search.toLowerCase())) || (exp.highlights || []).some((h) => h.toLowerCase().includes(search.toLowerCase()));
+    const technologies = getExperienceTechnologies(exp, projectsData);
+    const matchesSearch = exp.company.toLowerCase().includes(search.toLowerCase()) || exp.role.toLowerCase().includes(search.toLowerCase()) || (technologies || []).some((t) => t.toLowerCase().includes(search.toLowerCase())) || (exp.highlights || []).some((h) => h.toLowerCase().includes(search.toLowerCase()));
 
-    const matchesTech = filterTech ? (exp.technologies || []).includes(filterTech) : true;
+    const matchesTech = filterTech ? (technologies || []).includes(filterTech) : true;
 
     return matchesSearch && matchesTech;
   });
@@ -77,42 +80,45 @@ function ExperienceList({ experiencesData }) {
       </div>
 
       <div>
-        {filteredExperiences.map((exp) => (
-          <div key={exp.code} className={styles.experienceCard} tabIndex="0" role="link" onClick={() => navigate(`/experience/${exp.code}`)}>
-            <div className={styles.expCardContent}>
-              {exp.company_logo && <img src={`/data/experience/${exp.code}/${exp.company_logo}`} alt={`${exp.company} logo`} className={styles.expCardLogo} />}
-              <div className={styles.expCardText}>
-                <div className={styles.expHeader}>
-                  <h3 className={styles.expCompany}>{exp.company}</h3>
-                  <span className={styles.expDates}>
-                    <FaCalendarDays className={styles.icon} /> {formatDate(exp.start_date)} - {exp.ongoing ? "Present" : formatDate(exp.end_date)}
-                  </span>
-                </div>
-                <div className={styles.expSubHeader}>
-                  <span className={styles.expRole}>{exp.role}</span>
-                  <span className={styles.expLocation}>
-                    <FaLocationDot className={styles.icon} /> {exp.location.city}, {exp.location.country}
-                  </span>
+        {filteredExperiences.map((exp) => {
+          const technologies = getExperienceTechnologies(exp, projectsData);
+          return (
+            <div key={exp.code} className={styles.experienceCard} tabIndex="0" role="link" onClick={() => navigate(`/experience/${exp.code}`)}>
+              <div className={styles.expCardContent}>
+                {exp.company_logo && <img src={`/data/experience/${exp.code}/${exp.company_logo}`} alt={`${exp.company} logo`} className={styles.expCardLogo} />}
+                <div className={styles.expCardText}>
+                  <div className={styles.expHeader}>
+                    <h3 className={styles.expCompany}>{exp.company}</h3>
+                    <span className={styles.expDates}>
+                      <FaCalendarDays className={styles.icon} /> {formatDate(exp.start_date)} - {exp.ongoing ? "Present" : formatDate(exp.end_date)}
+                    </span>
+                  </div>
+                  <div className={styles.expSubHeader}>
+                    <span className={styles.expRole}>{exp.role}</span>
+                    <span className={styles.expLocation}>
+                      <FaLocationDot className={styles.icon} /> {exp.location.city}, {exp.location.country}
+                    </span>
+                  </div>
                 </div>
               </div>
+              <div className={styles.expDetails}>
+                <span>{exp.level}</span>
+                <span> | </span>
+                <span>{exp.type}</span>
+                <span> | </span>
+                <span>{exp.arrangement}</span>
+              </div>
+              <TechPills technologies={technologies} size="small" className={styles.expTechTags} />
+              {exp.highlights && exp.highlights.length > 0 && (
+                <ul className={styles.expHighlightsPreview}>
+                  {exp.highlights.map((highlight, i) => (
+                    <li key={i}>{renderHighlight(highlight)}</li>
+                  ))}
+                </ul>
+              )}
             </div>
-            <div className={styles.expDetails}>
-              <span>{exp.level}</span>
-              <span> | </span>
-              <span>{exp.type}</span>
-              <span> | </span>
-              <span>{exp.arrangement}</span>
-            </div>
-            <TechPills technologies={exp.technologies} size="small" className={styles.expTechTags} />
-            {exp.highlights && exp.highlights.length > 0 && (
-              <ul className={styles.expHighlightsPreview}>
-                {exp.highlights.map((highlight, i) => (
-                  <li key={i}>{renderHighlight(highlight)}</li>
-                ))}
-              </ul>
-            )}
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
@@ -120,6 +126,7 @@ function ExperienceList({ experiencesData }) {
 
 ExperienceList.propTypes = {
   experiencesData: PropTypes.arrayOf(PropTypes.object).isRequired,
+  projectsData: PropTypes.object.isRequired,
 };
 
 function ExperienceDetail({ experiencesData, projectsData }) {
@@ -129,6 +136,7 @@ function ExperienceDetail({ experiencesData, projectsData }) {
   if (!exp) return <div>404: Experience {experienceCode} not found.</div>;
 
   const projects = Object.values(projectsData || {});
+  const technologies = getExperienceTechnologies(exp, projectsData);
 
   return (
     <div>
@@ -166,7 +174,7 @@ function ExperienceDetail({ experiencesData, projectsData }) {
         <div className={styles.expTypeInfo}>
           <span>{exp.level}</span> | <span>{exp.type}</span> | <span>{exp.arrangement}</span>
         </div>
-        <TechPills technologies={exp.technologies} className={styles.techListHeader} />
+        <TechPills technologies={technologies} className={styles.techListHeader} />
       </section>
 
       {exp.projects && exp.projects.length > 0 && (
@@ -229,7 +237,7 @@ export default function Experience({ experiencesData, projectsData }) {
 
   return (
     <Routes>
-      <Route path="/" element={<ExperienceList experiencesData={experiences} />} />
+      <Route path="/" element={<ExperienceList experiencesData={experiences} projectsData={projectsData} />} />
       <Route path=":experienceCode" element={<ExperienceDetail experiencesData={experiences} projectsData={projectsData} />} />
     </Routes>
   );

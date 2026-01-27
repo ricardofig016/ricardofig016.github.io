@@ -120,7 +120,7 @@ function App() {
       <Navbar />
       <MainContent>
         <Routes>
-          <Route path="/" element={<Home featuredProjectsData={featuredProjects} experiencesData={experiences} />} />
+          <Route path="/" element={<Home featuredProjectsData={featuredProjects} experiencesData={experiences} projectsData={projects} />} />
           <Route path="/projects/*" element={<Projects projectsData={projects} />} />
           <Route path="/experience/*" element={<Experience experiencesData={experiences} projectsData={projects} />} />
           <Route path="/education" element={<Education />} />

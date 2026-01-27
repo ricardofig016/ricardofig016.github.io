@@ -7,8 +7,9 @@ import { contactLinks } from "../../constants/contactLinks";
 import { FaDownload, FaLocationDot } from "react-icons/fa6";
 import { formatDate } from "../../utils/dateUtils";
 import TechPills from "../../components/TechPills/TechPills";
+import { getExperienceTechnologies } from "../../utils/techMerger";
 
-function Home({ featuredProjectsData, experiencesData }) {
+function Home({ featuredProjectsData, experiencesData, projectsData }) {
   const featuredProjectEntries = Object.entries(featuredProjectsData || {});
   const experiences = Object.values(experiencesData || {});
 
@@ -70,7 +71,13 @@ function Home({ featuredProjectsData, experiencesData }) {
             <p>Building Software & Learning Every Day</p>
           </div>
           <p className={styles.location}>
-            <a href="https://www.google.com/maps?q=Oliveira+de+Azemeis+Portugal" target="_blank" rel="noopener noreferrer" aria-label="Open Google Maps for Oliveira de Azeméis, Portugal" className="outink">
+            <a
+              href="https://www.google.com/maps?q=Oliveira+de+Azemeis+Portugal"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open Google Maps for Oliveira de Azeméis, Portugal"
+              className="outink"
+            >
               <FaLocationDot aria-hidden="true" />
               <span>Oliveira de Azeméis, Portugal</span>
             </a>
@@ -107,20 +114,23 @@ function Home({ featuredProjectsData, experiencesData }) {
               const dateB = new Date(b.start_date.split("-").reverse().join("-"));
               return dateB - dateA;
             })
-            .map((exp) => (
-              <Link key={exp.code} to={`/experience/${exp.code}`} className={styles.experienceItem}>
-                <div className={styles.expDot} />
-                <div className={styles.expContent}>
-                  <h3 className={styles.expTitle}>
-                    {exp.role} @ <span className={styles.expCompany}>{exp.company}</span>
-                  </h3>
-                  <span className={styles.expDate}>
-                    {formatDate(exp.start_date)} — {exp.ongoing ? "Present" : formatDate(exp.end_date)}
-                  </span>
-                  <TechPills technologies={exp.technologies} size="small" className={styles.homeExpTech} />
-                </div>
-              </Link>
-            ))}
+            .map((exp) => {
+              const technologies = getExperienceTechnologies(exp, projectsData);
+              return (
+                <Link key={exp.code} to={`/experience/${exp.code}`} className={styles.experienceItem}>
+                  <div className={styles.expDot} />
+                  <div className={styles.expContent}>
+                    <h3 className={styles.expTitle}>
+                      {exp.role} @ <span className={styles.expCompany}>{exp.company}</span>
+                    </h3>
+                    <span className={styles.expDate}>
+                      {formatDate(exp.start_date)} — {exp.ongoing ? "Present" : formatDate(exp.end_date)}
+                    </span>
+                    <TechPills technologies={technologies} size="small" className={styles.homeExpTech} />
+                  </div>
+                </Link>
+              );
+            })}
         </div>
       </section>
 
@@ -137,6 +147,7 @@ Home.propTypes = {
   // { [code: string]: { ...projectData } }
   featuredProjectsData: PropTypes.objectOf(PropTypes.object).isRequired,
   experiencesData: PropTypes.objectOf(PropTypes.object),
+  projectsData: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default Home;
