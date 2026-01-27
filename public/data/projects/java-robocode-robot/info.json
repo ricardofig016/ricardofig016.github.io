@@ -12,8 +12,11 @@
   "name": "Roomba",
   "stars": 0,
   "technologies": [
-    "placeholder",
-    "placeholder"
+    "java",
+    "oop",
+    "api",
+    "unit testing",
+    "git"
   ],
   "website": ""
 }

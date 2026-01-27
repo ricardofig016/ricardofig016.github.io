@@ -16,8 +16,16 @@
   "name": "Ride Sharing App",
   "stars": 0,
   "technologies": [
-    "placeholder",
-    "placeholder"
+    "java",
+    "spring boot",
+    "react",
+    "typescript",
+    "maven",
+    "google maps",
+    "vaadin",
+    "junit",
+    "oop",
+    "git"
   ],
   "website": ""
 }

@@ -12,8 +12,16 @@
   "name": "Ricardo Figueiredo - Portfolio",
   "stars": 0,
   "technologies": [
-    "placeholder",
-    "placeholder"
+    "react",
+    "javascript",
+    "nodejs",
+    "python",
+    "rest",
+    "api",
+    "html",
+    "css",
+    "vite",
+    "git"
   ],
   "website": "https://ricardofig016.github.io/"
 }

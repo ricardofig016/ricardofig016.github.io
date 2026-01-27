@@ -16,8 +16,16 @@
   "name": "Shinsu Duel",
   "stars": 0,
   "technologies": [
-    "placeholder",
-    "placeholder"
+    "javascript",
+    "nodejs",
+    "express",
+    "rest",
+    "websocket",
+    "socketio",
+    "jest",
+    "html",
+    "css",
+    "git"
   ],
   "website": ""
 }

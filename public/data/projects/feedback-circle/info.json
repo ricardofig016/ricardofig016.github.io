@@ -14,13 +14,13 @@
   "technologies": [
     "javascript",
     "nodejs",
-    "expressjs",
+    "express",
     "mysql",
-    "restapi",
-    "jwt",
-    "rbac",
+    "python",
+    "rest",
     "html",
-    "css"
+    "css",
+    "git"
   ],
   "website": ""
 }

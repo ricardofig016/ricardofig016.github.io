@@ -15,8 +15,15 @@
   "name": "Class Imbalance Evaluantion on CART Algorithm",
   "stars": 0,
   "technologies": [
-    "placeholder",
-    "placeholder"
+    "python",
+    "machine learning",
+    "scikitlearn",
+    "pandas",
+    "numpy",
+    "jupyter",
+    "matplotlib",
+    "statistical analysis",
+    "git"
   ],
   "website": ""
 }

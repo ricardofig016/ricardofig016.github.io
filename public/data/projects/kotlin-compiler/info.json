@@ -12,8 +12,18 @@
   "name": "Kotlin Compiler",
   "stars": 0,
   "technologies": [
-    "placeholder",
-    "placeholder"
+    "compiler",
+    "haskell",
+    "alex",
+    "happy",
+    "assembly",
+    "abstract syntax trees",
+    "parsing",
+    "lexing",
+    "type checking",
+    "code generation",
+    "functional programming",
+    "git"
   ],
   "website": ""
 }
