@@ -13,12 +13,20 @@
     "3-place.png"
   ],
   "issues": 0,
-  "languages": {
-    "CSS": 13856,
-    "HTML": 26621,
-    "JavaScript": 114892
-  },
   "name": "Shinsu Duel",
+  "private": false,
   "stars": 0,
+  "technologies": [
+    "javascript",
+    "nodejs",
+    "express",
+    "rest",
+    "websocket",
+    "socketio",
+    "jest",
+    "html",
+    "css",
+    "git"
+  ],
   "website": ""
 }

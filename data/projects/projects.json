@@ -2,41 +2,49 @@
   "horus-skill-and-reach": {
     "featured": true,
     "image": "1-dashboard.png",
-    "context": "Internship"
+    "context": "Internship",
+    "technologies": ["python", "fastapi", "react", "typescript", "elasticsearch", "docker", "llms", "machine learning", "sqlmodel", "jwt", "git"]
   },
   "shinsu-duel": {
     "featured": true,
     "image": "2-big-card.png",
-    "context": "Personal"
+    "context": "Personal",
+    "technologies": ["javascript", "nodejs", "express", "rest", "websocket", "socketio", "jest", "html", "css", "git"]
   },
   "ride-sharing-app": {
     "featured": true,
     "image": "2-create-ride.png",
-    "context": "University"
+    "context": "University",
+    "technologies": ["java", "spring boot", "react", "typescript", "maven", "google maps", "vaadin", "junit", "oop", "git"]
   },
   "kotlin-compiler": {
     "featured": false,
     "image": null,
-    "context": "University"
+    "context": "University",
+    "technologies": ["compiler", "haskell", "alex", "happy", "assembly", "abstract syntax trees", "parsing", "lexing", "type checking", "code generation", "functional programming", "git"]
   },
   "feedback-circle": {
     "featured": false,
     "image": null,
-    "context": "Internship"
+    "context": "Internship",
+    "technologies": ["javascript", "nodejs", "express", "mysql", "python", "rest", "html", "css", "git"]
   },
   "cart-algorithm-class-imbalance-evaluation": {
     "featured": true,
     "image": "1-average.png",
-    "context": "University"
+    "context": "University",
+    "technologies": ["python", "machine learning", "scikitlearn", "pandas", "numpy", "jupyter", "matplotlib", "statistical analysis", "git"]
   },
   "java-robocode-robot": {
     "featured": false,
     "image": null,
-    "context": "University"
+    "context": "University",
+    "technologies": ["java", "oop", "api", "unit testing", "git"]
   },
   "ricardofig016.github.io": {
     "featured": false,
     "image": null,
-    "context": "Personal"
+    "context": "Personal",
+    "technologies": ["react", "javascript", "nodejs", "python", "rest", "api", "html", "css", "vite", "git"]
   }
 }

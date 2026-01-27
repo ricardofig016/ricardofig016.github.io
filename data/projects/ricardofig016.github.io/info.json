@@ -9,13 +9,20 @@
   "image": null,
   "images": [],
   "issues": 0,
-  "languages": {
-    "CSS": 11408,
-    "HTML": 384,
-    "JavaScript": 32557,
-    "Python": 17254
-  },
   "name": "Ricardo Figueiredo - Portfolio",
+  "private": false,
   "stars": 0,
+  "technologies": [
+    "react",
+    "javascript",
+    "nodejs",
+    "python",
+    "rest",
+    "api",
+    "html",
+    "css",
+    "vite",
+    "git"
+  ],
   "website": "https://ricardofig016.github.io/"
 }

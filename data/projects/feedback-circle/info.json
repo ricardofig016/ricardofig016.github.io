@@ -9,16 +9,19 @@
   "image": null,
   "images": [],
   "issues": 0,
-  "languages": {
-    "Batchfile": 28,
-    "CSS": 23588,
-    "HTML": 25153,
-    "JavaScript": 133980,
-    "Less": 78481,
-    "Python": 6031,
-    "SCSS": 79489
-  },
   "name": "Feedback Circle",
+  "private": false,
   "stars": 0,
+  "technologies": [
+    "javascript",
+    "nodejs",
+    "express",
+    "mysql",
+    "python",
+    "rest",
+    "html",
+    "css",
+    "git"
+  ],
   "website": ""
 }

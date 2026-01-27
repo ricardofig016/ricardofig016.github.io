@@ -15,14 +15,21 @@
     "5-email.png"
   ],
   "issues": 0,
-  "languages": {
-    "CSS": 14298,
-    "Dockerfile": 755,
-    "HTML": 343,
-    "Python": 306184,
-    "TypeScript": 245142
-  },
   "name": "HORUS - OSINT cyber-news ingestion and processing pipeline",
+  "private": true,
   "stars": 0,
+  "technologies": [
+    "python",
+    "fastapi",
+    "react",
+    "typescript",
+    "elasticsearch",
+    "docker",
+    "llms",
+    "machine learning",
+    "sqlmodel",
+    "jwt",
+    "git"
+  ],
   "website": null
 }

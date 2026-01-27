@@ -9,10 +9,15 @@
   "image": null,
   "images": [],
   "issues": 0,
-  "languages": {
-    "Java": 4330
-  },
   "name": "Roomba",
+  "private": false,
   "stars": 0,
+  "technologies": [
+    "java",
+    "oop",
+    "api",
+    "unit testing",
+    "git"
+  ],
   "website": ""
 }

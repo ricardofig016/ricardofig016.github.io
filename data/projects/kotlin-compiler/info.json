@@ -9,13 +9,22 @@
   "image": null,
   "images": [],
   "issues": 0,
-  "languages": {
-    "Haskell": 273973,
-    "Kotlin": 4324,
-    "Lex": 4390,
-    "Yacc": 5362
-  },
   "name": "Kotlin Compiler",
+  "private": false,
   "stars": 0,
+  "technologies": [
+    "compiler",
+    "haskell",
+    "alex",
+    "happy",
+    "assembly",
+    "abstract syntax trees",
+    "parsing",
+    "lexing",
+    "type checking",
+    "code generation",
+    "functional programming",
+    "git"
+  ],
   "website": ""
 }

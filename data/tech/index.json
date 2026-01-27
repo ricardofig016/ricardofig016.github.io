@@ -1,0 +1,17 @@
+[
+  { "code": "react", "color": "#61dafb" },
+  { "code": "typescript", "color": "#007acc" },
+  { "code": "javascript", "color": "#f0db4f" },
+  { "code": "java", "color": "#0074bd" },
+  { "code": "python", "color": "#327ebd" },
+  { "code": "docker", "color": "#2396ed" },
+  { "code": "git", "color": "#f34f29" },
+  { "code": "mongodb", "color": "#489944" },
+  { "code": "spring boot", "color": "#77bc1f" },
+  { "code": "mysql", "color": "#00618a" },
+  { "code": "nodejs", "color": "#539e43" },
+  { "code": "fastapi", "color": "#049688" },
+  { "code": "html", "color": "#e44d26" },
+  { "code": "css", "color": "#1572b6" },
+  { "code": "elasticsearch", "color": "#00bfb3" }
+]

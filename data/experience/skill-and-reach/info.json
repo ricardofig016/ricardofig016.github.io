@@ -25,9 +25,13 @@
   "ongoing": false,
   "location": { "city": "Porto", "country": "Portugal" },
   "description": "",
-  "highlights": ["Built an end-to-end **OSINT** news ingestion pipeline aggregating **RSS feeds** and scraped web sources using **Python**, processing 1000+ news articles daily.", "Applied **LLM**-based enrichment for article classification and summarization, with heuristic fallbacks.", "Implemented semantic deduplication and related-article linking using vector embeddings and **Elasticsearch**.", "Developed a **FastAPI** backend and **React** control center for article management and automated email reports."],
+  "highlights": [
+    "Built an end-to-end **OSINT** news ingestion pipeline aggregating **RSS feeds** and scraped web sources using **Python**, processing 1000+ news articles daily.",
+    "Applied **LLM**-based enrichment for article classification and summarization, with heuristic fallbacks.",
+    "Implemented semantic deduplication and related-article linking using vector embeddings and **Elasticsearch**.",
+    "Developed a **FastAPI** backend and **React** control center for article management and automated email reports."
+  ],
   "projects": ["horus-skill-and-reach"],
-  "technologies": ["docker", "elasticsearch", "react", "python", "typescript", "llms"],
   "files": [],
   "images": [],
   "featured": false
