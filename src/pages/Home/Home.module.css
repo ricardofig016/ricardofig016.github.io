@@ -55,7 +55,9 @@
       text-decoration: none;
       border: 2px solid var(--text-highlight);
       color: var(--text-primary);
-      transition: background-color 0.2s ease, color 0.2s ease;
+      transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
     }
     .resumeButton:hover {
       background-color: var(--text-highlight);
@@ -89,7 +91,9 @@
         border: 2px solid var(--text-highlight);
         text-decoration: none;
         color: var(--text-primary);
-        transition: background-color 0.2s ease, color 0.2s ease;
+        transition:
+          background-color 0.2s ease,
+          color 0.2s ease;
       }
       a:hover {
         background-color: var(--text-highlight);
@@ -216,4 +220,8 @@
 
 .homeExpTech {
   margin-top: 0.2rem;
+}
+
+.techSection {
+  margin: 3rem 0;
 }

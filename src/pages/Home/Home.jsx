@@ -7,9 +7,10 @@ import { contactLinks } from "../../constants/contactLinks";
 import { FaDownload, FaLocationDot } from "react-icons/fa6";
 import { formatDate } from "../../utils/dateUtils";
 import TechPills from "../../components/TechPills/TechPills";
+import TechStack from "../../components/TechStack/TechStack";
 import { getExperienceTechnologies } from "../../utils/techMerger";
 
-function Home({ featuredProjectsData, experiencesData, projectsData }) {
+function Home({ featuredProjectsData, experiencesData, projectsData, techData }) {
   const featuredProjectEntries = Object.entries(featuredProjectsData || {});
   const experiences = Object.values(experiencesData || {});
 
@@ -139,6 +140,12 @@ function Home({ featuredProjectsData, experiencesData, projectsData }) {
         <h2>Featured Projects</h2>
         {featuredProjectEntries.length > 0 ? carouselElement : <p>No featured projects yet.</p>}
       </section>
+
+      {/* Tech Stack */}
+      <section className={styles.techSection}>
+        <h2>Tech Stack</h2>
+        {techData && techData.length > 0 ? <TechStack techData={techData} /> : <p>Loading technologies...</p>}
+      </section>
     </div>
   );
 }
@@ -148,6 +155,7 @@ Home.propTypes = {
   featuredProjectsData: PropTypes.objectOf(PropTypes.object).isRequired,
   experiencesData: PropTypes.objectOf(PropTypes.object),
   projectsData: PropTypes.objectOf(PropTypes.object).isRequired,
+  techData: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default Home;

@@ -36,6 +36,7 @@ function App() {
   const [projects, setProjects] = useState({});
   const [featuredProjects, setFeaturedProjects] = useState({});
   const [experiences, setExperiences] = useState({});
+  const [tech, setTech] = useState([]);
 
   useEffect(() => {
     const fetchProjectData = async (folder) => {
@@ -113,8 +114,20 @@ function App() {
       }
     };
 
+    const fetchTech = async () => {
+      try {
+        const res = await fetch("/data/tech/index.json");
+        if (!res.ok) throw new Error(`Failed to fetch tech/index.json: ${res.status}`);
+        const techData = await res.json();
+        setTech(techData);
+      } catch (error) {
+        console.error("Error fetching tech:", error);
+      }
+    };
+
     fetchProjects();
     fetchExperiences();
+    fetchTech();
   }, []);
 
   return (
@@ -123,7 +136,7 @@ function App() {
       <Navbar />
       <MainContent>
         <Routes>
-          <Route path="/" element={<Home featuredProjectsData={featuredProjects} experiencesData={experiences} projectsData={projects} />} />
+          <Route path="/" element={<Home featuredProjectsData={featuredProjects} experiencesData={experiences} projectsData={projects} techData={tech} />} />
           <Route path="/projects/*" element={<Projects projectsData={projects} />} />
           <Route path="/experience/*" element={<Experience experiencesData={experiences} projectsData={projects} />} />
           <Route path="/education" element={<Education />} />
