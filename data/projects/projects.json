@@ -41,6 +41,12 @@
     "context": "University",
     "technologies": ["java", "oop", "api", "unit testing", "git"]
   },
+  "flagle-enhanced": {
+    "featured": false,
+    "image": null,
+    "context": "Personal",
+    "technologies": ["javascript", "html", "css", "git"]
+  },
   "ricardofig016.github.io": {
     "featured": false,
     "image": null,

@@ -1,0 +1,22 @@
+{
+  "code": "flagle-enhanced",
+  "context": "Personal",
+  "description": "A Wordle-inspired flag guessing game where players identify countries and territories by progressively revealed flag sections. Test your geography knowledge with 300 different flags!",
+  "featured": false,
+  "forks": 0,
+  "github_url": "https://github.com/ricardofig016/flagle-enhanced",
+  "id": 7,
+  "image": null,
+  "images": [],
+  "issues": 0,
+  "name": "Flagle Enhanced",
+  "private": false,
+  "stars": 0,
+  "technologies": [
+    "javascript",
+    "html",
+    "css",
+    "git"
+  ],
+  "website": "https://ricardofig016.github.io/flagle-enhanced/"
+}
