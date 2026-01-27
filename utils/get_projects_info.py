@@ -63,6 +63,7 @@ def get_general_info(project_code):
         "issues": data["open_issues_count"],
         "github_url": data["html_url"],
         "website": data["homepage"],
+        "private": data["private"],
     }
     return project_info
 

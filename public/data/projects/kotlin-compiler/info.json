@@ -10,6 +10,7 @@
   "images": [],
   "issues": 0,
   "name": "Kotlin Compiler",
+  "private": false,
   "stars": 0,
   "technologies": [
     "compiler",

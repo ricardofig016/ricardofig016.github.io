@@ -16,6 +16,7 @@
   ],
   "issues": 0,
   "name": "HORUS - OSINT cyber-news ingestion and processing pipeline",
+  "private": true,
   "stars": 0,
   "technologies": [
     "python",

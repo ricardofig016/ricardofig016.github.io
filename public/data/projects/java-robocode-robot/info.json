@@ -10,6 +10,7 @@
   "images": [],
   "issues": 0,
   "name": "Roomba",
+  "private": false,
   "stars": 0,
   "technologies": [
     "java",

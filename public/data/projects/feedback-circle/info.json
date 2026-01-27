@@ -10,6 +10,7 @@
   "images": [],
   "issues": 0,
   "name": "Feedback Circle",
+  "private": false,
   "stars": 0,
   "technologies": [
     "javascript",

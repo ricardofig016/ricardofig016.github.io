@@ -50,6 +50,7 @@ function App() {
       try {
         const response = await fetch(`/data/projects/${folder}/${FILE_NAMES.info}`);
         projectData = await response.json();
+        projectData.private = Boolean(projectData.private);
       } catch (error) {
         console.error(`Error fetching info.json for ${folder}: ${error}`);
         return null;
@@ -57,8 +58,10 @@ function App() {
 
       // Readme
       try {
-        const readmeRes = await fetch(`/data/projects/${folder}/${FILE_NAMES.readme}`);
-        projectData.readme = await readmeRes.text();
+        if (!projectData.private) {
+          const readmeRes = await fetch(`/data/projects/${folder}/${FILE_NAMES.readme}`);
+          projectData.readme = await readmeRes.text();
+        } else projectData.readme = null;
       } catch (error) {
         projectData.readme = null;
       }

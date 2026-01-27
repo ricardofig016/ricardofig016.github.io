@@ -139,7 +139,7 @@ function ProjectsList({ projectsData }) {
 
               {/* Actions */}
               <div>
-                {proj.github_url && (
+                {proj.github_url && !proj.private && (
                   <a className={styles.projectGithubLink} href={proj.github_url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${proj.name} on GitHub`}>
                     GitHub Repo
                   </a>
@@ -166,7 +166,7 @@ function Project({ projectsData }) {
   if (!project) return <div>404: Project {projectCode} not found.</div>;
 
   const converter = new Showdown.Converter();
-  project.readmeHtml = project.readme ? converter.makeHtml(project.readme) : "";
+  const readmeHtml = !project.private && project.readme ? converter.makeHtml(project.readme) : "";
 
   // Handler for tech pill clicks
   const handleTechClick = (tech) => {
@@ -213,10 +213,12 @@ function Project({ projectsData }) {
   );
 
   // Links
-  const linksSection = (project.github_url || project.website) && (
+  const showGitHubLink = project.github_url && !project.private;
+  const showWebsiteLink = project.website;
+  const linksSection = (showGitHubLink || showWebsiteLink) && (
     <CollapsibleSection title="Links">
       <div className={styles.projectLinks}>
-        {project.github_url && (
+        {showGitHubLink && (
           <div className={styles.link}>
             <FaGithub />
             <a href={project.github_url} target="_blank" rel="noopener noreferrer">
@@ -224,7 +226,7 @@ function Project({ projectsData }) {
             </a>
           </div>
         )}
-        {project.website && (
+        {showWebsiteLink && (
           <div className={styles.link}>
             <FaGlobe />
             <a href={project.website} target="_blank" rel="noopener noreferrer">
@@ -237,7 +239,7 @@ function Project({ projectsData }) {
   );
 
   // ReadMe
-  const readmeSection = project.readmeHtml && (
+  const readmeSection = readmeHtml && (
     <CollapsibleSection title="ReadMe" defaultOpen={false}>
       <span className={styles.sectionParagraph}>
         Read this on{" "}
@@ -246,7 +248,7 @@ function Project({ projectsData }) {
         </a>
         .
       </span>
-      <div dangerouslySetInnerHTML={{ __html: project.readmeHtml }} className={styles.projectReadme} />
+      <div dangerouslySetInnerHTML={{ __html: readmeHtml }} className={styles.projectReadme} />
     </CollapsibleSection>
   );
 
