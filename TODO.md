@@ -2,6 +2,7 @@
 
 - [ ] feat: add a change language feature between Portuguese and English in the Navbar
 - [ ] feat: add development time to each project (think about how to implement this interestingly)
+- [ ] chore: move projects images to each respective project folder
 - [x] feat: have a technologies (langs/tools/frameworks) section in Home with icons, see https://jzitnik.dev/en/, but make sure the viewer can look for what they want. or maybe make it a cool simple table, see https://andrijaweb.vercel.app/
 - [x] feat: check if a repo is private or not
 - [x] feat: make the tech pills clickable to filter projects by that technology

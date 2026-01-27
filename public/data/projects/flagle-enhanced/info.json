@@ -1,0 +1,22 @@
+{
+  "code": "flagle-enhanced",
+  "context": "Personal",
+  "description": "better version of flagle unlimited",
+  "featured": false,
+  "forks": 0,
+  "github_url": "https://github.com/ricardofig016/flagle-enhanced",
+  "id": 5,
+  "image": null,
+  "images": [],
+  "issues": 0,
+  "name": "Flagle Enhanced",
+  "private": false,
+  "stars": 0,
+  "technologies": [
+    "javascript",
+    "html",
+    "css",
+    "git"
+  ],
+  "website": null
+}

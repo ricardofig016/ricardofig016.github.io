@@ -29,6 +29,12 @@
     "context": "Internship",
     "technologies": ["javascript", "nodejs", "express", "mysql", "python", "rest", "html", "css", "git"]
   },
+  "flagle-enhanced": {
+    "featured": false,
+    "image": null,
+    "context": "Personal",
+    "technologies": ["javascript", "html", "css", "git"]
+  },
   "cart-algorithm-class-imbalance-evaluation": {
     "featured": true,
     "image": "1-average.png",
