@@ -56,13 +56,23 @@ def get_general_info(project_code):
     data = get_request(url)
     if data is None:
         return None
+
+    # Determine website URL
+    website = data["homepage"]
+    if not website and data.get("has_pages", False):
+        # Construct GitHub Pages URL if pages are enabled but homepage is not set
+        if project_code == f"{GITHUB_USERNAME}.github.io":
+            website = f"https://{GITHUB_USERNAME}.github.io/"
+        else:
+            website = f"https://{GITHUB_USERNAME}.github.io/{project_code}/"
+
     project_info = {
         "description": data["description"],
         "stars": data["stargazers_count"],
         "forks": data["forks_count"],
         "issues": data["open_issues_count"],
         "github_url": data["html_url"],
-        "website": data["homepage"],
+        "website": website,
         "private": data["private"],
     }
     return project_info
