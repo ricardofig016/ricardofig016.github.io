@@ -1,43 +1,158 @@
 # Flagle Enhanced
 
-## Description
+A Wordle-inspired flag guessing game where players identify countries and territories by progressively revealed flag sections. Test your geography knowledge with 300 different flags!
 
-## Categorization of Geopolitical Entities
+## Play Now
 
-Geopolitical Entities are divided based on several criteria. It's provided a comprehensive understanding of each of the classifications along with illustrative examples.
+**Live Demo**: [https://ricardofig016.github.io/flagle-enhanced/](https://ricardofig016.github.io/flagle-enhanced/)
 
-### Sovereign States
+## How to Play
 
-**Definition:**
+1. **Start the game** - One random section of a flag (out of 6) is revealed
+2. **Make a guess** - Type the country or territory name using the autocomplete search
+3. **Get feedback** - Correct guess wins! Wrong guess reveals another flag section
+4. **Win or lose** - You have 6 attempts total to identify the flag
+5. **Track your stats** - Monitor your win streak, win rate, and average attempts
 
-Independent countries recognized for their full sovereignty. They have defined territories, permanent populations, governments, and the ability to engage in international relations.
+## Features
 
-**Examples:**
+- **300 Flags**: Includes UN Member States and other territories
+- **Three Difficulty Levels**: Easy, Medium, and Hard flags
+- **Smart Autocomplete**: Type-ahead search with keyboard navigation
+- **Progressive Reveal**: Flag sections revealed one at a time
+- **Persistent Stats**: Track your performance across sessions with localStorage
+- **Responsive Design**: Works seamlessly on desktop and mobile devices
+- **Zero Dependencies**: Pure vanilla JavaScript - no frameworks or libraries
 
-- **United States**: A federal republic in North America with full sovereignty, consisting of 50 states and a federal government.
+## Getting Started
 
-- **Japan**: An island nation in East Asia with a constitutional monarchy and a parliamentary government, exercising full sovereignty.
+### Play Online
 
-- **South Africa**: A country at the southern tip of the African continent, characterized as a parliamentary republic with full sovereignty.
+Visit the live game at [https://ricardofig016.github.io/flagle-enhanced/](https://ricardofig016.github.io/flagle-enhanced/) - no installation required!
 
-- **Australia**: A sovereign country and a continent, located in the Southern Hemisphere, with a federal parliamentary democracy.
+### Local Development
 
-- **Brazil**: The largest country in South America, governed as a federal republic with full sovereignty.
+#### Prerequisites
 
-### Other Territories
+- A modern web browser (Chrome, Firefox, Safari, Edge)
+- A local web server (optional but recommended)
 
-**Definition:**
+#### Installation
 
-Regions dependent on another sovereign state, lacking full sovereignty. Examples include colonies, overseas territories, and areas with limited self-governance.
+1. Clone the repository:
 
-**Examples:**
+   ```bash
+   git clone https://github.com/ricardofig016/flagle-enhanced.git
+   cd flagle-enhanced
+   ```
 
-- **Puerto Rico**: An unincorporated territory of the United States in the Caribbean with a high degree of local autonomy but not fully sovereign.
+2. Open `index.html` in your browser, or serve with a local server:
 
-- **Greenland**: An autonomous territory within the Kingdom of Denmark, located in the Arctic, with its own government.
+   ```bash
+   # Python 3
+   python -m http.server 8000
 
-- **Gibraltar**: A British Overseas Territory located at the southern tip of the Iberian Peninsula, governed by the United Kingdom.
+   # Node.js (with http-server)
+   npx http-server
+   ```
 
-- **French Guiana**: An overseas department and region of France located on the northern coast of South America.
+3. Navigate to `http://localhost:8000` and start playing!
 
-- **Hong Kong**: A Special Administrative Region (SAR) of China, with a high degree of autonomy, but ultimately under Chinese sovereignty.
+## Technologies Used
+
+- **JavaScript (ES6+)** - Game logic and interactions
+- **HTML5** - Semantic page structure
+- **CSS3** - Responsive styling with custom properties
+- **Fetch API** - Asynchronous CSV data loading
+- **localStorage** - Client-side stat persistence
+- **DOM API** - Dynamic UI manipulation
+
+## Project Structure
+
+```
+flagle-enhanced/
+├── index.html          # Main HTML structure
+├── script.js           # Game logic and state management
+├── style.css           # Styling and responsive layout
+├── data.csv            # Flag data (300 entries)
+├── assets/
+│   └── flags/          # Flag image files
+├── fonts/
+│   └── Montserrat/     # Local font files
+└── .github/
+    └── copilot-instructions.md  # AI coding guidelines
+```
+
+## Statistics Tracked
+
+- **Current Streak**: Consecutive wins
+- **Highest Streak**: Best winning streak achieved
+- **Win Rate**: Percentage of games won
+- **Average Attempts**: Mean number of guesses for won games
+
+## About the Flags
+
+### Categorization of Geopolitical Entities
+
+The game includes two categories of flags:
+
+#### UN Member States (Difficulty 1-2)
+
+Independent countries recognized for their full sovereignty, with defined territories, permanent populations, and governments. Examples include the United States, Japan, Australia, Brazil, and South Africa.
+
+#### Other Territories (Difficulty 3)
+
+Regions dependent on another sovereign state, including colonies, overseas territories, and areas with limited self-governance. Examples include Puerto Rico, Greenland, Gibraltar, French Guiana, and Hong Kong.
+
+## Difficulty Levels
+
+Choose a difficulty that matches your geography expertise:
+
+### Easy (Default)
+
+**For newcomers and casual players**
+
+- Features well-known countries with distinctive flags
+- Includes major world powers and commonly-recognized nations
+- Examples: United States, France, Japan, Canada, Brazil, India
+- Recommended for: Learning geography, building confidence, high win rate
+
+### Medium
+
+**For experienced players**
+
+- Mix of less common countries and territories
+- Requires solid geographic knowledge
+- Examples: Malta, Cyprus, Mongolia, Belize, Seychelles
+- Recommended for: Regular players, geographic enthusiasts, balanced challenge
+
+### Hard
+
+**For geography experts**
+
+- Obscure and lesser-known territories
+- Includes autonomous regions, overseas territories, and non-sovereign entities
+- Examples: Aland, Nagorno-Karabakh, Northern Cyprus, Sint Eustatius
+- Recommended for: Advanced players, extreme challenge seekers
+
+**Note**: Use the difficulty selector in the dropdown menu to switch levels between games. Your performance stats are cumulative across all difficulties.
+
+## Game Design
+
+- **Default Difficulty**: Easy (1) - more accessible for new players
+- **Initial Reveal**: One section shown at start
+- **Progressive Difficulty**: Harder flags require more geographic knowledge
+- **Smart Filtering**: Only shows flags matching selected difficulty level
+- **Fair Gameplay**: Case-insensitive matching, substring autocomplete
+
+## Development
+
+This project uses no build tools or package managers - just pure vanilla JavaScript. To modify:
+
+1. Edit `script.js` for game logic
+2. Edit `style.css` for visual styling
+3. Edit `data.csv` to add/modify flags
+
+## License
+
+This project is open source and available under the MIT License.

@@ -29,12 +29,6 @@
     "context": "Internship",
     "technologies": ["javascript", "nodejs", "express", "mysql", "python", "rest", "html", "css", "git"]
   },
-  "flagle-enhanced": {
-    "featured": false,
-    "image": null,
-    "context": "Personal",
-    "technologies": ["javascript", "html", "css", "git"]
-  },
   "cart-algorithm-class-imbalance-evaluation": {
     "featured": true,
     "image": "1-average.png",
@@ -46,6 +40,12 @@
     "image": null,
     "context": "University",
     "technologies": ["java", "oop", "api", "unit testing", "git"]
+  },
+  "flagle-enhanced": {
+    "featured": false,
+    "image": null,
+    "context": "Personal",
+    "technologies": ["javascript", "html", "css", "git"]
   },
   "ricardofig016.github.io": {
     "featured": false,
