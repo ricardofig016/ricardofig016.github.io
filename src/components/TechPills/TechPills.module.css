@@ -12,6 +12,16 @@
   color: var(--text-primary);
 }
 
+.techItem.clickable {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.techItem.clickable:hover {
+  background-color: var(--bg-tertiary);
+  color: var(--text-highlight);
+}
+
 .small .techItem {
   padding: 0.15rem 0.5rem;
   font-size: 0.7rem;

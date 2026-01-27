@@ -63,7 +63,11 @@ function ExperienceList({ experiencesData, projectsData }) {
 
   const filteredExperiences = experiencesData.filter((exp) => {
     const technologies = getExperienceTechnologies(exp, projectsData);
-    const matchesSearch = exp.company.toLowerCase().includes(search.toLowerCase()) || exp.role.toLowerCase().includes(search.toLowerCase()) || (technologies || []).some((t) => t.toLowerCase().includes(search.toLowerCase())) || (exp.highlights || []).some((h) => h.toLowerCase().includes(search.toLowerCase()));
+    const matchesSearch =
+      exp.company.toLowerCase().includes(search.toLowerCase()) ||
+      exp.role.toLowerCase().includes(search.toLowerCase()) ||
+      (technologies || []).some((t) => t.toLowerCase().includes(search.toLowerCase())) ||
+      (exp.highlights || []).some((h) => h.toLowerCase().includes(search.toLowerCase()));
 
     const matchesTech = filterTech ? (technologies || []).includes(filterTech) : true;
 
@@ -131,12 +135,18 @@ ExperienceList.propTypes = {
 
 function ExperienceDetail({ experiencesData, projectsData }) {
   const { experienceCode } = useParams();
+  const navigate = useNavigate();
   const exp = experiencesData.find((e) => e.code === experienceCode);
 
   if (!exp) return <div>404: Experience {experienceCode} not found.</div>;
 
   const projects = Object.values(projectsData || {});
   const technologies = getExperienceTechnologies(exp, projectsData);
+
+  // Handler for tech pill clicks
+  const handleTechClick = (tech) => {
+    navigate(`/projects?tech=${encodeURIComponent(tech)}`);
+  };
 
   return (
     <div>
@@ -174,7 +184,7 @@ function ExperienceDetail({ experiencesData, projectsData }) {
         <div className={styles.expTypeInfo}>
           <span>{exp.level}</span> | <span>{exp.type}</span> | <span>{exp.arrangement}</span>
         </div>
-        <TechPills technologies={technologies} className={styles.techListHeader} />
+        <TechPills technologies={technologies} className={styles.techListHeader} onTechClick={handleTechClick} />
       </section>
 
       {exp.projects && exp.projects.length > 0 && (

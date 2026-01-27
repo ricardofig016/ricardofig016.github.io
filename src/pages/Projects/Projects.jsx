@@ -1,6 +1,6 @@
 import styles from "./Projects.module.css";
-import { Routes, Route, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { Routes, Route, useNavigate, useSearchParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import Select from "../../components/Select/Select";
@@ -13,6 +13,7 @@ import Carousel from "react-multi-carousel";
 
 function ProjectsList({ projectsData }) {
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   // Context filter
   const [filterContext, setFilterContext] = useState("");
@@ -25,6 +26,14 @@ function ProjectsList({ projectsData }) {
 
   // Technology filter
   const [filterTech, setFilterTech] = useState("");
+
+  // Initialize tech filter from URL params on mount
+  useEffect(() => {
+    const techParam = searchParams.get("tech");
+    if (techParam) {
+      setFilterTech(techParam);
+    }
+  }, [searchParams]);
   const techStats = {}; // { tech: { count: number, minOrder: number } }
   projectsData.forEach((proj) => {
     (proj.technologies || []).forEach((tech, index) => {
@@ -55,6 +64,16 @@ function ProjectsList({ projectsData }) {
       })
       .map((tech) => ({ value: tech, label: tech })),
   ];
+
+  // Handler to update tech filter and URL params
+  const handleTechFilterChange = (tech) => {
+    setFilterTech(tech);
+    if (tech) {
+      setSearchParams({ tech });
+    } else {
+      setSearchParams({});
+    }
+  };
 
   // Search
   const [search, setSearch] = useState("");
@@ -102,7 +121,7 @@ function ProjectsList({ projectsData }) {
         <Select options={contextOptions} value={filterContext} onChange={(v) => setFilterContext(v)} placeholder="All Contexts" id="projects-context-select" />
 
         {/* Technologies */}
-        <Select options={techOptions} value={filterTech} onChange={(v) => setFilterTech(v)} placeholder="All Technologies" id="projects-tech-select" />
+        <Select options={techOptions} value={filterTech} onChange={handleTechFilterChange} placeholder="All Technologies" id="projects-tech-select" />
 
         {/* Search */}
         <input className={styles.searchInput} type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search tools, frameworks, projects..." />
@@ -142,17 +161,23 @@ ProjectsList.propTypes = {
 
 function Project({ projectsData }) {
   const { projectCode } = useParams();
+  const navigate = useNavigate();
   const project = projectsData.find((proj) => proj.code === projectCode);
   if (!project) return <div>404: Project {projectCode} not found.</div>;
 
   const converter = new Showdown.Converter();
   project.readmeHtml = project.readme ? converter.makeHtml(project.readme) : "";
 
+  // Handler for tech pill clicks
+  const handleTechClick = (tech) => {
+    navigate(`/projects?tech=${encodeURIComponent(tech)}`);
+  };
+
   // Header
   const headerSection = (
     <section className={styles.projectHeader}>
       <h1>{project.name}</h1>
-      <TechPills technologies={project.technologies || []} className={styles.projectHeaderTech} />
+      <TechPills technologies={project.technologies || []} className={styles.projectHeaderTech} onTechClick={handleTechClick} />
       <p>{project.description}</p>
     </section>
   );
