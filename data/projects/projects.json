@@ -3,7 +3,7 @@
     "featured": true,
     "image": "1-dashboard.png",
     "context": "Internship",
-    "technologies": ["python", "fastapi", "react", "typescript", "elasticsearch", "docker", "llms", "machine learning", "sqlmodel", "jwt", "git"]
+    "technologies": ["python", "fastapi", "react", "typescript", "elasticsearch", "docker", "openai api", "machine learning", "sqlmodel", "jwt", "git"]
   },
   "shinsu-duel": {
     "featured": true,
@@ -34,6 +34,12 @@
     "image": "1-average.png",
     "context": "University",
     "technologies": ["python", "machine learning", "scikitlearn", "pandas", "numpy", "jupyter", "matplotlib", "statistical analysis", "git"]
+  },
+  "dnd-session-audio-recording-summary-generator": {
+    "featured": false,
+    "image": null,
+    "context": "Personal",
+    "technologies": ["python", "api", "openai api", "nlp", "git", "audio processing"]
   },
   "java-robocode-robot": {
     "featured": false,
