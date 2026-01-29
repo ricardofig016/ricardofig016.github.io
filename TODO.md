@@ -1,9 +1,29 @@
 # To Do
 
 - [ ] feat: add a change language feature between Portuguese and English in the Navbar
-- [ ] feat: add development time to each project (think about how to implement this interestingly)
-- [ ] feat: add more projects
 - [ ] chore: add images to feedback-circle and update description
+- [ ] feat: add project job-search-tracker-cli
+- [ ] feat: add project couple-calendar
+- [ ] feat: add project file-tree-generator
+- [ ] feat: add project seguranca-e-privacidade-trabalho-1
+- [ ] feat: add project epic-the-musical-game
+- [ ] feat: add project competitive-programming
+- [ ] feat: add project nine-mens-morris
+- [ ] feat: add project react-calculator-nucc
+- [ ] feat: add project internet-speed-test
+- [ ] feat: add project spotifree
+- [ ] feat: add project Spotipy
+- [ ] feat: add project whatsapp-auto-reactor
+- [ ] feat: add project gpt-chat-bot
+- [ ] feat: add project name_all_countries
+- [ ] feat: add project my-first-platformer
+- [ ] feat: add project wallpaper-switcher
+- [ ] feat: add project CheckersAI
+- [ ] feat: add project SudokuMaker
+- [ ] feat: add project TriviaAnkiDeckGenerator
+- [ ] feat: add project ID3DecisionTree
+- [ ] feat: add project boing
+- [x] feat: add development time to each project (think about how to implement this interestingly)
 - [x] feat: add openai to tech stack
 - [x] feat: add documents to projects (e.g., PDFs, reports)
 - [x] feat: improve project details page
