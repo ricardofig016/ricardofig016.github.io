@@ -4,6 +4,7 @@
 - [ ] feat: add development time to each project (think about how to implement this interestingly)
 - [ ] feat: add more projects
 - [ ] chore: add images to feedback-circle
+- [x] feat: improve project details page
 - [x] feat: add images to flagle enhanced project
 - [x] chore: move projects images to each respective project folder
 - [x] feat: have a technologies (langs/tools/frameworks) section in Home with icons, see https://jzitnik.dev/en/, but make sure the viewer can look for what they want. or maybe make it a cool simple table, see https://andrijaweb.vercel.app/

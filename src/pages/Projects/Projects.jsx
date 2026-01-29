@@ -174,11 +174,41 @@ function Project({ projectsData }) {
   };
 
   // Header
+  const showGitHubLink = project.github_url && !project.private;
+  const showWebsiteLink = project.website;
+
   const headerSection = (
     <section className={styles.projectHeader}>
       <h1>{project.name}</h1>
+
+      <div className={styles.projectTypeInfo}>
+        {project.context && <span>{project.context}</span>}
+        {project.context && project.stars !== undefined && <span> | </span>}
+        {project.stars !== undefined && (
+          <span>
+            {project.stars} {project.stars === 1 ? "star" : "stars"}
+          </span>
+        )}
+      </div>
+
       <TechPills technologies={project.technologies || []} className={styles.projectHeaderTech} onTechClick={handleTechClick} />
-      <p>{project.description}</p>
+
+      <div className={styles.projectLinksHeader}>
+        {showGitHubLink && (
+          <a href={project.github_url} target="_blank" rel="noopener noreferrer" aria-label="GitHub Repository" title="View on GitHub">
+            <FaGithub />
+            <span>GitHub</span>
+          </a>
+        )}
+        {showWebsiteLink && (
+          <a href={project.website} target="_blank" rel="noopener noreferrer" aria-label="Project Website" title="Visit website">
+            <FaGlobe />
+            <span>Website</span>
+          </a>
+        )}
+      </div>
+
+      {project.description && <p>{project.description}</p>}
     </section>
   );
 
@@ -210,32 +240,6 @@ function Project({ projectsData }) {
         {carouselItems}
       </Carousel>
     </section>
-  );
-
-  // Links
-  const showGitHubLink = project.github_url && !project.private;
-  const showWebsiteLink = project.website;
-  const linksSection = (showGitHubLink || showWebsiteLink) && (
-    <CollapsibleSection title="Links">
-      <div className={styles.projectLinks}>
-        {showGitHubLink && (
-          <div className={styles.link}>
-            <FaGithub />
-            <a href={project.github_url} target="_blank" rel="noopener noreferrer">
-              GitHub
-            </a>
-          </div>
-        )}
-        {showWebsiteLink && (
-          <div className={styles.link}>
-            <FaGlobe />
-            <a href={project.website} target="_blank" rel="noopener noreferrer">
-              Website
-            </a>
-          </div>
-        )}
-      </div>
-    </CollapsibleSection>
   );
 
   // ReadMe
@@ -275,7 +279,6 @@ function Project({ projectsData }) {
     <div>
       {headerSection}
       {imagesSection}
-      {linksSection}
       {readmeSection}
       {whatILearnedSection}
       {relatedSection}
