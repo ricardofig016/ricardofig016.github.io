@@ -134,6 +134,17 @@ function ProjectsList({ projectsData }) {
               {/* Title */}
               <h3 className={styles.projectTitle}>{proj.name + " "}</h3>
 
+              {/* Context & Stars */}
+              <div className={styles.projectTypeInfo}>
+                {proj.context && <span>{proj.context}</span>}
+                {proj.context && proj.stars !== undefined && <span> | </span>}
+                {proj.stars !== undefined && (
+                  <span>
+                    {proj.stars} {proj.stars === 1 ? "star" : "stars"}
+                  </span>
+                )}
+              </div>
+
               {/* Tech Tags */}
               <TechPills technologies={proj.technologies || []} size="small" className={styles.projectTechTags} />
 
