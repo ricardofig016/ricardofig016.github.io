@@ -2,6 +2,8 @@
 
 A modern, data-driven portfolio website built with **Vite**, **React Router v7**, and **Material UI**. Features a responsive design with projects, experience timeline, and education showcases.
 
+Live at: **https://ricardofig016.github.io/**
+
 ## Quick Start
 
 ### Prerequisites
@@ -224,12 +226,15 @@ python scripts/summarize_courses.py
 
 ## Deployment
 
-The site is deployed to GitHub Pages via `npm run deploy`:
+This site is deployed to GitHub Pages at **https://ricardofig016.github.io/**
 
-1. Builds with Vite: `npm run build`
-2. Runs postbuild hook: `node scripts/create-404.js` (copies `index.html` → `404.html` for SPA routing)
-3. Pushes `dist/` to `gh-pages` branch
-4. Site serves from: `https://ricardofig016.github.io`
+Build and deployment process:
+
+1. Build with Vite: `npm run build`
+2. Run postbuild hook: `node scripts/create-404.js` (copies `index.html` → `404.html` for SPA routing)
+3. Push `dist/` to `gh-pages` branch via `npm run deploy`
+
+The repository is synced from the homepage development folder to the `ricardofig016/ricardofig016.github.io` GitHub repository.
 
 ## Environment Variables
 
@@ -271,9 +276,10 @@ This project is open source. See LICENSE file for details.
 
 ## Contact
 
+- **GitHub**: https://github.com/ricardofig016
 - **Portfolio**: [ricardofig016.github.io](https://ricardofig016.github.io)
 - **GitHub**: [ricardofig016](https://github.com/ricardofig016)
-- **LinkedIn**: Check footer links
+- **LinkedIn**: [ricardo-figueiredo](https://www.linkedin.com/in/ricardo-figueiredo-ba5245235/)
 
 ---
 
