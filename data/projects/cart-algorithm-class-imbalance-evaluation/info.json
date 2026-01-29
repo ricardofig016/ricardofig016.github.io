@@ -5,6 +5,9 @@
   "context": "University",
   "created_at": "2025-03-27T14:01:23Z",
   "description": "Evaluation of the CART decision tree algorithm on imbalanced binary classification datasets. The project compares two versions of CART, and reports improvements in recall and ROC-AUC for minority classes. Developed for the Machine Learning I course.",
+  "documents": [
+    "presentation_slides.pdf"
+  ],
   "featured": true,
   "forks": 0,
   "github_url": "https://github.com/ricardofig016/cart-algorithm-class-imbalance-evaluation",

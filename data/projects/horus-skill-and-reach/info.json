@@ -5,6 +5,9 @@
   "context": "Internship",
   "created_at": "2025-12-18T14:46:58Z",
   "description": "An end-to-end OSINT cyber-news ingestion and processing pipeline developed for Skill & Reach, combining RSS and headless scraping, LLM-based enrichment, embedding-based deduplication, and an Elasticsearch API with a React control center.",
+  "documents": [
+    "internship_report.pdf"
+  ],
   "featured": true,
   "forks": 0,
   "github_url": "https://github.com/ricardofig016/horus-skill-and-reach",

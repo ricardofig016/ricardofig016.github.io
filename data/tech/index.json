@@ -13,5 +13,6 @@
   { "code": "fastapi", "color": "#049688" },
   { "code": "html", "color": "#e44d26" },
   { "code": "css", "color": "#1572b6" },
-  { "code": "elasticsearch", "color": "#00bfb3" }
+  { "code": "elasticsearch", "color": "#fed10a" },
+  { "code": "openai api", "color": "#ffffff" }
 ]
