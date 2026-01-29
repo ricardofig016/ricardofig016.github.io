@@ -8,8 +8,9 @@ import CollapsibleSection from "../../components/CollapsibleSection/CollapsibleS
 import ImageModal from "../../components/ImageModal/ImageModal";
 import TechPills from "../../components/TechPills/TechPills";
 import Showdown from "showdown";
-import { FaGithub, FaGlobe } from "react-icons/fa6";
+import { FaGithub, FaGlobe, FaTag, FaStar, FaCodeFork, FaCircleExclamation, FaEye, FaCalendarPlus, FaClock, FaCodeCommit, FaScaleBalanced, FaDatabase, FaBoxArchive } from "react-icons/fa6";
 import Carousel from "react-multi-carousel";
+import { formatISODate } from "../../utils/dateUtils";
 
 function ProjectsList({ projectsData }) {
   const navigate = useNavigate();
@@ -134,15 +135,22 @@ function ProjectsList({ projectsData }) {
               {/* Title */}
               <h3 className={styles.projectTitle}>{proj.name + " "}</h3>
 
-              {/* Context & Stars */}
+              {/* Metadata */}
               <div className={styles.projectTypeInfo}>
-                {proj.context && <span>{proj.context}</span>}
-                {proj.context && proj.stars !== undefined && <span> | </span>}
-                {proj.stars !== undefined && (
-                  <span>
-                    {proj.stars} {proj.stars === 1 ? "star" : "stars"}
-                  </span>
-                )}
+                {[
+                  proj.context && { icon: FaTag, label: proj.context },
+                  proj.stars > 0 && { icon: FaStar, label: proj.stars },
+                  proj.forks > 0 && { icon: FaCodeFork, label: proj.forks },
+                  proj.issues > 0 && { icon: FaCircleExclamation, label: proj.issues },
+                  proj.watchers > 0 && { icon: FaEye, label: proj.watchers },
+                ]
+                  .filter(Boolean)
+                  .map((item, index) => (
+                    <span key={index}>
+                      {index > 0 && <span> | </span>}
+                      {item.icon && <item.icon />} {item.label}
+                    </span>
+                  ))}
               </div>
 
               {/* Tech Tags */}
@@ -193,13 +201,26 @@ function Project({ projectsData }) {
       <h1>{project.name}</h1>
 
       <div className={styles.projectTypeInfo}>
-        {project.context && <span>{project.context}</span>}
-        {project.context && project.stars !== undefined && <span> | </span>}
-        {project.stars !== undefined && (
-          <span>
-            {project.stars} {project.stars === 1 ? "star" : "stars"}
-          </span>
-        )}
+        {[
+          project.context && { icon: FaTag, label: project.context },
+          project.stars > 0 && { icon: FaStar, label: project.stars },
+          project.forks > 0 && { icon: FaCodeFork, label: project.forks },
+          project.issues > 0 && { icon: FaCircleExclamation, label: project.issues },
+          project.watchers > 0 && { icon: FaEye, label: project.watchers },
+          project.commit_count && { icon: FaCodeCommit, label: `${project.commit_count} commits` },
+          project.license && { icon: FaScaleBalanced, label: project.license },
+          project.size && { icon: FaDatabase, label: `${(project.size / 1024).toFixed(1)} MB` },
+          project.created_at && { icon: FaCalendarPlus, label: `Created ${formatISODate(project.created_at)}` },
+          project.updated_at && { icon: FaClock, label: `Updated ${formatISODate(project.updated_at)}` },
+          project.archived && { icon: FaBoxArchive, label: "Archived" },
+        ]
+          .filter(Boolean)
+          .map((item, index) => (
+            <span key={index}>
+              {index > 0 && <span> | </span>}
+              {item.icon && <item.icon />} {item.label}
+            </span>
+          ))}
       </div>
 
       <TechPills technologies={project.technologies || []} className={styles.projectHeaderTech} onTechClick={handleTechClick} />

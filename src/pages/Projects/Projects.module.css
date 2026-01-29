@@ -64,6 +64,14 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+
+  svg {
+    font-size: 0.8rem;
+  }
 }
 
 .projectLinksHeader {

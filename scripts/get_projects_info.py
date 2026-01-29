@@ -60,10 +60,16 @@ def get_general_info(project_code):
         "description": data["description"],
         "stars": data["stargazers_count"],
         "forks": data["forks_count"],
+        "watchers": data["watchers_count"],
         "issues": data["open_issues_count"],
         "github_url": data["html_url"],
         "website": data["homepage"],
         "private": data["private"],
+        "created_at": data["created_at"],
+        "updated_at": data["updated_at"],
+        "license": data["license"]["name"] if data.get("license") else None,
+        "size": data["size"],
+        "archived": data["archived"],
     }
     return project_info
 
@@ -83,6 +89,27 @@ def get_name(readme):
         if line.startswith("# "):
             return line[2:].strip()
     return "Untitled"
+
+
+def get_commit_count(project_code):
+    url = f"{GITHUB_API_BASE_URL}/{project_code}/commits?per_page=1"
+    headers = build_headers()
+    response = requests.get(url, headers=headers)
+    if response.status_code != 200:
+        print(f"Failed to fetch commits: {response.status_code}")
+        return None
+    
+    # GitHub returns the total count in the Link header for pagination
+    link_header = response.headers.get("Link", "")
+    if "last" in link_header:
+        # Extract page number from last page link
+        import re
+        match = re.search(r'page=(\d+)>; rel="last"', link_header)
+        if match:
+            return int(match.group(1))
+    
+    # If no pagination, just count the returned commits
+    return len(response.json())
 
 
 def get_images(project_code):
@@ -119,6 +146,7 @@ def save_basic_info(project_code, curr_id, projects_data, readme, file_path):
 
     project_info["name"] = get_name(readme)
     project_info["images"] = get_images(project_code)
+    project_info["commit_count"] = get_commit_count(project_code)
 
     project_info["featured"] = projects_data[project_code]["featured"]
     if project_info["featured"] and projects_data[project_code]["image"] and projects_data[project_code]["image"] in project_info["images"]:
