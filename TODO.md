@@ -4,7 +4,7 @@
 - [ ] feat: add development time to each project (think about how to implement this interestingly)
 - [ ] feat: add more projects
 - [ ] chore: add images to feedback-circle and update description
-- [ ] feat: add openai to tech stack
+- [x] feat: add openai to tech stack
 - [x] feat: add documents to projects (e.g., PDFs, reports)
 - [x] feat: improve project details page
 - [x] feat: add images to flagle enhanced project
