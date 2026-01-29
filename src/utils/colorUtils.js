@@ -105,9 +105,8 @@ export function hslToHex(h, s, l) {
 export function generateTechBackground(color) {
   const hsl = hexToHSL(color);
 
-  // reduce lightness and saturation for a muted, neutral tone
-  const adjustedLightness = Math.max(15, hsl.l - 40);
-  const adjustedSaturation = Math.max(25, hsl.s * 0.55);
+  // reduce lightness
+  let adjustedLightness = Math.max(15, hsl.l - 70);
 
-  return `hsl(${hsl.h}, ${adjustedSaturation}%, ${adjustedLightness}%)`;
+  return `hsl(${hsl.h}, ${hsl.s}%, ${adjustedLightness}%)`;
 }
