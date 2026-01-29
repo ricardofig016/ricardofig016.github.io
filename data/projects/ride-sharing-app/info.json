@@ -1,6 +1,9 @@
 {
+  "archived": false,
   "code": "ride-sharing-app",
+  "commit_count": 38,
   "context": "University",
+  "created_at": "2025-09-26T16:37:03Z",
   "description": "A full-stack web application built as a project for the Software Architecture course from university, using Java Spring Boot and Vaadin Flow. It's a ride-sharing application similar to Uber.",
   "featured": true,
   "forks": 0,
@@ -13,8 +16,10 @@
     "3-rides.png"
   ],
   "issues": 0,
+  "license": "The Unlicense",
   "name": "Ride Sharing App",
   "private": false,
+  "size": 7441,
   "stars": 0,
   "technologies": [
     "java",
@@ -28,5 +33,7 @@
     "oop",
     "git"
   ],
+  "updated_at": "2026-01-27T12:35:36Z",
+  "watchers": 0,
   "website": ""
 }

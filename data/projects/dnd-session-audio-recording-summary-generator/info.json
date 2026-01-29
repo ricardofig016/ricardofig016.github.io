@@ -1,6 +1,9 @@
 {
+  "archived": false,
   "code": "dnd-session-audio-recording-summary-generator",
+  "commit_count": 27,
   "context": "Personal",
+  "created_at": "2025-08-21T21:24:45Z",
   "description": "A Python pipeline that automatically transcribes and summarizes Dungeons & Dragons session audio recordings. This tool converts raw audio files into comprehensive markdown summaries using OpenAI's Whisper API for transcription and DeepSeek's API for intelligent summarization and formatting.",
   "featured": false,
   "forks": 0,
@@ -9,9 +12,11 @@
   "image": null,
   "images": [],
   "issues": 0,
+  "license": null,
   "name": "D&D Session Audio Recording & Summary Generator",
   "private": false,
-  "stars": 0,
+  "size": 183,
+  "stars": 1,
   "technologies": [
     "python",
     "api",
@@ -20,5 +25,7 @@
     "git",
     "audio processing"
   ],
+  "updated_at": "2026-01-29T00:39:03Z",
+  "watchers": 1,
   "website": ""
 }
