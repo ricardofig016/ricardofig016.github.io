@@ -23,7 +23,7 @@ Goal: Provide AI agents with essential codebase context to ship changes quickly 
      - Pull general metadata (description, stars, forks, issues, URLs)
      - Extract project name from README's first `# ` heading
      - Generate `info.json` with combined metadata + manual tags from `projects.json`
-     - Populate `public/data/projects/[code]/` folders and `public/images/projects/` structure
+     - Populate `public/data/projects/[code]/` folders and `public/data/projects/[code]/images/` structure
 - **Education Data Sync** (requires OpenAI API key in `.env` as `OPENAI_API_KEY`):
   1. Run `python utils/scrape_sigarra.py` to fetch raw HTML from university portal.
   2. Run `python utils/summarize_courses.py` to generate structured course topics using LLM.

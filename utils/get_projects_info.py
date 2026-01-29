@@ -11,7 +11,6 @@ load_dotenv()
 
 PROJECTS_DIR_PATH = "public/data/projects"
 PROJECTS_DATA_PATH = os.path.join(PROJECTS_DIR_PATH, "projects.json")
-IMAGES_DIR_PATH = "public/images/projects"
 
 GITHUB_USERNAME = "ricardofig016"
 GITHUB_API_BASE_URL = f"https://api.github.com/repos/{GITHUB_USERNAME}"
@@ -87,7 +86,7 @@ def get_name(readme):
 
 
 def get_images(project_code):
-    images_path = os.path.join(IMAGES_DIR_PATH, project_code)
+    images_path = os.path.join(PROJECTS_DIR_PATH, project_code, "images")
     os.makedirs(images_path, exist_ok=True)
 
     image_file_names = []
@@ -138,7 +137,6 @@ def save_basic_info(project_code, curr_id, projects_data, readme, file_path):
 
 def main():
     os.makedirs(PROJECTS_DIR_PATH, exist_ok=True)
-    os.makedirs(IMAGES_DIR_PATH, exist_ok=True)
 
     validate_token_access()
 
