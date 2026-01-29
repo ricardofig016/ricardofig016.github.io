@@ -8,7 +8,22 @@ import CollapsibleSection from "../../components/CollapsibleSection/CollapsibleS
 import ImageModal from "../../components/ImageModal/ImageModal";
 import TechPills from "../../components/TechPills/TechPills";
 import Showdown from "showdown";
-import { FaGithub, FaGlobe, FaTag, FaStar, FaCodeFork, FaCircleExclamation, FaEye, FaCalendarPlus, FaClock, FaCodeCommit, FaScaleBalanced, FaDatabase, FaBoxArchive } from "react-icons/fa6";
+import {
+  FaGithub,
+  FaGlobe,
+  FaTag,
+  FaStar,
+  FaCodeFork,
+  FaCircleExclamation,
+  FaEye,
+  FaCalendarPlus,
+  FaClock,
+  FaCodeCommit,
+  FaScaleBalanced,
+  FaDatabase,
+  FaBoxArchive,
+  FaDownload,
+} from "react-icons/fa6";
 import Carousel from "react-multi-carousel";
 import { formatISODate } from "../../utils/dateUtils";
 
@@ -187,6 +202,14 @@ function Project({ projectsData }) {
   const converter = new Showdown.Converter();
   const readmeHtml = !project.private && project.readme ? converter.makeHtml(project.readme) : "";
 
+  // Format document filename for display
+  const formatDocumentName = (filename) => {
+    return filename
+      .replace(/\.[^/.]+$/, "") // Remove extension
+      .replace(/[-_]/g, " ") // Replace - and _ with spaces
+      .replace(/\b\w/g, (char) => char.toUpperCase()); // Title case
+  };
+
   // Handler for tech pill clicks
   const handleTechClick = (tech) => {
     navigate(`/projects?tech=${encodeURIComponent(tech)}`);
@@ -238,6 +261,14 @@ function Project({ projectsData }) {
             <span>Website</span>
           </a>
         )}
+        {project.documents &&
+          project.documents.length > 0 &&
+          project.documents.map((doc) => (
+            <a key={doc} href={`/data/projects/${project.code}/documents/${doc}`} download aria-label={`Download ${doc}`} title={`Download ${doc}`}>
+              <FaDownload />
+              <span>{formatDocumentName(doc)}</span>
+            </a>
+          ))}
       </div>
 
       {project.description && <p>{project.description}</p>}

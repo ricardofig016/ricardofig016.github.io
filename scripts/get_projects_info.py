@@ -124,6 +124,18 @@ def get_images(project_code):
     return image_file_names
 
 
+def get_documents(project_code):
+    documents_path = os.path.join(PROJECTS_DIR_PATH, project_code, "documents")
+    os.makedirs(documents_path, exist_ok=True)
+
+    document_file_names = []
+    for filename in os.listdir(documents_path):
+        if os.path.isfile(os.path.join(documents_path, filename)):
+            document_file_names.append(filename)
+
+    return document_file_names
+
+
 def save_readme(project_code, file_path):
     project_readme = get_readme(project_code)
     if project_readme is None:
@@ -146,6 +158,7 @@ def save_basic_info(project_code, curr_id, projects_data, readme, file_path):
 
     project_info["name"] = get_name(readme)
     project_info["images"] = get_images(project_code)
+    project_info["documents"] = get_documents(project_code)
     project_info["commit_count"] = get_commit_count(project_code)
 
     project_info["featured"] = projects_data[project_code]["featured"]

@@ -5,6 +5,7 @@
   "context": "Personal",
   "created_at": "2024-12-29T23:47:05Z",
   "description": "A 1v1 CCG inspired by SIU's Tower of God. It provides a Node.js game server, WebSocket-based real-time play, and a static web client.",
+  "documents": [],
   "featured": true,
   "forks": 0,
   "github_url": "https://github.com/ricardofig016/shinsu-duel",
