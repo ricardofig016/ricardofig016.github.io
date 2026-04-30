@@ -14,7 +14,6 @@
 - [ ] feat: add project spotifree
 - [ ] feat: add project Spotipy
 - [ ] feat: add project whatsapp-auto-reactor
-- [ ] feat: add project gpt-chat-bot
 - [ ] feat: add project name_all_countries
 - [ ] feat: add project my-first-platformer
 - [ ] feat: add project wallpaper-switcher
