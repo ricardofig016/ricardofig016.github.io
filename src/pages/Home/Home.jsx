@@ -1,6 +1,4 @@
 import { Link } from "react-router-dom";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
 import styles from "./Home.module.css";
 import PropTypes from "prop-types";
 import { contactLinks } from "../../constants/contactLinks";
@@ -9,6 +7,7 @@ import { formatDate } from "../../utils/dateUtils";
 import TechPills from "../../components/TechPills/TechPills";
 import TechStack from "../../components/TechStack/TechStack";
 import { getExperienceTechnologies } from "../../utils/techMerger";
+import Carousel from "../../components/Carousel/Carousel";
 
 function Home({ featuredProjectsData, experiencesData, projectsData, techData }) {
   const featuredProjectEntries = Object.entries(featuredProjectsData || {});
@@ -18,47 +17,25 @@ function Home({ featuredProjectsData, experiencesData, projectsData, techData })
     // Image
     const projectImagesBasePath = `/data/projects/${project.code}/images/`;
     const imageUrl = project.image ? `${projectImagesBasePath}${project.image}` : null;
-    const imgElem = imageUrl && <img src={imageUrl} alt={project.name} />;
 
     const item = (
-      <Link to={`/projects/${project.code}`} key={project.name}>
+      <Link to={`/projects/${project.code}`} key={project.code} className={styles.featuredProjectLink}>
         <div className={styles.projectCard}>
-          <h3>{project.name}</h3>
-          <TechPills technologies={project.technologies || []} size="small" />
-          <p>{project.description}</p>
-          {imgElem}
+          <div className={styles.projectCardBody}>
+            <h3>{project.name}</h3>
+            <TechPills technologies={project.technologies || []} size="small" />
+            <p>{project.description}</p>
+          </div>
+          {imageUrl && (
+            <div className={styles.projectMedia}>
+              <img src={imageUrl} alt={project.name} />
+            </div>
+          )}
         </div>
       </Link>
     );
     return item;
   });
-
-  const carouselElement = (
-    <Carousel
-      swipeable={true}
-      draggable={false}
-      showDots={false}
-      responsive={{
-        all: {
-          breakpoint: { max: 5000, min: 0 },
-          items: 1,
-          slidesToSlide: 1,
-        },
-      }}
-      ssr={true} // render carousel on server-side.
-      infinite={true}
-      // autoPlay={true}
-      autoPlaySpeed={5000}
-      centerMode={true}
-      keyBoardControl={true}
-      containerClass="carousel-container"
-      dotListClass="custom-dot-list-style"
-      itemClass="carousel-item-padding-40-px"
-      className={styles.carousel}
-    >
-      {carouselItems}
-    </Carousel>
-  );
 
   return (
     <div>
@@ -138,7 +115,13 @@ function Home({ featuredProjectsData, experiencesData, projectsData, techData })
       {/* Featured Projects */}
       <section>
         <h2>Featured Projects</h2>
-        {featuredProjectEntries.length > 0 ? carouselElement : <p>No featured projects yet.</p>}
+        {featuredProjectEntries.length > 0 ? (
+          <Carousel ariaLabel="Featured projects" className={styles.carousel} slideClassName={styles.carouselSlide} contentClassName={styles.carouselContent}>
+            {carouselItems}
+          </Carousel>
+        ) : (
+          <p>No featured projects yet.</p>
+        )}
       </section>
 
       {/* Tech Stack */}

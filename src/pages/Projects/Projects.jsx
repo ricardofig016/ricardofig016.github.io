@@ -24,7 +24,7 @@ import {
   FaBoxArchive,
   FaDownload,
 } from "react-icons/fa6";
-import Carousel from "react-multi-carousel";
+import Carousel from "../../components/Carousel/Carousel";
 import { formatISODate } from "../../utils/dateUtils";
 
 function ProjectsList({ projectsData }) {
@@ -276,31 +276,12 @@ function Project({ projectsData }) {
   );
 
   // Images
-  const carouselItems = (project.images || []).map((image) => <ImageModal className={styles.carouselItem} key={image} src={`/data/projects/${project.code}/images/${image}`} alt={project.name} />);
   const imagesSection = project.images && project.images.length > 0 && (
     <section className={styles.projectImages}>
-      <Carousel
-        swipeable={true}
-        draggable={false}
-        showDots={true}
-        responsive={{
-          all: {
-            breakpoint: { max: 5000, min: 0 },
-            items: 2,
-            slidesToSlide: 1,
-          },
-        }}
-        ssr={true} // render carousel on server-side.
-        infinite={true}
-        // autoPlay={true}
-        autoPlaySpeed={5000}
-        keyBoardControl={true}
-        containerClass="carousel-container"
-        dotListClass="custom-dot-list-style"
-        itemClass="carousel-item-padding-40-px"
-        className={styles.carousel}
-      >
-        {carouselItems}
+      <Carousel ariaLabel={`${project.name} screenshots`} className={styles.carousel} slideClassName={styles.carouselSlide} contentClassName={styles.carouselContent} showDots>
+        {(project.images || []).map((image) => (
+          <ImageModal className={styles.carouselItem} key={image} src={`/data/projects/${project.code}/images/${image}`} alt={project.name} />
+        ))}
       </Carousel>
     </section>
   );

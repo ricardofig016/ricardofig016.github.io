@@ -1,0 +1,127 @@
+.carousel {
+  --carousel-visible-slides: 2;
+  position: relative;
+  width: 100%;
+}
+
+@media (min-width: 2050px) {
+  .carousel {
+    --carousel-visible-slides: 3;
+  }
+}
+
+@media (max-width: 1000px) {
+  .carousel {
+    --carousel-visible-slides: 1;
+  }
+}
+
+.viewport {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  outline: none;
+}
+
+.viewport::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+.track {
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+}
+
+.slide {
+  flex: 0 0 calc(100% / var(--carousel-visible-slides));
+  min-width: calc(100% / var(--carousel-visible-slides));
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.slideContent {
+  width: min(100%, var(--carousel-slide-max-width, 100%));
+  min-width: 0;
+}
+
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border: 2px solid var(--text-highlight);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--bg-primary) 86%, transparent);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.navButton:hover:not(:disabled) {
+  background: var(--text-highlight);
+  color: var(--bg-primary);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.navButton:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.navButton svg {
+  font-size: 1rem;
+}
+
+.prevButton {
+  left: 2.5rem;
+}
+
+.nextButton {
+  right: 2.5rem;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 999px;
+  border: 2px solid var(--text-highlight);
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.dot:hover {
+  transform: scale(1.15);
+}
+
+.dotActive {
+  background: var(--text-highlight);
+}
