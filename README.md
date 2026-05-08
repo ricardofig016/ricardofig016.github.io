@@ -70,7 +70,7 @@ public/data/
 ## Technology Stack
 
 - **Frontend**: React 18, React Router v7, Vite
-- **UI Libraries**: Material UI (MUI), PrimeReact, react-multi-carousel
+- **UI Libraries**: Material UI (MUI), PrimeReact (Menubar), custom scroll-snap carousel components
 - **Styling**: CSS Modules, global styles
 - **Markdown**: Showdown for rendering
 - **Icons**: react-icons (Font Awesome 6)

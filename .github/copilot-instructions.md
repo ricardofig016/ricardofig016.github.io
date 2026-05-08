@@ -11,7 +11,7 @@ Goal: Provide AI agents with essential codebase context to ship changes quickly 
   - Content structure: `index.json` (array of folder names) → `[folder]/info.json` (metadata) → `[folder]/README.md` (detailed content, projects only).
   - Projects and experiences each maintain separate data structures with different schemas.
 - **Styling**: CSS Modules (`Component.module.css`) for component scoping; `src/styles.css` for global styles.
-- **UI Libraries**: **Material UI (MUI)** for base components, **PrimeReact** for `Carousel`, **react-multi-carousel** for project images, **Showdown** for markdown rendering, and **react-icons** (Font Awesome 6 - `Fa6`) for icons.
+- **UI Libraries**: **Material UI (MUI)** for base components, **PrimeReact** for `Menubar`, custom scroll-snap carousel components for featured projects and project images, **Showdown** for markdown rendering, and **react-icons** (Font Awesome 6 - `Fa6`) for icons.
 
 ## Critical Workflows
 
