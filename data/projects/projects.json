@@ -11,6 +11,12 @@
     "context": "Personal",
     "technologies": ["javascript", "nodejs", "express", "rest", "websocket", "socketio", "jest", "html", "css", "git"]
   },
+  "couple-calendar": {
+    "featured": true,
+    "image": "2-manage-page.jpeg",
+    "context": "Personal",
+    "technologies": ["typescript", "react", "react native", "javascript", "nodejs", "android", "kotlin", "expo", "google calendar", "git"]
+  },
   "ride-sharing-app": {
     "featured": true,
     "image": "2-create-ride.png",

@@ -1,6 +1,6 @@
 # Ricardo Figueiredo - Portfolio
 
-A modern, data-driven portfolio website built with **Vite**, **React Router v7**, and **Material UI**. Features a responsive design with projects, experience timeline, and education showcases.
+A portfolio website built with Vite, React Router v7, and Material UI. Features a responsive design with projects, experience timeline, and education showcases.
 
 Live at: **https://ricardofig016.github.io/**
 

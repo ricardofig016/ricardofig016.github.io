@@ -1,0 +1,41 @@
+{
+  "archived": false,
+  "code": "couple-calendar",
+  "commit_count": 76,
+  "context": "Personal",
+  "created_at": "2026-01-16T17:42:51Z",
+  "description": "A lightweight Expo (React Native) application designed to seamlessly sync events to Google Calendars for a couple. This app eliminates the complexity of OAuth by using a Google Apps Script proxy, making it perfect for personal use.",
+  "documents": [],
+  "featured": true,
+  "forks": 0,
+  "github_url": "https://github.com/ricardofig016/couple-calendar",
+  "id": 2,
+  "image": "2-manage-page.jpeg",
+  "images": [
+    "1-maria-birthday-event-creation.jpeg",
+    "2-manage-page.jpeg",
+    "3-settings-page.jpeg",
+    "4-dinner-date-event-creation.jpeg"
+  ],
+  "issues": 0,
+  "license": null,
+  "name": "Couple Calendar",
+  "private": false,
+  "size": 1094,
+  "stars": 0,
+  "technologies": [
+    "typescript",
+    "react",
+    "react native",
+    "javascript",
+    "nodejs",
+    "android",
+    "kotlin",
+    "expo",
+    "google calendar",
+    "git"
+  ],
+  "updated_at": "2026-05-08T10:11:55Z",
+  "watchers": 0,
+  "website": ""
+}
