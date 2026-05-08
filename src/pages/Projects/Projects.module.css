@@ -111,31 +111,50 @@
 }
 
 .projectImages {
-  .carousel {
-    .carouselItem {
-      /* max-height: 50rem; */
-      padding: 0 1rem 0 0;
-      overflow: hidden;
-      width: 100%;
+  margin-top: 1rem;
+}
 
-      img {
-        border-radius: 6px;
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        object-position: center;
-        display: block;
-      }
-      img:hover {
-        cursor: pointer;
-        opacity: 0.8;
-      }
-      img:focus {
-        outline: none;
-      }
-    }
-    .carouselItem:focus {
-      outline: none;
-    }
+.carousel {
+  --carousel-slide-max-width: 100%;
+}
+
+.carouselSlide {
+  padding: 0 0.75rem;
+}
+
+.carouselContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: min(72vh, 48rem);
+}
+
+.carouselItem {
+  width: 100%;
+  height: min(72vh, 48rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    border-radius: 6px;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
   }
+
+  img:hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+
+  img:focus {
+    outline: none;
+  }
+}
+
+.carouselItem:focus {
+  outline: none;
 }
