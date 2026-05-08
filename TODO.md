@@ -3,7 +3,6 @@
 - [ ] feat: add a change language feature between Portuguese and English in the Navbar
 - [ ] chore: add images to feedback-circle and update description
 - [ ] feat: add project job-search-tracker-cli
-- [ ] feat: add project couple-calendar
 - [ ] feat: add project file-tree-generator
 - [ ] feat: add project seguranca-e-privacidade-trabalho-1
 - [ ] feat: add project epic-the-musical-game
@@ -22,6 +21,7 @@
 - [ ] feat: add project TriviaAnkiDeckGenerator
 - [ ] feat: add project ID3DecisionTree
 - [ ] feat: add project boing
+- [x] feat: add project couple-calendar
 - [x] feat: add development time to each project (think about how to implement this interestingly)
 - [x] feat: add openai to tech stack
 - [x] feat: add documents to projects (e.g., PDFs, reports)
