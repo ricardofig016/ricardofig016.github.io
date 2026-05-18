@@ -52,6 +52,59 @@ function isPreviewableDocument(filename) {
   return getDocumentExtension(filename) === "pdf";
 }
 
+const PROJECT_COVER_EXTENSIONS = ["png", "jpg", "jpeg", "webp", "avif", "gif", "svg"];
+
+function getProjectCoverCandidates(projectCode) {
+  return PROJECT_COVER_EXTENSIONS.map((extension) => `/data/projects/${projectCode}/cover.${extension}`);
+}
+
+function loadImage(src) {
+  return new Promise((resolve) => {
+    const image = new Image();
+    image.onload = () => resolve(src);
+    image.onerror = () => resolve(null);
+    image.src = src;
+  });
+}
+
+function ProjectCardCover({ projectCode, projectName }) {
+  const [coverState, setCoverState] = useState({ status: "loading", url: null });
+
+  useEffect(() => {
+    let active = true;
+    const candidateUrls = getProjectCoverCandidates(projectCode);
+
+    setCoverState({ status: "loading", url: null });
+
+    (async () => {
+      for (const candidateUrl of candidateUrls) {
+        const loadedUrl = await loadImage(candidateUrl);
+        if (!active) return;
+
+        if (loadedUrl) {
+          setCoverState({ status: "loaded", url: loadedUrl });
+          return;
+        }
+      }
+
+      if (active) setCoverState({ status: "missing", url: null });
+    })();
+
+    return () => {
+      active = false;
+    };
+  }, [projectCode]);
+
+  if (coverState.status !== "loaded") return null;
+
+  return <img src={coverState.url} alt={`Cover art for ${projectName}`} className={styles.projectCardCoverImage} loading="lazy" decoding="async" />;
+}
+
+ProjectCardCover.propTypes = {
+  projectCode: PropTypes.string.isRequired,
+  projectName: PropTypes.string.isRequired,
+};
+
 function ProjectsList({ projectsData }) {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -172,41 +225,40 @@ function ProjectsList({ projectsData }) {
         {filteredProjects.map((proj) => {
           return (
             <div key={proj.id ?? proj.code} className={styles.projectCard} tabIndex="0" role="link" onClick={() => navigate(`/projects/${proj.code}`)}>
-              {/* Title */}
-              <h3 className={styles.projectTitle}>{proj.name + " "}</h3>
+              <div className={styles.projectCardMeta}>
+                <ProjectCardCover projectCode={proj.code} projectName={proj.name} />
 
-              {/* Metadata */}
-              <div className={styles.projectTypeInfo}>
-                {[
-                  proj.context && { icon: FaTag, label: proj.context },
-                  proj.stars > 0 && { icon: FaStar, label: proj.stars },
-                  proj.forks > 0 && { icon: FaCodeFork, label: proj.forks },
-                  proj.issues > 0 && { icon: FaCircleExclamation, label: proj.issues },
-                  proj.watchers > 0 && { icon: FaEye, label: proj.watchers },
-                ]
-                  .filter(Boolean)
-                  .map((item, index) => (
-                    <span key={index}>
-                      {index > 0 && <span> | </span>}
-                      {item.icon && <item.icon />} {item.label}
-                    </span>
-                  ))}
+                <div className={styles.projectCardMetaContent}>
+                  {/* Title */}
+                  <h3 className={styles.projectTitle}>{proj.name + " "}</h3>
+
+                  {/* Metadata */}
+                  <div className={styles.projectTypeInfo}>
+                    {[
+                      proj.context && { icon: FaTag, label: proj.context },
+                      proj.stars > 0 && { icon: FaStar, label: proj.stars },
+                      proj.forks > 0 && { icon: FaCodeFork, label: proj.forks },
+                      proj.issues > 0 && { icon: FaCircleExclamation, label: proj.issues },
+                      proj.watchers > 0 && { icon: FaEye, label: proj.watchers },
+                    ]
+                      .filter(Boolean)
+                      .map((item, index) => (
+                        <span key={index}>
+                          {index > 0 && <span> | </span>}
+                          {item.icon && <item.icon />} {item.label}
+                        </span>
+                      ))}
+                  </div>
+
+                  {/* Tech Tags */}
+                  <TechPills technologies={proj.technologies || []} size="small" className={styles.projectTechTags} />
+                </div>
               </div>
 
-              {/* Tech Tags */}
-              <TechPills technologies={proj.technologies || []} size="small" className={styles.projectTechTags} />
-
-              {/* Actions */}
-              <div>
-                {proj.github_url && !proj.private && (
-                  <a className={styles.projectGithubLink} href={proj.github_url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${proj.name} on GitHub`}>
-                    GitHub Repo
-                  </a>
-                )}
+              <div className={[styles.projectCardDescription, !proj.description ? styles.projectCardDescriptionEmpty : ""].filter(Boolean).join(" ")}>
+                {/* Description */}
+                {proj.description && <p className={styles.projectDesc}>{proj.description}</p>}
               </div>
-
-              {/* Description */}
-              {proj.description && <p className={styles.projectDesc}>{proj.description}</p>}
             </div>
           );
         })}

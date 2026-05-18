@@ -9,6 +9,8 @@ The project system has two layers:
 1. **Manual metadata** (`projects.json`) - You define featured status, image, context, and technologies
 2. **Automated data** (`info.json`) - Synced from GitHub API (description, stars, forks, license, README, etc.)
 
+The projects listing page also supports an optional per-project cover image for the card thumbnail. This cover is separate from the project gallery images and is loaded directly from `public/data/projects/[project-code]/cover.[ext]` when present.
+
 The automation script (`scripts/get_projects_info.py`) merges these layers to create the final project data and **automatically regenerates** `index.json`.
 
 **Key point:** You only need to edit `projects.json` — the sync script handles `index.json` automatically.
@@ -48,6 +50,7 @@ Create the following directory structure:
 
 ```
 public/data/projects/my-project-code/
+├── cover.jpg                (optional, used on the projects listing card)
 ├── images/                  (optional)
 │   ├── 1-dashboard.png
 │   ├── 2-features.png
@@ -61,6 +64,7 @@ public/data/projects/my-project-code/
 
 **Adding Media:**
 
+- Put the listing cover at `cover.[ext]` in the project root folder
 - Place project images in `images/` folder
 - Name images with number prefix: `1-`, `2-`, `3-`, etc. (determines carousel order)
 - Supported formats: `.png`, `.jpg`, `.gif`
@@ -172,6 +176,7 @@ Navigate to http://localhost:5173/projects to see your new project.
 - ✅ **Featured projects** appear on the home page carousel with their main image
 - ✅ **Technology array** is used for filtering and sorting on projects page
 - ✅ **Context** helps visitors filter by project type
+- ✅ **Listing cover** is optional and separate from the project image carousel
 - ✅ **Images** appear in a carousel on project detail page
 - ✅ **Documents** appear as downloadable links
 - ✅ **Automation** keeps GitHub data in sync when you run the script
