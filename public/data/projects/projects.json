@@ -69,6 +69,6 @@
     "featured": false,
     "image": null,
     "context": "Personal",
-    "technologies": ["react", "javascript", "nodejs", "python", "rest", "api", "html", "css", "vite", "git"]
+    "technologies": ["react", "javascript", "nodejs", "python", "rest", "github pages", "html", "css", "vite", "git"]
   }
 }
