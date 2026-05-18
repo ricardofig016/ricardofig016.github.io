@@ -1,7 +1,7 @@
 {
   "archived": false,
   "code": "ricardofig016.github.io",
-  "commit_count": 161,
+  "commit_count": 165,
   "context": "Personal",
   "created_at": "2024-09-18T14:27:40Z",
   "description": "A lightweight React portfolio built with Vite to showcase my projects, skills and experience.",
@@ -9,7 +9,7 @@
   "featured": false,
   "forks": 0,
   "github_url": "https://github.com/ricardofig016/ricardofig016.github.io",
-  "id": 10,
+  "id": 11,
   "image": null,
   "images": [],
   "images_meta": [],
@@ -17,7 +17,7 @@
   "license": null,
   "name": "Ricardo Figueiredo - Portfolio",
   "private": false,
-  "size": 19182,
+  "size": 19200,
   "stars": 0,
   "technologies": [
     "react",
@@ -31,7 +31,7 @@
     "vite",
     "git"
   ],
-  "updated_at": "2026-05-08T18:22:19Z",
+  "updated_at": "2026-05-18T15:07:37Z",
   "watchers": 0,
   "website": "https://ricardofig016.github.io/"
 }

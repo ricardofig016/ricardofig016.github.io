@@ -11,6 +11,12 @@
     "context": "Personal",
     "technologies": ["javascript", "nodejs", "express", "rest", "websocket", "socketio", "jest", "html", "css", "git"]
   },
+  "travel-book": {
+    "featured": false,
+    "image": null,
+    "context": "Personal",
+    "technologies": ["typescript", "angular", "postgresql", "supabase", "rls", "scss", "github actions", "cloudinary", "geojson", "git"]
+  },
   "couple-calendar": {
     "featured": true,
     "image": "2-manage-page.jpeg",
