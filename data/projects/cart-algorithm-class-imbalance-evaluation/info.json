@@ -11,11 +11,25 @@
   "featured": true,
   "forks": 0,
   "github_url": "https://github.com/ricardofig016/cart-algorithm-class-imbalance-evaluation",
-  "id": 6,
+  "id": 7,
   "image": "1-average.png",
   "images": [
     "1-average.png",
     "2-count.png"
+  ],
+  "images_meta": [
+    {
+      "file": "1-average.png",
+      "height": 493,
+      "ratio": 1.7789046653144016,
+      "width": 877
+    },
+    {
+      "file": "2-count.png",
+      "height": 384,
+      "ratio": 1.7786458333333333,
+      "width": 683
+    }
   ],
   "issues": 0,
   "license": null,
