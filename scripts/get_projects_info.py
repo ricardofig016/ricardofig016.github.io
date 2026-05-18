@@ -5,7 +5,6 @@ import json
 from icecream import ic
 from dotenv import load_dotenv
 
-
 load_dotenv()
 
 
@@ -98,16 +97,17 @@ def get_commit_count(project_code):
     if response.status_code != 200:
         print(f"Failed to fetch commits: {response.status_code}")
         return None
-    
+
     # GitHub returns the total count in the Link header for pagination
     link_header = response.headers.get("Link", "")
     if "last" in link_header:
         # Extract page number from last page link
         import re
+
         match = re.search(r'page=(\d+)>; rel="last"', link_header)
         if match:
             return int(match.group(1))
-    
+
     # If no pagination, just count the returned commits
     return len(response.json())
 
@@ -117,11 +117,83 @@ def get_images(project_code):
     os.makedirs(images_path, exist_ok=True)
 
     image_file_names = []
+    images_meta = []
     for filename in os.listdir(images_path):
-        if os.path.isfile(os.path.join(images_path, filename)):
+        file_path = os.path.join(images_path, filename)
+        if os.path.isfile(file_path):
             image_file_names.append(filename)
+            # Try to get natural image dimensions without external deps
+            try:
+                with open(file_path, "rb") as f:
+                    head = f.read(32)
 
-    return image_file_names
+                # PNG
+                if head.startswith(b"\x89PNG\r\n\x1a\n"):
+                    # width/height at bytes 16-24 (big-endian)
+                    with open(file_path, "rb") as f:
+                        f.seek(16)
+                        dims = f.read(8)
+                        width = int.from_bytes(dims[0:4], "big")
+                        height = int.from_bytes(dims[4:8], "big")
+                # GIF
+                elif head[:6] in (b"GIF87a", b"GIF89a"):
+                    with open(file_path, "rb") as f:
+                        f.seek(6)
+                        dims = f.read(4)
+                        width = int.from_bytes(dims[0:2], "little")
+                        height = int.from_bytes(dims[2:4], "little")
+                # JPEG (more complex)
+                elif head.startswith(b"\xff\xd8"):
+                    width = None
+                    height = None
+                    with open(file_path, "rb") as f:
+                        f.seek(0)
+                        data = f.read()
+                    idx = 2
+                    while idx < len(data):
+                        if data[idx] != 0xFF:
+                            idx += 1
+                            continue
+                        marker = data[idx + 1]
+                        idx += 2
+                        # SOF markers that contain frame info
+                        if marker in (0xC0, 0xC1, 0xC2, 0xC3, 0xC5, 0xC6, 0xC7, 0xC9, 0xCA, 0xCB, 0xCD, 0xCE, 0xCF):
+                            length = (data[idx] << 8) + data[idx + 1]
+                            height = (data[idx + 3] << 8) + data[idx + 4]
+                            width = (data[idx + 5] << 8) + data[idx + 6]
+                            break
+                        else:
+                            if idx + 1 >= len(data):
+                                break
+                            length = (data[idx] << 8) + data[idx + 1]
+                            idx += length
+                    if width is None or height is None:
+                        raise ValueError("Couldn't parse JPEG dimensions")
+                # BMP
+                elif head.startswith(b"BM"):
+                    with open(file_path, "rb") as f:
+                        f.seek(18)
+                        dims = f.read(8)
+                        width = int.from_bytes(dims[0:4], "little")
+                        height = int.from_bytes(dims[4:8], "little")
+                else:
+                    # Unknown format; skip dimensions
+                    width = None
+                    height = None
+            except Exception:
+                width = None
+                height = None
+
+            images_meta.append(
+                {
+                    "file": filename,
+                    "width": width,
+                    "height": height,
+                    "ratio": (width / height) if (width and height and height != 0) else None,
+                }
+            )
+
+    return image_file_names, images_meta
 
 
 def get_documents(project_code):
@@ -157,7 +229,9 @@ def save_basic_info(project_code, curr_id, projects_data, readme, file_path):
         project_info[key] = value
 
     project_info["name"] = get_name(readme)
-    project_info["images"] = get_images(project_code)
+    images, images_meta = get_images(project_code)
+    project_info["images"] = images
+    project_info["images_meta"] = images_meta
     project_info["documents"] = get_documents(project_code)
     project_info["commit_count"] = get_commit_count(project_code)
 

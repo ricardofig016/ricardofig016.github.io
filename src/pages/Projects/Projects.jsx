@@ -278,7 +278,7 @@ function Project({ projectsData }) {
   // Images
   const imagesSection = project.images && project.images.length > 0 && (
     <section className={styles.projectImages}>
-      <Carousel ariaLabel={`${project.name} screenshots`} className={styles.carousel} slideClassName={styles.carouselSlide} contentClassName={styles.carouselContent} showDots>
+      <Carousel ariaLabel={`${project.name} screenshots`} className={styles.carousel} slideClassName={styles.carouselSlide} contentClassName={styles.carouselContent} showDots imageMeta={project.images_meta}>
         {(project.images || []).map((image) => (
           <ImageModal className={styles.carouselItem} key={image} src={`/data/projects/${project.code}/images/${image}`} alt={project.name} />
         ))}

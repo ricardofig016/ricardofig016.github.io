@@ -3,13 +3,14 @@ import PropTypes from "prop-types";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import styles from "./Carousel.module.css";
 
-function Carousel({ children, ariaLabel, className, slideClassName, contentClassName, showDots = false }) {
+function Carousel({ children, ariaLabel, className, slideClassName, contentClassName, showDots = false, imageMeta = null }) {
   const slides = useMemo(() => Children.toArray(children).filter(Boolean), [children]);
   const carouselRef = useRef(null);
   const viewportRef = useRef(null);
   const scrollFrameRef = useRef(null);
   const [visibleSlides, setVisibleSlides] = useState(2);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [inlineStyle, setInlineStyle] = useState({});
 
   const pageCount = Math.max(slides.length - visibleSlides + 1, 1);
   const maxPageIndex = pageCount - 1;
@@ -27,6 +28,39 @@ function Carousel({ children, ariaLabel, className, slideClassName, contentClass
   }, []);
 
   useEffect(() => {
+    // If image metadata is provided, derive preferred visible slides and media height
+    if (imageMeta && Array.isArray(imageMeta) && imageMeta.length > 0 && typeof window !== "undefined") {
+      // collect valid ratios
+      const ratios = imageMeta.map((m) => (m && m.ratio ? m.ratio : null)).filter(Boolean);
+      const medianRatio = (() => {
+        if (ratios.length === 0) return 1.5;
+        const sorted = [...ratios].sort((a, b) => a - b);
+        const mid = Math.floor(sorted.length / 2);
+        return sorted.length % 2 === 0 ? (sorted[mid - 1] + sorted[mid]) / 2 : sorted[mid];
+      })();
+
+      // Choose slides based on median aspect ratio
+      let desiredSlides = 2;
+      if (medianRatio < 0.8) desiredSlides = 3;
+      else if (medianRatio >= 1.5) desiredSlides = 1;
+      else desiredSlides = 2;
+
+      // compute reasonable max height based on viewport width
+      const carouselElement = carouselRef.current;
+      let maxHeightPx = null;
+      if (carouselElement) {
+        const viewportWidth = carouselElement.clientWidth || window.innerWidth;
+        const slideWidth = Math.max(100, Math.floor(viewportWidth / Math.max(1, desiredSlides)));
+        maxHeightPx = Math.min(1200, Math.round(slideWidth / Math.max(0.1, medianRatio)));
+      }
+
+      const styleVars = {
+        "--carousel-visible-slides": desiredSlides,
+      };
+      if (maxHeightPx) styleVars["--carousel-media-max-height"] = `${maxHeightPx}px`;
+
+      setInlineStyle(styleVars);
+    }
     const updateVisibleSlides = () => {
       setVisibleSlides((currentVisibleSlides) => {
         const nextVisibleSlides = readVisibleSlides();
@@ -45,7 +79,7 @@ function Carousel({ children, ariaLabel, className, slideClassName, contentClass
 
     window.addEventListener("resize", updateVisibleSlides);
     return () => window.removeEventListener("resize", updateVisibleSlides);
-  }, [readVisibleSlides]);
+  }, [readVisibleSlides, imageMeta]);
 
   useEffect(() => {
     const viewport = viewportRef.current;
@@ -122,7 +156,7 @@ function Carousel({ children, ariaLabel, className, slideClassName, contentClass
   }
 
   return (
-    <div ref={carouselRef} className={`${styles.carousel} ${className || ""}`.trim()} aria-roledescription="carousel" aria-label={ariaLabel}>
+    <div ref={carouselRef} style={inlineStyle} className={`${styles.carousel} ${className || ""}`.trim()} aria-roledescription="carousel" aria-label={ariaLabel}>
       <button className={`${styles.navButton} ${styles.prevButton}`} type="button" onClick={handlePrevious} aria-label="Previous page" disabled={pageCount <= 1}>
         <FaChevronLeft aria-hidden="true" />
       </button>
@@ -166,6 +200,7 @@ Carousel.propTypes = {
   slideClassName: PropTypes.string,
   contentClassName: PropTypes.string,
   showDots: PropTypes.bool,
+  imageMeta: PropTypes.array,
 };
 
 export default Carousel;
