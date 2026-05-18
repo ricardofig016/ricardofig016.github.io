@@ -1,7 +1,7 @@
 {
   "archived": false,
   "code": "horus-skill-and-reach",
-  "commit_count": 221,
+  "commit_count": 222,
   "context": "Internship",
   "created_at": "2025-12-18T14:46:58Z",
   "description": "An end-to-end OSINT cyber-news ingestion and processing pipeline developed for Skill & Reach, combining RSS and headless scraping, LLM-based enrichment, embedding-based deduplication, and an Elasticsearch API with a React control center.",
@@ -20,11 +20,43 @@
     "4-sources.png",
     "5-email.png"
   ],
+  "images_meta": [
+    {
+      "file": "1-dashboard.png",
+      "height": 619,
+      "ratio": 2.08562197092084,
+      "width": 1291
+    },
+    {
+      "file": "2-articles.png",
+      "height": 611,
+      "ratio": 2.106382978723404,
+      "width": 1287
+    },
+    {
+      "file": "3-article-details.png",
+      "height": 615,
+      "ratio": 2.0634146341463415,
+      "width": 1269
+    },
+    {
+      "file": "4-sources.png",
+      "height": 613,
+      "ratio": 2.097879282218597,
+      "width": 1286
+    },
+    {
+      "file": "5-email.png",
+      "height": 618,
+      "ratio": 2.001618122977346,
+      "width": 1237
+    }
+  ],
   "issues": 0,
   "license": null,
   "name": "HORUS - OSINT cyber-news ingestion and processing pipeline",
   "private": true,
-  "size": 2558,
+  "size": 2559,
   "stars": 0,
   "technologies": [
     "python",
@@ -39,7 +71,7 @@
     "jwt",
     "git"
   ],
-  "updated_at": "2026-01-27T11:58:24Z",
+  "updated_at": "2026-05-08T17:06:18Z",
   "watchers": 0,
   "website": null
 }

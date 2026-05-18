@@ -16,6 +16,26 @@
     "2-create-ride.png",
     "3-rides.png"
   ],
+  "images_meta": [
+    {
+      "file": "1-profile.png",
+      "height": 615,
+      "ratio": 1.7772357723577237,
+      "width": 1093
+    },
+    {
+      "file": "2-create-ride.png",
+      "height": 614,
+      "ratio": 1.778501628664495,
+      "width": 1092
+    },
+    {
+      "file": "3-rides.png",
+      "height": 611,
+      "ratio": 1.7774140752864158,
+      "width": 1086
+    }
+  ],
   "issues": 0,
   "license": "The Unlicense",
   "name": "Ride Sharing App",

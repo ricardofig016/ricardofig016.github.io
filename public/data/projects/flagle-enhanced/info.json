@@ -18,6 +18,38 @@
     "4-uk.png",
     "5-montenegro.png"
   ],
+  "images_meta": [
+    {
+      "file": "1-spain.png",
+      "height": 633,
+      "ratio": 1.7772511848341233,
+      "width": 1125
+    },
+    {
+      "file": "2-portugal.png",
+      "height": 633,
+      "ratio": 1.7772511848341233,
+      "width": 1125
+    },
+    {
+      "file": "3-ukraine.png",
+      "height": 634,
+      "ratio": 1.777602523659306,
+      "width": 1127
+    },
+    {
+      "file": "4-uk.png",
+      "height": 634,
+      "ratio": 1.777602523659306,
+      "width": 1127
+    },
+    {
+      "file": "5-montenegro.png",
+      "height": 637,
+      "ratio": 1.7770800627943486,
+      "width": 1132
+    }
+  ],
   "issues": 0,
   "license": null,
   "name": "Flagle Enhanced",

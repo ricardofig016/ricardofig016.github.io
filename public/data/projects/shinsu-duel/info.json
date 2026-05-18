@@ -16,6 +16,26 @@
     "2-big-card.png",
     "3-place.png"
   ],
+  "images_meta": [
+    {
+      "file": "1-board.png",
+      "height": 619,
+      "ratio": 1.7786752827140548,
+      "width": 1101
+    },
+    {
+      "file": "2-big-card.png",
+      "height": 619,
+      "ratio": 1.7786752827140548,
+      "width": 1101
+    },
+    {
+      "file": "3-place.png",
+      "height": 623,
+      "ratio": 1.7768860353130016,
+      "width": 1107
+    }
+  ],
   "issues": 0,
   "license": "MIT License",
   "name": "Shinsu Duel",
