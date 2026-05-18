@@ -37,12 +37,6 @@ function Home({ featuredProjectsData, experiencesData, projectsData, techData })
     return item;
   });
 
-  const featuredImageMeta = featuredProjectEntries.map(([, project]) => {
-    if (project.image && project.images_meta) return project.images_meta.find((m) => m.file === project.image) || null;
-
-    return null;
-  });
-
   return (
     <div>
       {/* Hero Section */}
@@ -122,7 +116,7 @@ function Home({ featuredProjectsData, experiencesData, projectsData, techData })
       <section>
         <h2>Featured Projects</h2>
         {featuredProjectEntries.length > 0 ? (
-          <Carousel ariaLabel="Featured projects" className={styles.carousel} slideClassName={styles.carouselSlide} contentClassName={styles.carouselContent} imageMeta={featuredImageMeta}>
+          <Carousel ariaLabel="Featured projects" className={styles.carousel} slideClassName={styles.carouselSlide} contentClassName={styles.carouselContent}>
             {carouselItems}
           </Carousel>
         ) : (
