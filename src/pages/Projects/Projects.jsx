@@ -23,9 +23,34 @@ import {
   FaDatabase,
   FaBoxArchive,
   FaDownload,
+  FaFile,
 } from "react-icons/fa6";
 import Carousel from "../../components/Carousel/Carousel";
 import { formatISODate } from "../../utils/dateUtils";
+
+function formatDocumentName(filename) {
+  return filename
+    .replace(/\.[^/.]+$/, "")
+    .replace(/[-_]/g, " ")
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+}
+
+function getDocumentUrl(projectCode, documentName) {
+  return `/data/projects/${projectCode}/documents/${documentName}`;
+}
+
+function getDocumentRoute(projectCode, documentName) {
+  return `/projects/${projectCode}/${encodeURIComponent(documentName)}`;
+}
+
+function getDocumentExtension(filename) {
+  const parts = filename.split(".");
+  return parts.length > 1 ? parts.pop().toLowerCase() : "";
+}
+
+function isPreviewableDocument(filename) {
+  return getDocumentExtension(filename) === "pdf";
+}
 
 function ProjectsList({ projectsData }) {
   const navigate = useNavigate();
@@ -202,14 +227,6 @@ function Project({ projectsData }) {
   const converter = new Showdown.Converter();
   const readmeHtml = !project.private && project.readme ? converter.makeHtml(project.readme) : "";
 
-  // Format document filename for display
-  const formatDocumentName = (filename) => {
-    return filename
-      .replace(/\.[^/.]+$/, "") // Remove extension
-      .replace(/[-_]/g, " ") // Replace - and _ with spaces
-      .replace(/\b\w/g, (char) => char.toUpperCase()); // Title case
-  };
-
   // Handler for tech pill clicks
   const handleTechClick = (tech) => {
     navigate(`/projects?tech=${encodeURIComponent(tech)}`);
@@ -264,10 +281,10 @@ function Project({ projectsData }) {
         {project.documents &&
           project.documents.length > 0 &&
           project.documents.map((doc) => (
-            <a key={doc} href={`/data/projects/${project.code}/documents/${doc}`} download aria-label={`Download ${doc}`} title={`Download ${doc}`}>
-              <FaDownload />
+            <Link key={doc} to={getDocumentRoute(project.code, doc)} aria-label={`Preview ${formatDocumentName(doc)}`} title={`Preview ${formatDocumentName(doc)}`}>
+              <FaFile />
               <span>{formatDocumentName(doc)}</span>
-            </a>
+            </Link>
           ))}
       </div>
 
@@ -278,7 +295,14 @@ function Project({ projectsData }) {
   // Images
   const imagesSection = project.images && project.images.length > 0 && (
     <section className={styles.projectImages}>
-      <Carousel ariaLabel={`${project.name} screenshots`} className={styles.carousel} slideClassName={styles.carouselSlide} contentClassName={styles.carouselContent} showDots imageMeta={project.images_meta}>
+      <Carousel
+        ariaLabel={`${project.name} screenshots`}
+        className={styles.carousel}
+        slideClassName={styles.carouselSlide}
+        contentClassName={styles.carouselContent}
+        showDots
+        imageMeta={project.images_meta}
+      >
         {(project.images || []).map((image) => (
           <ImageModal className={styles.carouselItem} key={image} src={`/data/projects/${project.code}/images/${image}`} alt={project.name} />
         ))}
@@ -333,12 +357,82 @@ Project.propTypes = {
   projectsData: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
+function ProjectDocumentPreview({ projectsData }) {
+  const { projectCode, documentName } = useParams();
+  const project = projectsData.find((proj) => proj.code === projectCode);
+  if (!project) return <div>404: Project {projectCode} not found.</div>;
+
+  const document = (project.documents || []).find((doc) => doc === documentName);
+  if (!document) {
+    return (
+      <div className={styles.documentPreviewPage}>
+        <section className={styles.documentPreviewHeader}>
+          <div>
+            <p className={styles.documentPreviewProjectName}>{project.name}</p>
+            <h1>Document not found</h1>
+          </div>
+
+          <div className={styles.projectLinksHeader}>
+            <Link to={`/projects/${project.code}`} aria-label={`Back to ${project.name}`} title={`Back to ${project.name}`}>
+              Back to project
+            </Link>
+          </div>
+        </section>
+
+        <div className={styles.documentPreviewFallback}>
+          <p>The document {documentName} is not available for this project.</p>
+        </div>
+      </div>
+    );
+  }
+
+  const documentUrl = getDocumentUrl(project.code, document);
+  const canPreview = isPreviewableDocument(document);
+
+  return (
+    <div className={styles.documentPreviewPage}>
+      <section className={styles.documentPreviewHeader}>
+        <div>
+          <p className={styles.documentPreviewProjectName}>{project.name}</p>
+          <h1>{formatDocumentName(document)}</h1>
+        </div>
+
+        <div className={styles.projectLinksHeader}>
+          <Link to={`/projects/${project.code}`} aria-label={`Back to ${project.name}`} title={`Back to ${project.name}`}>
+            Back to project
+          </Link>
+          <a href={documentUrl} download={document} aria-label={`Download ${formatDocumentName(document)}`} title={`Download ${formatDocumentName(document)}`}>
+            <FaDownload />
+            <span>Download</span>
+          </a>
+        </div>
+      </section>
+
+      {canPreview ? (
+        <div className={styles.documentPreviewViewer}>
+          <iframe className={styles.documentPreviewFrame} src={documentUrl} title={`${project.name} - ${document}`} />
+        </div>
+      ) : (
+        <div className={styles.documentPreviewFallback}>
+          <p>Preview is not available for this file type yet.</p>
+          <p>Use the download option to open it locally.</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+ProjectDocumentPreview.propTypes = {
+  projectsData: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
 export default function Projects({ projectsData }) {
   const projectEntries = Object.values(projectsData || {});
 
   return (
     <Routes>
       <Route path="/" element={<ProjectsList projectsData={projectEntries} />} />
+      <Route path=":projectCode/:documentName" element={<ProjectDocumentPreview projectsData={projectEntries} />} />
       <Route path=":projectCode" element={<Project projectsData={projectEntries} />} />
     </Routes>
   );
