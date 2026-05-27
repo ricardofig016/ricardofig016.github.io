@@ -41,7 +41,7 @@ function Home({ featuredProjectsData, experiencesData, projectsData, techData })
     <div>
       {/* Hero Section */}
       <section className={styles.heroSection}>
-        <img src="/images/profile_photo.jpg" alt="Profile" />
+        <img src="/images/profile_photo.png" alt="Profile" />
         <div className={styles.heroText}>
           <h1>Ricardo Figueiredo</h1>
           <div>
