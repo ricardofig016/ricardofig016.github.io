@@ -213,8 +213,15 @@
   display: block;
 }
 
-.experienceItem:hover .expContent {
+.experienceItem:hover :is(.expCardContent, .homeExpTech) {
   transform: translateX(10px);
+}
+
+.expCardContent {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: transform 0.2s ease;
 }
 
 .expDot {
@@ -238,7 +245,14 @@
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-  transition: transform 0.2s ease;
+}
+
+.expLogo {
+  width: 3rem;
+  height: 3rem;
+  object-fit: contain;
+  border-radius: 5px;
+  flex-shrink: 0;
 }
 
 .expTitle {
@@ -260,7 +274,7 @@
 }
 
 .homeExpTech {
-  margin-top: 0.2rem;
+  margin-top: 0.5rem;
 }
 
 .techSection {

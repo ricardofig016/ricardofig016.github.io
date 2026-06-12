@@ -97,15 +97,20 @@ function Home({ featuredProjectsData, experiencesData, projectsData, techData })
               return (
                 <Link key={exp.code} to={`/experience/${exp.code}`} className={styles.experienceItem}>
                   <div className={styles.expDot} />
-                  <div className={styles.expContent}>
-                    <h3 className={styles.expTitle}>
-                      {exp.role} @ <span className={styles.expCompany}>{exp.company}</span>
-                    </h3>
-                    <span className={styles.expDate}>
-                      {formatDate(exp.start_date)} — {exp.ongoing ? "Present" : formatDate(exp.end_date)}
-                    </span>
-                    <TechPills technologies={technologies} size="small" className={styles.homeExpTech} />
+                  <div className={styles.expCardContent}>
+                    {exp.company_logo && (
+                      <img src={`/data/experience/${exp.code}/${exp.company_logo}`} alt={`${exp.company} logo`} className={styles.expLogo} />
+                    )}
+                    <div className={styles.expContent}>
+                      <h3 className={styles.expTitle}>
+                        {exp.role} @ <span className={styles.expCompany}>{exp.company}</span>
+                      </h3>
+                      <span className={styles.expDate}>
+                        {formatDate(exp.start_date)} — {exp.ongoing ? "Present" : formatDate(exp.end_date)}
+                      </span>
+                    </div>
                   </div>
+                  <TechPills technologies={technologies} size="small" className={styles.homeExpTech} />
                 </Link>
               );
             })}
