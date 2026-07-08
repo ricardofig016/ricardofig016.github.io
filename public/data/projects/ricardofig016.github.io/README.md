@@ -279,7 +279,7 @@ This project is open source. See LICENSE file for details.
 - **GitHub**: https://github.com/ricardofig016
 - **Portfolio**: [ricardofig016.github.io](https://ricardofig016.github.io)
 - **GitHub**: [ricardofig016](https://github.com/ricardofig016)
-- **LinkedIn**: [ricardo-figueiredo](https://www.linkedin.com/in/ricardo-figueiredo-ba5245235/)
+- **LinkedIn**: [ricardocastrofigueiredo](https://www.linkedin.com/in/ricardocastrofigueiredo/)
 
 ---
 

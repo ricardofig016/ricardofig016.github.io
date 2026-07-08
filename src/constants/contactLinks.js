@@ -11,7 +11,7 @@ export const contactLinks = [
   {
     id: "linkedin",
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/ricardo-figueiredo-ba5245235",
+    href: "https://www.linkedin.com/in/ricardocastrofigueiredo/",
     icon: FaLinkedin,
     external: true,
   },
